@@ -4,7 +4,6 @@ import '../src/style.css'; // ✅ Tailwind CSS file
 
 
 
-
 // Main App Component
 const DelverseApp = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -362,6 +361,9 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
   );
 };
 
+
+// Services Page Component
+// Services Page Component
 // Services Page Component
 const ServicesPage = () => {
   return (
@@ -423,6 +425,14 @@ const ServicesPage = () => {
   );
 };
 
+// Services Page Component
+// Services Page Component
+// Services Page Component
+
+
+
+// Technologies Page Component
+// Technologies Page Component
 // Technologies Page Component
 const TechnologiesPage = () => {
   const techCategories = [
@@ -489,6 +499,15 @@ const TechnologiesPage = () => {
   );
 };
 
+// Technologies Page Component
+// Technologies Page Component
+// Technologies Page Component
+
+
+
+
+// Portfolio Page Component
+// Portfolio Page Component
 // Portfolio Page Component  
 const PortfolioPage = () => {
   const [filter, setFilter] = useState('all');
@@ -612,7 +631,18 @@ const PortfolioPage = () => {
   );
 };
 
+// Portfolio Page Component
+// Portfolio Page Component
+// Portfolio Page Component
+
+
+
+
 // About Page Component
+// About Page Component
+// About Page Component
+
+
 const AboutPage = () => {
   const stats = [
     { number: "50+", label: "Projects Completed" },
@@ -759,7 +789,17 @@ const AboutPage = () => {
   );
 };
 
+// About Page Component
+// About Page Component
+// About Page Component
+
+
+
+
 // Contact Page Component
+// Contact Page Component
+// Contact Page Component
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -966,7 +1006,16 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
   );
 };
 
+// Contact Page Component
+// Contact Page Component
+// Contact Page Component
+
+
+
 // Footer Component
+// Footer Component
+// Footer Component
+
 type FooterProps = {
   setCurrentPage: (page: string) => void;
 };
@@ -1047,5 +1096,9 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
     </footer>
   );
 };
+
+// Footer Component
+// Footer Component
+
 
 export default DelverseApp;

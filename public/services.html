@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Delverse Technologies</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="/delverse-app/src/style.css">
+</head>
+<body class="min-h-screen bg-gray-50">
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full bg-white shadow-lg z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html">
+        <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
+      </a>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
+        <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
+        <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
+        <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
+        <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
+        <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+            <!-- SERVICES PAGE OPENS -->
+             <!-- oUR SOLUTIONS OPENS -->
+        <div id="servicesPage" class="page-content hidden">
+            <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+                <div class="max-w-6xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl font-bold mb-4">Our Services</h1>
+                    <p class="text-xl opacity-90">Comprehensive technology solutions to drive your business forward</p>
+                </div>
+            </section>
+
+            <section class="py-16">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="brain" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">AI-Powered Solutions</h3>
+                            <p class="text-gray-600 mb-6">Transform your business with intelligent automation, machine learning models, and AI-driven insights that enhance decision-making and operational efficiency.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Machine Learning Models</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Natural Language Processing</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Computer Vision</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Predictive Analytics</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="globe" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Website Development</h3>
+                            <p class="text-gray-600 mb-6">Create stunning, responsive websites that engage users and drive conversions with modern design principles and cutting-edge technologies.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Responsive Design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>SEO Optimization</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>CMS Integration</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>E-commerce Solutions</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="smartphone" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Mobile App Development</h3>
+                            <p class="text-gray-600 mb-6">Build powerful native and cross-platform mobile applications that provide seamless user experiences across all devices.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Native iOS & Android</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Cross-platform Development</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>UI/UX Design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>App Store Optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="database" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Data Analytics</h3>
+                            <p class="text-gray-600 mb-6">Transform raw data into actionable insights with advanced analytics, business intelligence, and data visualization solutions.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Business Intelligence</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Data Visualization</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Reporting Dashboards</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Predictive Modeling</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="user" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">IT Support</h3>
+                            <p class="text-gray-600 mb-6">Protect your digital assets with comprehensive security solutions and reliable IT support.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Security Audits & Assessment</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Network Security Implementation</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Data Protection & Backup</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>24/7 IT Support</span>
+                                </li>
+                               <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Compliance Management</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="text-blue-600 mb-6">
+                                <i data-lucide="shield" class="w-15 h-15"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Business Consulting</h3>
+                            <p class="text-gray-600 mb-6">Strategic technology consulting to optimize operations and accelerate digital transformation.</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Digital Transformation Strategy</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Technology Assessment</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Process Optimization</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Change Management</span>
+                                </li>
+                               <li class="flex items-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
+                                    <span>Technology Roadmapping</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- oUR SOLUTIONS CLOSES -->
+
+    <!-- Process Section Opens -->
+    <section class="process-section">
+        <div class="process-container">
+            <h2 class="process-title">Our Process</h2>
+            <p class="process-subtitle">How we deliver exceptional results for our clients</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery & Planning</h3>
+                    <p>We analyze your needs, understand your goals, and create a comprehensive project roadmap.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Design & Development</h3>
+                    <p>Our expert team brings your vision to life with cutting-edge technology and best practices.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Testing & Quality Assurance</h3>
+                    <p>Rigorous testing ensures your solution performs flawlessly across all platforms and scenarios.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Launch & Support</h3>
+                    <p>We deploy your solution and provide ongoing support to ensure continued success and growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Process Section Closes -->
+
+                        <!-- CTA Section opens -->
+            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
+                    <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
+                    <button onclick="showPage('contact')" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        Start Your Project
+                    </button>
+                    <button onclick="showPage('services')" class=" text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        View our Services
+                    </button>
+                </div>
+            </section>
+        </div>
+        <!-- CTA Section closes -->
+<!-- Services Page closes -->
+
+                     <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Company Info -->
+                <div>
+            <div class="w-16 h-16">
+          <img 
+             src="/logo.png" 
+                alt="Delverse Logo" 
+                class="object-contain w-full h-full" 
+                />
+                    </div>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Delverse Technologies is a remote, technology-driven consulting firm specializing in AI-based software solutions. We empower businesses with tailored digital products that drive growth.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/delverse-technologies-limited/about/" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">LinkedIn</span>
+                             <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://x.com/delverse_tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <button onclick="showPage('services')" class="text-gray-400 hover:text-white transition-colors">
+                                Services
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="showPage('about')" class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="showPage('portfolio')" class="text-gray-400 hover:text-white transition-colors">
+                                Portfolio
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="showPage('technologies')" class="text-gray-400 hover:text-white transition-colors">
+                                Technologies
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            delversetech@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            +234 806 930 5155
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"></i>
+                            <span>Plot 2542, Hassan Usman Katsina Street, Asokoro, Abuja, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Delverse Technologies Limited. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    
+  <!-- JS for Filtering -->
+  <script>
+    function filterProjects(category) {
+      const cards = document.querySelectorAll(".project-card");
+      cards.forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

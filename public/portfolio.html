@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Delverse Technologies</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="/delverse-app/src/style.css">
+</head>
+<body class="min-h-screen bg-gray-50">
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full bg-white shadow-lg z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html">
+        <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
+      </a>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
+        <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
+        <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
+        <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
+        <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
+        <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+
+                    <!-- Portfolio Page Opens -->
+        <div id="portfolioPage" class="page-content hidden">
+            <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+                <div class="max-w-6xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl font-bold mb-4">Featured Projects</h1>
+                    <p class="text-xl opacity-90">Explore our successful projects and see how we've helped businesses achieve their digital transformation goals</p>
+                </div>
+            </section>
+            <!-- Stats Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">50+</div>
+                            <div class="text-gray-600">Projects Completed</div>
+                        </div>
+                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">30+</div>
+                            <div class="text-gray-600">Happy Clients</div>
+                        </div>
+                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">5+</div>
+                            <div class="text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">24/7</div>
+                            <div class="text-gray-600">Support Available</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="flex justify-center mb-12">
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="filterProjects('all')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-blue-600 text-white">
+                                All
+                            </button>
+                            <button onclick="filterProjects('website')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                Website Development
+                            </button>
+                            <button onclick="filterProjects('ecommerce')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                Ecommerce
+                            </button>
+                            <button onclick="filterProjects('education')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                Education
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="portfolioGrid">
+                        <!-- AbisGroup Africa -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">A</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Ecommerce
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">AbisGroup Africa</h3>
+                                <p class="text-gray-600 mb-4">A comprehensive livestock processing company and marketplace platform connecting farmers, processors, and consumers in the livestock value chain.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Livestock Marketplace</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Processing Management</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Supply Chain Tracking</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Payment Integration</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">MongoDB</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Stripe API</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://www.abisgroup.africa/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- MECA Group -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
+                            <div class="h-48 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">M</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Website
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">MECA Group Company Website</h3>
+                                <p class="text-gray-600 mb-4">Complete rebranding and redevelopment of MECA Group company website with modern design and enhanced user experience.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Modern Design</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Mobile Responsive</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">SEO Optimized</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Fast Loading</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Next.js</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Tailwind CSS</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">TypeScript</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://www.mecagroup.com.ng/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- LearnlyApp -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="education">
+                            <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">L</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Education
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">LearnlyApp Educational Platform</h3>
+                                <p class="text-gray-600 mb-4">Interactive learning platform with uploadify features for educational content management and student engagement.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Course Management</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">File Upload</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Student Progress</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Content</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Next.js</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Firebase</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://uploadify-learning.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                                        <!-- DCP Company Website -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">D</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Website
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">DCP Company Website</h3>
+                                <p class="text-gray-600 mb-4">Professional rebranding and website redevelopment for DCP with focus on corporate identity and digital presence.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Coporate Design</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Content Management</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Conatct Forms</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Analytics Integration</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Javascript</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://www.dcp.com.ng/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                                            <!-- GetSpares E-commerce Platform -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">G</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Ecommerce
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">GetSpares E-commerce Platform</h3>
+                                <p class="text-gray-600 mb-4">Proof of concept for a comprehensive e-commerce platform focused on automotive spare parts and accessories.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Product Catalog</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Shopping Cart</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Payment Integration</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">User Authentication</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">MongoDB</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Stripe API</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://www.getspares.net/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                                            <!-- Precious Photographs Website -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">P</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Website
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">Precious Photographs Website</h3>
+                                <p class="text-gray-600 mb-4">Responsive photography portfolio website showcasing professional photography services with elegant design.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Image Gallery</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Responsive Design</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Contact Forms</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Portfolio Showcase</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">HTML5</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Bootstrap</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://preciousphotographs.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                                           <!-- Interactive Quiz Application -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">I</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Website
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">Interactive Quiz Application</h3>
+                                <p class="text-gray-600 mb-4">Engaging quiz application with interactive features, real-time scoring, and user-friendly interface.</p>    
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Quiz</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Real-time Scoring</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Multiple Categories</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Progress Tracking</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://quiz-application-seven-umber.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+<!-- Interactive Quiz Application -->
+                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
+                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="text-white text-4xl font-bold">I</div>
+                            </div>
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+                                    Website
+                                </span>
+                                <h3 class="text-xl font-bold mb-3">Interactive Image Gallery</h3>
+                                <p class="text-gray-600 mb-4">Dynamic image gallery application with interactive features and smooth user experience for image browsing.</p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                    <div class="grid grid-cols-2 gap-1">
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Gallery</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Image Filtering</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Smooth Animations</span>
+                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Responsive Layout</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="https://image-interactive-app.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                >
+                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
+                    <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
+                    <a href="contact.html">
+                    <button class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        Start Your Project
+                    </button>
+                    </a>
+
+                    <a href="services.html">
+                    <button class=" text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        View our Services
+                    </button>
+                    </a>
+                </div>
+            </section>
+        </div>
+                <!-- Portfolio Page Closes -->
+                     <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Company Info -->
+                <div>
+            <div class="w-16 h-16">
+          <img 
+             src="/logo.png" 
+                alt="Delverse Logo" 
+                class="object-contain w-full h-full" 
+                />
+                    </div>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Delverse Technologies is a remote, technology-driven consulting firm specializing in AI-based software solutions. We empower businesses with tailored digital products that drive growth.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/delverse-technologies-limited/about/" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">LinkedIn</span>
+                             <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://x.com/delverse_tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="services.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Services
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="portfolio.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Portfolio
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="technologies.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Technologies
+                            </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            delversetech@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            +234 806 930 5155
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"></i>
+                            <span>Plot 2542, Hassan Usman Katsina Street, Asokoro, Abuja, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Delverse Technologies Limited. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      alert("Thank you for contacting us! We'll get back to you soon.");
+    }
+  </script>    
+</body>
+</html>

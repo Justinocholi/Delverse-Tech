@@ -15,7 +15,7 @@
 
         /* Header Styles */
         .header {
-            background: white;
+            background: #000;
             padding: 1rem 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
@@ -40,7 +40,7 @@
             width: auto;              /* Automatically adjust width to maintain aspect ratio */
             object-fit: contain;      /* Ensure full logo fits within container */
             display: block;           /* Prevent inline spacing issues */
-            max-width: 100%;          /* Responsive: prevents overflow */
+            max-width: 120%;          /* Responsive: prevents overflow */
             vertical-align: middle;   /* Aligns image cleanly with surrounding text/content */
         }
 
@@ -105,105 +105,58 @@
   }
 }
 
-/* =========================
-   Carousel Container (Owl)
-========================= */
-.carousel-container {
-  position: relative;
-  height: 400px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-/* =========================
-   Owl Carousel Items
-========================= */
-.owl-carousel .item {
-  position: relative;
-}
-
-.owl-carousel .item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* =========================
-   Image Overlay
-========================= */
-.owl-carousel .item div {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  padding: 1rem;
-  text-align: center;
-}
-
-.owl-carousel .item div h3 {
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-/* =========================
-   Owl Carousel Dots
-========================= */
-.owl-dots {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.owl-dots .owl-dot span {
-  width: 12px;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.owl-dots .owl-dot.active span {
-  background: #fbbf24;
-  transform: scale(1.2);
-}
-
-
-
-/* =========================
-   Responsive Adjustments
-========================= */
-@media (max-width: 768px) {
-  .carousel-container {
-    height: 300px;
+  .video-background {
+    position: fixed; /* stays behind everything */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* send to back */
   }
-}
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); /* darken video for contrast */
+    z-index: -1;
+  }
+
+  section {
+    position: relative;
+    z-index: 1; /* ensure content is above video */
+  }
+
+
 
 
         /* About Section */
         .about-section {
-            padding: 4rem 2rem;
-            background: #f7fafc;
+            padding: 80px 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff
         }
 
         .about-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            display: flex;
             align-items: center;
+            gap: 40px;
         }
 
+        .slide-image img {
+            max-width: 450px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;}
+
         .about-text h2 {
-            font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         .about-text .highlight {
@@ -218,7 +171,25 @@
 
         .about-features {
             list-style: none;
-            margin-bottom: 2rem;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .about-features .feature-card {
+            background: #f7f9fc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .about-features .feature-card.show {
+            transform: translateX(0);
+            opacity: 1;
         }
 
         .about-features li {
@@ -719,7 +690,6 @@
             object-fit: contain;      /* Ensure full logo fits within container */
             display: block;           /* Prevent inline spacing issues */
             max-width: 100%;          /* Responsive: prevents overflow */
-            vertical-align: middle;
         }
 
         .footer-description {
@@ -832,119 +802,5 @@
                 margin-top: 1rem;
                 width: 100%;
                 text-align: center;
-            }
-
-            /* Owl Carousel overrides if needed */
-.owl-carousel .carousel-slide {
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 10px;
-  margin: 1rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.slide-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.slide-text {
-  flex: 1;
-  padding: 20px;
-}
-
-.slide-image {
-  flex: 1;
-  padding: 20px;
-  text-align: center;
-}
-
-.slide-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.highlight {
-  color: #d1e700;
-}
-
-.btn-primary,
-.btn-secondary {
-  padding: 12px 24px;
-  margin-right: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
-.btn-primary {
-  background-color: #004d2a;
-  color: #fff;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #004d2a;
-  border: 2px solid #004d2a;
-}
-
-
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .carousel-nav {
-                position: static;
-                margin-top: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .tech-grid {
-                justify-content: center;
-            }
-
-            .slide-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 1rem;
-            }
-
-            .slide-text h1 {
-                font-size: 1.5rem;
-            }
-
-            .about-text h2,
-            .services-container h2,
-            .technologies-container h2,
-            .testimonials-container h2,
-            .cta-container h2 {
-                font-size: 2rem;
-            }
-
-            .carousel-container {
-                height: auto;
-                min-height: 500px;
             }
         }
