@@ -1,0 +1,232 @@
+/* Services Section */
+.services-section {
+    padding: 4rem 2rem;
+    background: white;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-container h2 {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.services-container p {
+    color: #718096;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.service-card.featured {
+    border: 2px solid #2b9cb8;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: #2b9cb8;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: #718096;
+    line-height: 1.6;
+}
+
+/* Process Section */
+.process-section {
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.process-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.process-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.process-subtitle {
+  font-size: 1.2rem;
+  color: #4b5563;
+  margin-bottom: 50px;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  position: relative;
+}
+
+.process-step {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  animation: floatUp 1s ease forwards;
+}
+
+.process-step:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.step-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2563eb;
+  background: #e0f2fe;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 15px auto;
+  position: relative;
+  z-index: 2;
+  animation: pulse 2s infinite;
+}
+
+.process-step h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.process-step p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Process Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    background: #e0f2fe;
+  }
+  50% {
+    transform: scale(1.1);
+    background: #bfdbfe;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(20px);
+  }
+}
+
+/* Process Background Effects */
+.process-section::before,
+.process-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.2;
+  animation: float 8s ease-in-out infinite;
+}
+
+.process-section::before {
+  width: 300px;
+  height: 300px;
+  background: #93c5fd;
+  top: -100px;
+  left: -100px;
+}
+
+.process-section::after {
+  width: 200px;
+  height: 200px;
+  background: #2563eb;
+  bottom: -80px;
+  right: -80px;
+}

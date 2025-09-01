@@ -12,7 +12,7 @@
 <body class="min-h-screen bg-gray-50">
 
   <!-- Header -->
-  <header class="fixed top-0 w-full bg-white shadow-lg z-50">
+  <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
@@ -29,37 +29,14 @@
   </header>
 
 
-                    <!-- Portfolio Page Opens -->
-        <div id="portfolioPage" class="page-content hidden">
-            <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+<section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
                 <div class="max-w-6xl mx-auto px-4 text-center">
-                    <h1 class="text-4xl font-bold mb-4">Featured Projects</h1>
-                    <p class="text-xl opacity-90">Explore our successful projects and see how we've helped businesses achieve their digital transformation goals</p>
+                    <h1 class="text-4xl font-bold mb-4">Our Portfolio</h1>
+                    <p class="text-xl opacity-90">Explore our successful projects and see how we've helped businesses across various industries achieve their digital transformation goals.</p>
                 </div>
             </section>
-            <!-- Stats Section -->
-            <section class="py-16 bg-gray-50">
-                <div class="max-w-6xl mx-auto px-4">
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">50+</div>
-                            <div class="text-gray-600">Projects Completed</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">30+</div>
-                            <div class="text-gray-600">Happy Clients</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">5+</div>
-                            <div class="text-gray-600">Years Experience</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-                            <div class="text-gray-600">Support Available</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
+                    <!-- Portfolio Page Opens -->
 
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
@@ -539,6 +516,41 @@
     </footer>
 
   <script>
+     const counters = document.querySelectorAll(".counter");
+  const speed = 200; // lower = faster
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        const count = +counter.innerText;
+
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target + (counter.getAttribute("data-target") === "24" ? "/7" : "+");
+        }
+      };
+
+      updateCount();
+    });
+  };
+
+  // Trigger when section is visible
+  const statsSection = document.querySelector(".py-16");
+  let started = false;
+  window.addEventListener("scroll", () => {
+    const sectionTop = statsSection.offsetTop - window.innerHeight + 100;
+    if (!started && window.scrollY > sectionTop) {
+      animateCounters();
+      started = true;
+    }
+  });
+
+
     lucide.createIcons();
 
     function handleFormSubmit(event) {

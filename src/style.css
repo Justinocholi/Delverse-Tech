@@ -129,9 +129,14 @@
     position: relative;
     z-index: 1; /* ensure content is above video */
   }
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
 
-
-
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
 
         /* About Section */
         .about-section {
@@ -486,6 +491,8 @@
         }
 
 
+
+
         /* Technologies Section */
         .technologies-section {
             padding: 4rem 2rem;
@@ -614,6 +621,7 @@
             color: #718096;
             font-size: 0.9rem;
         }
+
 
         
         /* CTA Section */
@@ -804,3 +812,5 @@
                 text-align: center;
             }
         }
+
+        

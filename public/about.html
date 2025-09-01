@@ -7,12 +7,12 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <link rel="stylesheet" href="/delverse-app/src/style.css">
+  <link rel="stylesheet" href="/delverse-app/src/style/about.css">
 </head>
 <body class="min-h-screen bg-gray-50">
 
   <!-- Header -->
-  <header class="fixed top-0 w-full bg-white shadow-lg z-50">
+  <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
@@ -21,15 +21,15 @@
         <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
         <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
         <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
-        <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
-        <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
+        <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
+        <a href="about.html" class="nav-link font-medium transition-colors text-blue-600">About Us</a>
         <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
       </nav>
     </div>
   </header>
 
         <!-- About Page Opens -->
-        <div id="aboutPage" class="page-content hidden">
+        <div id="aboutPage" class="page-content">
             <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
                 <div class="max-w-6xl mx-auto px-4 text-center">
                     <h1 class="text-4xl font-bold mb-4">About Delverse Technologies</h1>
@@ -39,37 +39,38 @@
             </div>
 
             <!-- Stats Section -->
-            <section class="py-16 bg-gray-50">
-                <div class="max-w-6xl mx-auto px-4">
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">50+</div>
-                            <div class="text-gray-600">Projects Completed</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">30+</div>
-                            <div class="text-gray-600">Happy Clients</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">5+</div>
-                            <div class="text-gray-600">Years Experience</div>
-                        </div>
-                        <div class="text-center bg-white p-6 rounded-lg shadow-md">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-                            <div class="text-gray-600">Support Available</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          <section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="50">0</div>
+        <div class="text-gray-600">Projects Completed</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="30">0</div>
+        <div class="text-gray-600">Happy Clients</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="5">0</div>
+        <div class="text-gray-600">Years Experience</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="24">0</div>
+        <div class="text-gray-600">Support Available</div>
+      </div>
+    </div>
+  </div>
+</section>
 
             <!-- Our Story -->
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg p-8 h-80 flex items-center justify-center">
-                                 <img src="image 3.jpg" alt="Description" class="w-30 h-30 object-contain">
-                            </div>
+<div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg inline-block p-2">
+  <img src="/image 1.jpg" alt="Description" class="block max-w-full h-auto rounded-md">
+</div>
+
                         </div>
                         <div>
                             <h2 class="text-3xl font-bold mb-6">Our Story</h2>
@@ -88,59 +89,89 @@
             </section>
 
     <!-- Vision Mission Section -->
-    <section class="vision-mission-section">
-        <div class="container">
-            <div class="vision-mission-grid">
-                <div class="vision-card">
-                    <div class="vision-icon">👁️</div>
-                    <h3>Our Vision</h3>
-                    <p>To be the global leader in AI-driven solutions, empowering businesses worldwide to achieve unprecedented growth through innovative technology and strategic digital transformation.</p>
-                </div>
-                
-                <div class="mission-card">
-                    <div class="mission-icon">🎯</div>
-                    <h3>Our Mission</h3>
-                    <p>To craft innovative, tailored technology solutions that drive meaningful business growth, while building lasting partnerships based on trust, excellence, and shared success.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Vision & Mission Section -->
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Vision -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">👁️</div>
+        <h3 class="text-2xl font-bold mb-2">Our Vision</h3>
+        <p class="text-gray-600 text-sm">
+          To be the global leader in AI-driven solutions, empowering businesses
+          worldwide to achieve unprecedented growth through innovative technology
+          and strategic digital transformation.
+        </p>
+      </div>
+
+      <!-- Mission -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">🎯</div>
+        <h3 class="text-2xl font-bold mb-2">Our Mission</h3>
+        <p class="text-gray-600 text-sm">
+          To craft innovative, tailored technology solutions that drive meaningful
+          business growth, while building lasting partnerships based on trust,
+          excellence, and shared success.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- Values Section -->
-    <section class="values-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Values</h2>
-                <p>The principles that guide everything we do</p>
-            </div>
-            
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">🎯</div>
-                    <h4>Innovation</h4>
-                    <p>We continuously push the boundaries of technology to deliver cutting-edge solutions that give our clients a competitive advantage.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">👥</div>
-                    <h4>Collaboration</h4>
-                    <p>We believe in the power of partnership and work closely with our clients to understand their unique challenges and goals.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">🏆</div>
-                    <h4>Precision</h4>
-                    <p>Every detail matters. We maintain the highest standards of quality and precision in all our deliverables.</p>
-                </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">💎</div>
-                    <h4>Integrity</h4>
-                    <p>We operate with transparency, honesty, and ethical practices in all our business relationships.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Values Section -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Our Values</h2>
+      <p class="text-gray-600">The principles that guide everything we do</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">🎯</div>
+        <h4 class="text-xl font-bold mb-2">Innovation</h4>
+        <p class="text-gray-600 text-sm">
+          We continuously push the boundaries of technology to deliver
+          cutting-edge solutions that give our clients a competitive advantage.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">👥</div>
+        <h4 class="text-xl font-bold mb-2">Collaboration</h4>
+        <p class="text-gray-600 text-sm">
+          We believe in the power of partnership and work closely with our clients
+          to understand their unique challenges and goals.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">🏆</div>
+        <h4 class="text-xl font-bold mb-2">Precision</h4>
+        <p class="text-gray-600 text-sm">
+          Every detail matters. We maintain the highest standards of quality and
+          precision in all our deliverables.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="text-4xl mb-4">💎</div>
+        <h4 class="text-xl font-bold mb-2">Integrity</h4>
+        <p class="text-gray-600 text-sm">
+          We operate with transparency, honesty, and ethical practices in all our
+          business relationships.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
             <!-- Team Section -->
             <section class="py-16 bg-gray-50">
@@ -185,34 +216,40 @@
             </section>
 
                 <!-- Why Choose Section -->
-    <section class="why-choose-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Delverse?</h2>
-                <p>What sets us apart in the technology consulting landscape</p>
-            </div>
-            
-            <div class="why-choose-grid">
-                <div class="why-choose-card">
-                    <div class="why-choose-icon teal">🌐</div>
-                    <h4>Remote-First Approach</h4>
-                    <p>Access to global talent and cost-effective solutions without compromising quality.</p>
-                </div>
-                
-                <div class="why-choose-card">
-                    <div class="why-choose-icon dark">👨‍💼</div>
-                    <h4>Expert Team</h4>
-                    <p>Skilled professionals with deep expertise in AI, web development, and digital transformation.</p>
-                </div>
-                
-                <div class="why-choose-card">
-                    <div class="why-choose-icon teal">🏅</div>
-                    <h4>Proven Results</h4>
-                    <p>Track record of successful projects and satisfied clients across various industries.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <!-- Section Title -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-gray-900">Why Choose Delverse?</h2>
+      <p class="mt-3 text-lg text-gray-600">What sets us apart in the technology consulting landscape</p>
+    </div>
+
+    <!-- Grid Layout -->
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="text-5xl mb-4 text-teal-500">🌐</div>
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Remote-First Approach</h4>
+        <p class="text-gray-600">Access to global talent and cost-effective solutions without compromising quality.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="text-5xl mb-4 text-blue-800">👨‍💼</div>
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Expert Team</h4>
+        <p class="text-gray-600">Skilled professionals with deep expertise in AI, web development, and digital transformation.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="text-5xl mb-4 text-yellow-500">🏅</div>
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Proven Results</h4>
+        <p class="text-gray-600">Track record of successful projects and satisfied clients across various industries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
                         <!-- CTA Section -->
             <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
@@ -324,6 +361,40 @@
     
   <!-- JS for Filtering -->
   <script>
+     const counters = document.querySelectorAll(".counter");
+  const speed = 200; // lower = faster
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        const count = +counter.innerText;
+
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target + (counter.getAttribute("data-target") === "24" ? "/7" : "+");
+        }
+      };
+
+      updateCount();
+    });
+  };
+
+  // Trigger when section is visible
+  const statsSection = document.querySelector(".py-16");
+  let started = false;
+  window.addEventListener("scroll", () => {
+    const sectionTop = statsSection.offsetTop - window.innerHeight + 100;
+    if (!started && window.scrollY > sectionTop) {
+      animateCounters();
+      started = true;
+    }
+  });
+
     function filterProjects(category) {
       const cards = document.querySelectorAll(".project-card");
       cards.forEach(card => {

@@ -1,35 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Delverse Technologies</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <link rel="stylesheet" href="/delverse-app/src/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Delverse Technologies - Your Partner in Digital Transformation" />
+    <title>Services - Delverse Technologies</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Your custom styles -->
+    <link rel="stylesheet" href="/delverse-app/src/style.css">
 </head>
 <body class="min-h-screen bg-gray-50">
 
   <!-- Header -->
-  <header class="fixed top-0 w-full bg-white shadow-lg z-50">
+  <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
       <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
-        <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
+        <a href="services.html" class="nav-link font-medium transition-colors text-blue-600">Services</a>
         <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
-        <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
+        <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
         <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
         <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
       </nav>
     </div>
   </header>
+
             <!-- SERVICES PAGE OPENS -->
              <!-- oUR SOLUTIONS OPENS -->
-        <div id="servicesPage" class="page-content hidden">
+        <div id="servicesPage" class="page-content">
             <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
                 <div class="max-w-6xl mx-auto px-4 text-center">
                     <h1 class="text-4xl font-bold mb-4">Our Services</h1>
@@ -37,6 +54,176 @@
                 </div>
             </section>
 
+
+        <!-- Technologies Page Opens -->
+            <section class="py-16">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="code" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Frontend Development</h3>
+                                    <p class="text-gray-600 text-sm">Modern frontend technologies for creating exceptional user experiences</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">React</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Next.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Vue.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">TypeScript</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Material-UI</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="database" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Backend Development</h3>
+                                    <p class="text-gray-600 text-sm">Robust backend solutions for scalable and secure applications</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Node.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Django</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Express.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">FastAPI</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">GraphQL</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="smartphone" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Mobile Development</h3>
+                                    <p class="text-gray-600 text-sm">Cross-platform and native mobile applications</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Flutter</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">React Native</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">iOS (Swift)</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Android (Kotlin)</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Ionic</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Xamarin</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="cloud" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Cloud & DevOps</h3>
+                                    <p class="text-gray-600 text-sm">Cloud infrastructure and deployment automation</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">AWS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Google Cloud</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Azure</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Docker</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Kubernetes</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Terraform</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="brain" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">AI & Machine Learning</h3>
+                                    <p class="text-gray-600 text-sm">Cutting-edge AI and ML technologies</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">TensorFlow</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">PyTorch</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Scikit-learn</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OpenAI</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Hugging Face</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">LangChain</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="shield" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Security & Testing</h3>
+                                    <p class="text-gray-600 text-sm">Comprehensive security and quality assurance</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OAuth 2.0</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">JWT</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">SSL/TLS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Jest</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Cypress</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Penetration Testing</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="database" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Database & Storage</h3>
+                                    <p class="text-gray-600 text-sm">Efficient data management and storage solutions</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">MongoDB</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Redis</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">MySQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Elasticsearch</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Firebase</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="users" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Integration & APIs</h3>
+                                    <p class="text-gray-600 text-sm">Seamless system integration and API development</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">REST APIs</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">GraphQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Webhooks</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Microservices</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">API Gateway</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Message Queues</span>
+                            </div>
+                        </div>
+
+                    </div>
+                        </div>
+            </section>
+
+            <!-- SErvices Section -->
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -208,40 +395,47 @@
             </section>
             <!-- oUR SOLUTIONS CLOSES -->
 
-    <!-- Process Section Opens -->
-    <section class="process-section">
-        <div class="process-container">
-            <h2 class="process-title">Our Process</h2>
-            <p class="process-subtitle">How we deliver exceptional results for our clients</p>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3>Discovery & Planning</h3>
-                    <p>We analyze your needs, understand your goals, and create a comprehensive project roadmap.</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3>Design & Development</h3>
-                    <p>Our expert team brings your vision to life with cutting-edge technology and best practices.</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3>Testing & Quality Assurance</h3>
-                    <p>Rigorous testing ensures your solution performs flawlessly across all platforms and scenarios.</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h3>Launch & Support</h3>
-                    <p>We deploy your solution and provide ongoing support to ensure continued success and growth.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Process Section Closes -->
+
+
+<!-- Process Section Opens -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Process</h2>
+    <p class="text-lg text-gray-600 mb-12">How we deliver exceptional results for our clients</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Step 1 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="text-2xl font-bold text-blue-600 mb-2">#1</div>
+        <h3 class="font-semibold text-xl mb-2">Discovery & Planning</h3>
+        <p class="text-gray-600">We analyze your needs, understand your goals, and create a comprehensive roadmap.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="text-2xl font-bold text-blue-600 mb-2">#2</div>
+        <h3 class="font-semibold text-xl mb-2">Design & Development</h3>
+        <p class="text-gray-600">Our expert team brings your vision to life with cutting-edge technology.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="text-2xl font-bold text-blue-600 mb-2">#3</div>
+        <h3 class="font-semibold text-xl mb-2">Testing & QA</h3>
+        <p class="text-gray-600">Rigorous testing ensures your solution performs flawlessly across all platforms.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="text-2xl font-bold text-blue-600 mb-2">#4</div>
+        <h3 class="font-semibold text-xl mb-2">Launch & Support</h3>
+        <p class="text-gray-600">We deploy your solution and provide ongoing support for success and growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Process Section Closes -->
+
 
                         <!-- CTA Section opens -->
             <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
@@ -260,7 +454,7 @@
         <!-- CTA Section closes -->
 <!-- Services Page closes -->
 
-                     <!-- Footer -->
+                 <!-- Footer -->
     <footer class="bg-blue-900 text-white py-12">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -293,24 +487,32 @@
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
                         <li>
-                            <button onclick="showPage('services')" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="services.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
                                 Services
                             </button>
+                            </a>
                         </li>
                         <li>
-                            <button onclick="showPage('about')" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="about.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
                                 About Us
                             </button>
+                            </a>
                         </li>
                         <li>
-                            <button onclick="showPage('portfolio')" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="portfolio.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
                                 Portfolio
                             </button>
+                            </a>
                         </li>
                         <li>
-                            <button onclick="showPage('technologies')" class="text-gray-400 hover:text-white transition-colors">
+                            <a href="technologies.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
                                 Technologies
                             </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
