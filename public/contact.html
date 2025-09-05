@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="/delverse-app/src/style.css">
 </head>
 <body class="min-h-screen bg-gray-50">
+<!-- Arrow Button -->
+<button id="scrollTopBtn" 
+  class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+  ↑
+</button>
 
   <!-- Header -->
   <header class="fixed top-0 w-full bg-white shadow-lg z-50">
@@ -20,7 +25,6 @@
       <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
         <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
-        <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
         <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
         <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
         <a href="contact.html" class="nav-link text-blue-600 font-semibold">Contact Us</a>
@@ -243,13 +247,6 @@
                             </button>
                             </a>
                         </li>
-                        <li>
-                            <a href="technologies.html">
-                            <button class="text-gray-400 hover:text-white transition-colors">
-                                Technologies
-                            </button>
-                            </a>
-                        </li>
                     </ul>
                 </div>
 
@@ -282,6 +279,28 @@
     </footer>
 
   <script>
+    // Get the button element
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 300px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove("hidden");
+      scrollTopBtn.classList.add("block");
+    } else {
+      scrollTopBtn.classList.add("hidden");
+      scrollTopBtn.classList.remove("block");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  
     lucide.createIcons();
 
     function handleFormSubmit(event) {

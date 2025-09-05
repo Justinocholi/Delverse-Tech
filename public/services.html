@@ -26,7 +26,11 @@
     <link rel="stylesheet" href="/delverse-app/src/style.css">
 </head>
 <body class="min-h-screen bg-gray-50">
-
+<!-- Arrow Button -->
+<button id="scrollTopBtn" 
+  class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+  ↑
+</button>
   <!-- Header -->
   <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -36,7 +40,6 @@
       <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
         <a href="services.html" class="nav-link font-medium transition-colors text-blue-600">Services</a>
-        <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
         <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
         <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
         <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
@@ -45,17 +48,152 @@
   </header>
 
             <!-- SERVICES PAGE OPENS -->
-             <!-- oUR SOLUTIONS OPENS -->
-        <div id="servicesPage" class="page-content">
-            <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
-                <div class="max-w-6xl mx-auto px-4 text-center">
-                    <h1 class="text-4xl font-bold mb-4">Our Services</h1>
-                    <p class="text-xl opacity-90">Comprehensive technology solutions to drive your business forward</p>
-                </div>
-            </section>
+          <!-- OUR SOLUTIONS -->
+<div id="servicesPage" class="page-content">
+
+<!-- Our Solutions Section -->
+
+
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Our Services</h1>
+      <p class="text-xl opacity-90">Comprehensive technology solutions to drive your business forward</p>
+    </div>
+  </section>
+
+  <!-- Accordion Services Section -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 space-y-4">
+      
+      <!-- Accordion Item 1 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          AI-Powered Solutions
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Transform your business with intelligent automation, machine learning models, and AI-driven insights that enhance decision-making and operational efficiency.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Machine Learning Models</li>
+            <li>Natural Language Processing</li>
+            <li>Computer Vision</li>
+            <li>Predictive Analytics</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion Item 2 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          Website Development
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Create stunning, responsive websites that engage users and drive conversions with modern design principles and cutting-edge technologies.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Responsive Design</li>
+            <li>SEO Optimization</li>
+            <li>CMS Integration</li>
+            <li>E-commerce Solutions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion Item 3 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          Mobile App Development
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Build powerful native and cross-platform mobile applications that provide seamless user experiences across all devices.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Native iOS & Android</li>
+            <li>Cross-platform Development</li>
+            <li>UI/UX Design</li>
+            <li>App Store Optimization</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion Item 4 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          Data Analytics
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Transform raw data into actionable insights with advanced analytics, business intelligence, and data visualization solutions.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Business Intelligence</li>
+            <li>Data Visualization</li>
+            <li>Reporting Dashboards</li>
+            <li>Predictive Modeling</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion Item 5 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          IT Support
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Protect your digital assets with comprehensive security solutions and reliable IT support.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Security Audits & Assessment</li>
+            <li>Network Security Implementation</li>
+            <li>Data Protection & Backup</li>
+            <li>24/7 IT Support</li>
+            <li>Compliance Management</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion Item 6 -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
+          Business Consulting
+          <span class="accordion-icon text-3xl">+</span>
+        </button>
+        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+          <p class="mb-4">
+            Strategic technology consulting to optimize operations and accelerate digital transformation.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Digital Transformation Strategy</li>
+            <li>Technology Assessment</li>
+            <li>Process Optimization</li>
+            <li>Change Management</li>
+            <li>Technology Roadmapping</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
 
 
         <!-- Technologies Page Opens -->
+         <section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Technologies</h2>
+    <p class="text-lg text-gray-600 mb-12">Leveraging cutting-edge technologies to build scalable, secure, and innovative solutions that drive your business forward.</p>
+</div>
+
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -223,180 +361,6 @@
                         </div>
             </section>
 
-            <!-- SErvices Section -->
-            <section class="py-16">
-                <div class="max-w-6xl mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="brain" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">AI-Powered Solutions</h3>
-                            <p class="text-gray-600 mb-6">Transform your business with intelligent automation, machine learning models, and AI-driven insights that enhance decision-making and operational efficiency.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Machine Learning Models</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Natural Language Processing</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Computer Vision</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Predictive Analytics</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="globe" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Website Development</h3>
-                            <p class="text-gray-600 mb-6">Create stunning, responsive websites that engage users and drive conversions with modern design principles and cutting-edge technologies.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Responsive Design</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>SEO Optimization</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>CMS Integration</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>E-commerce Solutions</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="smartphone" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Mobile App Development</h3>
-                            <p class="text-gray-600 mb-6">Build powerful native and cross-platform mobile applications that provide seamless user experiences across all devices.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Native iOS & Android</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Cross-platform Development</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>UI/UX Design</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>App Store Optimization</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="database" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Data Analytics</h3>
-                            <p class="text-gray-600 mb-6">Transform raw data into actionable insights with advanced analytics, business intelligence, and data visualization solutions.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Business Intelligence</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Data Visualization</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Reporting Dashboards</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Predictive Modeling</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="user" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">IT Support</h3>
-                            <p class="text-gray-600 mb-6">Protect your digital assets with comprehensive security solutions and reliable IT support.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Security Audits & Assessment</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Network Security Implementation</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Data Protection & Backup</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>24/7 IT Support</span>
-                                </li>
-                               <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Compliance Management</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <div class="text-blue-600 mb-6">
-                                <i data-lucide="shield" class="w-15 h-15"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4">Business Consulting</h3>
-                            <p class="text-gray-600 mb-6">Strategic technology consulting to optimize operations and accelerate digital transformation.</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Digital Transformation Strategy</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Technology Assessment</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Process Optimization</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Change Management</span>
-                                </li>
-                               <li class="flex items-center">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i>
-                                    <span>Technology Roadmapping</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- oUR SOLUTIONS CLOSES -->
-
-
-
 <!-- Process Section Opens -->
 <section class="py-16 bg-gray-50">
   <div class="max-w-6xl mx-auto px-4 text-center">
@@ -438,7 +402,7 @@
 
 
                         <!-- CTA Section opens -->
-            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white hidden">
                 <div class="max-w-4xl mx-auto text-center px-4">
                     <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
                     <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
@@ -548,6 +512,38 @@
     
   <!-- JS for Filtering -->
   <script>
+    // Get the button element
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 300px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove("hidden");
+      scrollTopBtn.classList.add("block");
+    } else {
+      scrollTopBtn.classList.add("hidden");
+      scrollTopBtn.classList.remove("block");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  
+     document.querySelectorAll(".accordion-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector(".accordion-icon");
+
+      content.classList.toggle("hidden");
+      icon.textContent = content.classList.contains("hidden") ? "+" : "−";
+    });
+  });
+
     function filterProjects(category) {
       const cards = document.querySelectorAll(".project-card");
       cards.forEach(card => {

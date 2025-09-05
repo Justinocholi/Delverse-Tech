@@ -10,7 +10,11 @@
   <link rel="stylesheet" href="/delverse-app/src/style/about.css">
 </head>
 <body class="min-h-screen bg-gray-50">
-
+<!-- Arrow Button -->
+<button id="scrollTopBtn" 
+  class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+  ↑
+</button>
   <!-- Header -->
   <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -20,7 +24,6 @@
       <nav class="hidden md:flex space-x-8">
         <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
         <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
-        <a href="technologies.html" class="nav-link text-gray-600 hover:text-blue-600">Technologies</a>
         <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
         <a href="about.html" class="nav-link font-medium transition-colors text-blue-600">About Us</a>
         <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
@@ -61,32 +64,6 @@
     </div>
   </div>
 </section>
-
-            <!-- Our Story -->
-            <section class="py-16">
-                <div class="max-w-6xl mx-auto px-4">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-<div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg inline-block p-2">
-  <img src="/image 1.jpg" alt="Description" class="block max-w-full h-auto rounded-md">
-</div>
-
-                        </div>
-                        <div>
-                            <h2 class="text-3xl font-bold mb-6">Our Story</h2>
-                            <p class="text-gray-600 mb-4">
-                                Founded with a vision to bridge the gap between cutting-edge technology and practical business solutions, Delverse Technologies has emerged as a leading remote consulting firm specializing in AI-driven software development.
-                            </p>
-                            <p class="text-gray-600 mb-4">
-                                We understand that in today's rapidly evolving digital landscape, businesses need more than just technology – they need strategic partners who can navigate complexity and deliver solutions that drive real results.
-                            </p>
-                            <p class="text-gray-600">
-                                Our team of experienced professionals combines deep technical expertise with industry knowledge to create tailored solutions that not only meet current needs but also position our clients for future growth.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
     <!-- Vision Mission Section -->
 <!-- Vision & Mission Section -->
@@ -251,8 +228,35 @@
 </section>
 
 
+            <!-- Our Story -->
+            <section class="py-16">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+<div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg inline-block p-2">
+  <img src="/image 1.jpg" alt="Description" class="block max-w-full h-auto rounded-md">
+</div>
+
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6">Our Story</h2>
+                            <p class="text-gray-600 mb-4">
+                                Founded with a vision to bridge the gap between cutting-edge technology and practical business solutions, Delverse Technologies has emerged as a leading remote consulting firm specializing in AI-driven software development.
+                            </p>
+                            <p class="text-gray-600 mb-4">
+                                We understand that in today's rapidly evolving digital landscape, businesses need more than just technology – they need strategic partners who can navigate complexity and deliver solutions that drive real results.
+                            </p>
+                            <p class="text-gray-600">
+                                Our team of experienced professionals combines deep technical expertise with industry knowledge to create tailored solutions that not only meet current needs but also position our clients for future growth.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
                         <!-- CTA Section -->
-            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white hidden">
                 <div class="max-w-4xl mx-auto text-center px-4">
                     <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
                     <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
@@ -320,13 +324,6 @@
                             </button>
                             </a>
                         </li>
-                        <li>
-                            <a href="technologies.html">
-                            <button class="text-gray-400 hover:text-white transition-colors">
-                                Technologies
-                            </button>
-                            </a>
-                        </li>
                     </ul>
                 </div>
 
@@ -361,6 +358,28 @@
     
   <!-- JS for Filtering -->
   <script>
+    // Get the button element
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 300px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove("hidden");
+      scrollTopBtn.classList.add("block");
+    } else {
+      scrollTopBtn.classList.add("hidden");
+      scrollTopBtn.classList.remove("block");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  
      const counters = document.querySelectorAll(".counter");
   const speed = 200; // lower = faster
 

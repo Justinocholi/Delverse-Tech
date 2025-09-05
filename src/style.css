@@ -36,11 +36,11 @@
 
         /* Logo Image Styling */
         .nav-container img {
-            height: 70px;             /* Maintain a consistent logo height */
+            height: 120px;             /* Maintain a consistent logo height */
             width: auto;              /* Automatically adjust width to maintain aspect ratio */
             object-fit: contain;      /* Ensure full logo fits within container */
             display: block;           /* Prevent inline spacing issues */
-            max-width: 120%;          /* Responsive: prevents overflow */
+            max-width: 150%;          /* Responsive: prevents overflow */
             vertical-align: middle;   /* Aligns image cleanly with surrounding text/content */
         }
 
