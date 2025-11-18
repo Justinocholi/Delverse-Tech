@@ -98,23 +98,30 @@
                 </button>
             </div>
 
+
+            <a href="#home" onclick="showPage('home'); toggleMobileMenu();"
+   class="mobile-nav-link block w-full text-left py-2 px-4 rounded bg-blue-50 text-blue-600">
+    Home
+</a>
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="md:hidden mt-4 pb-4 hidden">
-                <button onclick="showPage('home'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded bg-blue-50 text-blue-600">
+                <a href="index.html" onclick="showPage('home'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded bg-blue-50 text-blue-600">
                     Home
-                </button>
-                <button onclick="showPage('services'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                </a>
+
+                <a href="services.html" onclick="showPage('services'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
                     Services
-                </button>
-                <button onclick="showPage('portfolio'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                </a>
+
+                <a href="portfolio.html" onclick="showPage('portfolio'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
                     Portfolio
-                </button>
-                <button onclick="showPage('about'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                </a>
+                <a href="about.html" onclick="showPage('about'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
                     About Us
-                </button>
-                <button onclick="showPage('contact'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                </a>
+                <a href="contact.html" onclick="showPage('contact'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
                     Contact Us
-                </button>
+                </a>
                 <div class="px-4 mt-2">
                   <button id="mobileThemeToggle" onclick="toggleTheme()" class="w-full flex items-center justify-center gap-2 p-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100">
                     <i data-lucide="moon" class="w-5 h-5"></i>
