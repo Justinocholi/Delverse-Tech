@@ -7,7 +7,14 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <link rel="stylesheet" href="/delverse-app/src/style.css">
+  <link rel="stylesheet" href="/dark.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .filter-btn.active {
+      background-color: #2563eb;
+      color: white;
+    }
+  </style>
 </head>
 <body class="min-h-screen bg-gray-50">
 <!-- Arrow Button -->
@@ -15,21 +22,151 @@
   class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
   ↑
 </button>
+
+<script>
+  // Portfolio filtering functionality
+  function filterProjects(category) {
+    const projectCards = document.querySelectorAll('#portfolioGrid > .project-card');
+    const filterButtons = document.querySelectorAll('#filterBar .filter-btn');
+    
+    // Update active button state
+    filterButtons.forEach(btn => {
+      if (btn.textContent.trim().toLowerCase().includes(category) || 
+         (category === 'all' && btn.textContent.trim() === 'All')) {
+        btn.classList.add('active');
+        btn.classList.remove('bg-gray-200', 'text-gray-700');
+        btn.classList.add('bg-blue-600', 'text-white');
+      } else {
+        btn.classList.remove('active');
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('bg-gray-200', 'text-gray-700');
+      }
+    });
+    
+    // Show/hide project cards based on category
+    projectCards.forEach(card => {
+      const matches = category === 'all' || card.getAttribute('data-category') === category;
+      card.classList.toggle('hidden', !matches);
+    });
+}
+  
+  // Scroll to top button functionality
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.classList.remove('hidden');
+    } else {
+      scrollTopBtn.classList.add('hidden');
+    }
+  });
+  
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  // Initialize Lucide icons and normalize project cards
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('portfolioGrid');
+    if (grid) {
+      Array.from(grid.children).forEach(child => {
+        // Mark direct children as project cards
+        if (!child.classList.contains('project-card')) {
+          child.classList.add('project-card');
+        }
+        // If there's an inner placeholder project-card with a category, migrate it up and remove placeholder
+        const inner = child.querySelector('.project-card[data-category]');
+        if (inner && inner.getAttribute('data-category')) {
+          child.setAttribute('data-category', inner.getAttribute('data-category'));
+          inner.remove();
+        }
+        // Auto-assign data-category from tag if still missing
+        if (!child.hasAttribute('data-category')) {
+          const tag = child.querySelector('span.inline-block');
+          const label = tag ? tag.textContent.trim().toLowerCase() : '';
+          let cat = null;
+          if (label.includes('website')) cat = 'website';
+          else if (label.includes('ecommerce')) cat = 'ecommerce';
+          else if (label.includes('portfolio')) cat = 'portfolio';
+          else if (label.includes('data')) cat = 'data';
+          if (cat) child.setAttribute('data-category', cat);
+        }
+      });
+      // Remove any stray filter buttons inside cards to clean layout
+      grid.querySelectorAll('.filter-btn').forEach(btn => {
+        if (!btn.closest('#filterBar')) btn.remove();
+      });
+    }
+    // Set initial filter state
+    filterProjects('all');
+    // Initialize icons
+    lucide.createIcons();
+  });
+</script>
   <!-- Header -->
   <header class="top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
-      <nav class="hidden md:flex space-x-8">
-        <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
-        <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
-        <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
-        <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
-        <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
-      </nav>
+      <div class="flex items-center gap-4">
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
+          <a href="services.html" class="nav-link text-gray-600 hover:text-blue-600">Services</a>
+          <a href="portfolio.html" class="nav-link text-blue-600 font-medium">Portfolio</a>
+          <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
+          <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
+        </nav>
+        <button id="themeToggleBtn" class="p-2 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100" aria-label="Toggle theme">
+          <i data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+        <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden mt-4 pb-4 hidden px-4">
+      <a href="index.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Home</a>
+      <a href="services.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Services</a>
+      <a href="portfolio.html" class="block w-full text-left py-2 px-4 rounded text-blue-600 bg-blue-50">Portfolio</a>
+      <a href="about.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">About Us</a>
+      <a href="contact.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Contact Us</a>
     </div>
   </header>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+    }
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    });
+  </script>
 
 
                     <!-- Portfolio Page Opens -->
@@ -46,7 +183,7 @@
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
                     <div class="flex justify-center mb-12">
-                        <div class="flex flex-wrap gap-4">
+                        <div class="flex flex-wrap gap-4" id="filterBar">
                             <button onclick="filterProjects('all')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-blue-600 text-white">
                                 All
                             </button>
@@ -56,85 +193,89 @@
                             <button onclick="filterProjects('ecommerce')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
                                 Ecommerce
                             </button>
-                            <button onclick="filterProjects('education')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
-                                Education
+                            <button onclick="filterProjects('portfolio')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                Portfolio
+                            </button>
+                            <button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                Data Analysis
                             </button>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="portfolioGrid">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioGrid">
                         <!-- AbisGroup Africa -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">A</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Ecommerce
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">AbisGroup Africa</h3>
-                                <p class="text-gray-600 mb-4">A comprehensive livestock processing company and marketplace platform connecting farmers, processors, and consumers in the livestock value chain.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Livestock Marketplace</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Processing Management</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Supply Chain Tracking</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Payment Integration</span>
-                                    </div>
-                                </div>
+                   <!-- Portfolio Card with + / - toggle -->
+<!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center">
+    <div class="text-white text-2xl font-bold">Cover</div>
+  </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">MongoDB</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Stripe API</span>
-                                    </div>
-                                </div>
+  <!-- Card Content -->
+  <div class="p-3">
+    <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce"></div>
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Ecommerce
+    </span>
+    <h3 class="text-md font-bold mb-2">AbisGroup Africa</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      A comprehensive livestock processing company and marketplace platform connecting farmers, processors, and consumers.
+    </p>
 
-                                <a
-                                    href="https://www.abisgroup.africa/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Livestock Marketplace</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Processing Management</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+      </div>
+    </div>
+
+    <a
+      href="https://www.abisgroup.africa/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
 
                         <!-- MECA Group -->
                         <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-48 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">M</div>
+                            <div class="h-40 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
+                                <div class="text-white text-3xl font-bold">M</div>
                             </div>
-                            <div class="p-6">
+                            <div class="p-4">
                                 <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
                                     Website
                                 </span>
-                                <h3 class="text-xl font-bold mb-3">MECA Group Company Website</h3>
-                                <p class="text-gray-600 mb-4">Complete rebranding and redevelopment of MECA Group company website with modern design and enhanced user experience.</p>
+                                <h3 class="text-lg font-bold mb-2">MECA Group Company Website</h3>
+                                <p class="text-gray-600 mb-3 text-sm">Complete rebranding and redevelopment of MECA Group company website with modern design.</p>
                                 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
+                                <div class="mb-3">
+                                    <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
                                     <div class="grid grid-cols-2 gap-1">
                                         <span class="text-xs bg-gray-100 px-2 py-1 rounded">Modern Design</span>
                                         <span class="text-xs bg-gray-100 px-2 py-1 rounded">Mobile Responsive</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">SEO Optimized</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Fast Loading</span>
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
+                                <div class="mb-3">
+                                    <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
                                     <div class="flex flex-wrap gap-1">
                                         <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
                                         <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Next.js</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Tailwind CSS</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">TypeScript</span>
                                     </div>
                                 </div>
 
@@ -142,271 +283,454 @@
                                     href="https://www.mecagroup.com.ng/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                                    class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
                                 >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                                    View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- LearnlyApp -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="education">
-                            <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">L</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Education
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">LearnlyApp Educational Platform</h3>
-                                <p class="text-gray-600 mb-4">Interactive learning platform with uploadify features for educational content management and student engagement.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Course Management</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">File Upload</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Student Progress</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Content</span>
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Next.js</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Firebase</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
-                                    </div>
-                                </div>
-
-                                <a
-                                    href="https://uploadify-learning.vercel.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
                                         <!-- DCP Company Website -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">D</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Website
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">DCP Company Website</h3>
-                                <p class="text-gray-600 mb-4">Professional rebranding and website redevelopment for DCP with focus on corporate identity and digital presence.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Coporate Design</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Content Management</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Conatct Forms</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Analytics Integration</span>
-                                    </div>
-                                </div>
+                        <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+   <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website"></div>
+  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+    <div class="text-white text-2xl font-bold">D</div>
+  </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Javascript</span>
-                                    </div>
-                                </div>
+  <!-- Card Content -->
+  <div class="p-3">
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Website
+    </span>
+    <h3 class="text-md font-bold mb-2">DCP Company Website</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Professional rebranding and website redevelopment for DCP with focus on corporate identity and digital presence.
+    </p>
 
-                                <a
-                                    href="https://www.dcp.com.ng/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Coporate Design</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Content Management</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Conatct Forms</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Analytics Integration</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Javascript</span>
+      </div>
+    </div>
+
+    <a
+      href="https://www.dcp.com.ng/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
 
                                             <!-- GetSpares E-commerce Platform -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">G</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Ecommerce
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">GetSpares E-commerce Platform</h3>
-                                <p class="text-gray-600 mb-4">Proof of concept for a comprehensive e-commerce platform focused on automotive spare parts and accessories.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Product Catalog</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Shopping Cart</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Payment Integration</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">User Authentication</span>
-                                    </div>
-                                </div>
+                        <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+    <div class="text-white text-2xl font-bold">G</div>
+  </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">MongoDB</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Stripe API</span>
-                                    </div>
-                                </div>
+  <!-- Card Content -->
+  <div class="p-3">
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Ecommerce
+    </span>
+    <h3 class="text-md font-bold mb-2">GetSpares E-commerce Platform</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Proof of concept for a comprehensive e-commerce platform focused on automotive spare parts and accessories.
+    </p>
 
-                                <a
-                                    href="https://www.getspares.net/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Product Catalog</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Shopping Cart</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Payment Integration</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">User Authentication</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">MongoDB</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Stripe API</span>
+      </div>
+    </div>
+
+    <a
+      href="https://www.getspares.net/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
 
                                             <!-- Precious Photographs Website -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">P</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Website
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">Precious Photographs Website</h3>
-                                <p class="text-gray-600 mb-4">Responsive photography portfolio website showcasing professional photography services with elegant design.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Image Gallery</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Responsive Design</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Contact Forms</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Portfolio Showcase</span>
-                                    </div>
-                                </div>
+                        <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+    <div class="text-white text-2xl font-bold">P</div>
+  </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">HTML5</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Bootstrap</span>
-                                    </div>
-                                </div>
+  <!-- Card Content -->
+  <div class="p-3">
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Portfolio
+    </span>
+    <h3 class="text-md font-bold mb-2">Precious Photographs Website</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Responsive photography portfolio website showcasing professional photography services with elegant design.
+    </p>
 
-                                <a
-                                    href="https://preciousphotographs.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Image Gallery</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Responsive Design</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Contact Forms</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Portfolio Showcase</span>
+      </div>
+    </div>
 
-                                           <!-- Interactive Quiz Application -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">I</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Website
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">Interactive Quiz Application</h3>
-                                <p class="text-gray-600 mb-4">Engaging quiz application with interactive features, real-time scoring, and user-friendly interface.</p>    
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Quiz</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Real-time Scoring</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Multiple Categories</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Progress Tracking</span>
-                                    </div>
-                                </div>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">HTML5</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Bootstrap</span>
+      </div>
+    </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
-                                    </div>
-                                </div>
+    <a
+      href="https://preciousphotographs.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
 
-                                <a
-                                    href="https://quiz-application-seven-umber.vercel.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
 
-<!-- Interactive Quiz Application -->
-                        <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <div class="text-white text-4xl font-bold">I</div>
-                            </div>
-                            <div class="p-6">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-                                    Website
-                                </span>
-                                <h3 class="text-xl font-bold mb-3">Interactive Image Gallery</h3>
-                                <p class="text-gray-600 mb-4">Dynamic image gallery application with interactive features and smooth user experience for image browsing.</p>
-                                
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Key Features:</h4>
-                                    <div class="grid grid-cols-2 gap-1">
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Interactive Gallery</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Image Filtering</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Smooth Animations</span>
-                                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Responsive Layout</span>
-                                    </div>
-                                </div>
 
-                                <div class="mb-4">
-                                    <h4 class="font-semibold text-sm mb-2">Technologies:</h4>
-                                    <div class="flex flex-wrap gap-1">
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">CSS3</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">JavaScript</span>
-                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vercel</span>
-                                    </div>
-                                </div>
+    <!-- GitHub Project 1 -->
+<!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
 
-                                <a
-                                    href="https://image-interactive-app.vercel.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                                >
-                                    View Project <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">User Behavior Analysis</h3>
+    <p class="text-gray-700 mb-2 text-sm flex-grow">
+      Firebase-based user behavior and retention analysis report with actionable insights for improving user engagement.
+    </p>
+    <a href="https://github.com/daveeocholi/User-Behavior-and-Retention-Analysis-Report-Firebase-Overview-Project" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto">
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+
+
+                            <!-- GitHub Project 2 -->
+  <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">Business Analysis</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      EPI vs Minimum Premium Variances analysis for business insights.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/Business-Analysis-EPI-vs-Minimum-Premium-Variances"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+
+    <!-- User Behavior Analysis Card -->
+<!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">User Behavior Analysis</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Firebase-based user behavior and retention analysis report with actionable insights for improving user engagement.
+    </p>
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+                                          
+                            <!-- GitHub Project 3 -->
+                            <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">Burger Analytics</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Sales data analysis for Nov-Dec 2022 with comprehensive insights.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/BurgerAnalytics-Sales-Data-Analysis-Nov-Dec-2022-/tree/main"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+                            <!-- GitHub Project 4 -->
+                            <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">Superstore Sales Analysis</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Exploratory data analysis of superstore sales performance in the United States.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/EXPLORATORY-DATA-ANALYSIS-OF-SUPERSTORE-SALES-PERFORMANCE-IN-THE-UNITED-STATES"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+                            
+                            <!-- GitHub Project 5 -->
+                            <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">TechCrush House Prices</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Exploratory analysis of house prices in King County, Washington.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/TECHCRUSH-CAPSTONE-PROJECT-ON-EXPLORATORY-ANALYSIS-OF-HOUSE-PRICES-IN-KING-COUNTY-WASHINGTON"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+                            
+                            <!-- GitHub Project 6 -->
+<!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">Brewery Sales Dashboard</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      International Brewery Sales Dashboard with interactive visualizations.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/International-Brewery-Sales-Dashboard"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+                            
+                            <!-- GitHub Project 7 -->
+                           <!-- Simplified Portfolio Card -->
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
+  
+    <div class="flex flex-wrap gap-4 mb-12">
+<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+    </div>
+  <!-- Top Gradient Banner -->
+  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+    </svg>
+  </div>
+
+  <!-- Tag -->
+  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
+    Data Analysis
+  </span>
+
+  <!-- Content -->
+  <div class="p-3 flex flex-col flex-grow">
+    <h3 class="text-md font-bold mb-2">Church Membership Analysis</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Celebration Church International Mararaba membership bio-data analysis.
+    </p>
+    <a
+      href="https://github.com/daveeocholi/CELEBRATION-CHURCH-INTERNATIONAL-MARARABA-MEMBERSHIP-BIO-DATA-ANALYSIS"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    >
+      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+
             </section>
 
             <!-- CTA Section -->
@@ -514,10 +838,10 @@
     </footer>
 
   <script>
-    // Get the button element
+// Get the button element
   const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-  // Show button when user scrolls down 300px
+// Show button when user scrolls down 300px
   window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
       scrollTopBtn.classList.remove("hidden");
@@ -528,7 +852,7 @@
     }
   });
 
-  // Scroll to top when button is clicked
+// Scroll to top when button is clicked
   scrollTopBtn.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
@@ -570,7 +894,19 @@
     }
   });
 
+// Make all portfolio cards expandable
+  document.querySelectorAll('.group').forEach(card => {
+    card.addEventListener('click', () => {
+      const content = card.querySelector('div.p-4.overflow-hidden');
+      if (!content) return;
 
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
     lucide.createIcons();
 
     function handleFormSubmit(event) {

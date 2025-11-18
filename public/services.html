@@ -10,6 +10,7 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/dark.css">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -23,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Your custom styles -->
-    <link rel="stylesheet" href="/delverse-app/src/style.css">
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 <body class="min-h-screen bg-gray-50">
 <!-- Arrow Button -->
@@ -37,15 +38,61 @@
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
-      <nav class="hidden md:flex space-x-8">
-        <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
-        <a href="services.html" class="nav-link font-medium transition-colors text-blue-600">Services</a>
-        <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
-        <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
-        <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
-      </nav>
+      <div class="flex items-center gap-4">
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
+          <a href="services.html" class="nav-link text-blue-600 font-medium">Services</a>
+          <a href="portfolio.html" class="nav-link text-gray-600 hover:text-blue-600">Portfolio</a>
+          <a href="about.html" class="nav-link text-gray-600 hover:text-blue-600">About Us</a>
+          <a href="contact.html" class="nav-link text-gray-600 hover:text-blue-600">Contact Us</a>
+        </nav>
+        <button id="themeToggleBtn" class="p-2 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100" aria-label="Toggle theme">
+          <i data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+        <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden mt-4 pb-4 hidden px-4">
+      <a href="index.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Home</a>
+      <a href="services.html" class="block w-full text-left py-2 px-4 rounded text-blue-600 bg-blue-50">Services</a>
+      <a href="portfolio.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Portfolio</a>
+      <a href="about.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">About Us</a>
+      <a href="contact.html" class="block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">Contact Us</a>
     </div>
   </header>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+    }
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    });
+  </script>
 
             <!-- SERVICES PAGE OPENS -->
           <!-- OUR SOLUTIONS -->
@@ -62,41 +109,50 @@
     </div>
   </section>
 
-  <!-- Accordion Services Section -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 space-y-4">
-      
-      <!-- Accordion Item 1 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          AI-Powered Solutions
-          <span class="accordion-icon text-3xl">+</span>
+<!-- Services Accordion Redesigned -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- GRID WRAPPER FOR SIDE-BY-SIDE CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- ✅ AI-Powered Solutions -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl text-2xl">🤖</div>
+            <h3 class="text-xl font-semibold text-gray-900">AI-Powered Solutions</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-blue-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Transform your business with intelligent automation, machine learning models, and AI-driven insights that enhance decision-making and operational efficiency.
+            Transform your business with intelligent automation, machine learning models, and AI-driven insights.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
+          <ul class="space-y-2 pl-5 list-disc">
             <li>Machine Learning Models</li>
-            <li>Natural Language Processing</li>
+            <li>Natural Language Processing (NLP)</li>
             <li>Computer Vision</li>
             <li>Predictive Analytics</li>
           </ul>
         </div>
       </div>
 
-      <!-- Accordion Item 2 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          Website Development
-          <span class="accordion-icon text-3xl">+</span>
+      <!-- ✅ Website Development -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-green-100 text-green-600 flex items-center justify-center rounded-xl text-2xl">💻</div>
+            <h3 class="text-xl font-semibold text-gray-900">Website Development</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-green-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Create stunning, responsive websites that engage users and drive conversions with modern design principles and cutting-edge technologies.
+            Stunning and responsive websites designed to engage users and drive conversions.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
-            <li>Responsive Design</li>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Responsive UI/UX</li>
             <li>SEO Optimization</li>
             <li>CMS Integration</li>
             <li>E-commerce Solutions</li>
@@ -104,17 +160,20 @@
         </div>
       </div>
 
-      <!-- Accordion Item 3 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          Mobile App Development
-          <span class="accordion-icon text-3xl">+</span>
+      <!-- ✅ Mobile App Development -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-purple-100 text-purple-600 flex items-center justify-center rounded-xl text-2xl">📱</div>
+            <h3 class="text-xl font-semibold text-gray-900">Mobile App Development</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-purple-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Build powerful native and cross-platform mobile applications that provide seamless user experiences across all devices.
+            Build powerful mobile applications with seamless user experience across devices.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
+          <ul class="space-y-2 pl-5 list-disc">
             <li>Native iOS & Android</li>
             <li>Cross-platform Development</li>
             <li>UI/UX Design</li>
@@ -123,17 +182,20 @@
         </div>
       </div>
 
-      <!-- Accordion Item 4 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          Data Analytics
-          <span class="accordion-icon text-3xl">+</span>
+      <!-- ✅ Data Analytics -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-yellow-100 text-yellow-600 flex items-center justify-center rounded-xl text-2xl">📊</div>
+            <h3 class="text-xl font-semibold text-gray-900">Data Analytics</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-yellow-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Transform raw data into actionable insights with advanced analytics, business intelligence, and data visualization solutions.
+            Turn raw data into actionable insights with BI and advanced analytics.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
+          <ul class="space-y-2 pl-5 list-disc">
             <li>Business Intelligence</li>
             <li>Data Visualization</li>
             <li>Reporting Dashboards</li>
@@ -142,57 +204,61 @@
         </div>
       </div>
 
-      <!-- Accordion Item 5 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          IT Support
-          <span class="accordion-icon text-3xl">+</span>
+      <!-- ✅ IT Support -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-red-100 text-red-600 flex items-center justify-center rounded-xl text-2xl">🛡️</div>
+            <h3 class="text-xl font-semibold text-gray-900">IT Support</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Protect your digital assets with comprehensive security solutions and reliable IT support.
+            Reliable IT support and cybersecurity solutions for business protection.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
-            <li>Security Audits & Assessment</li>
-            <li>Network Security Implementation</li>
-            <li>Data Protection & Backup</li>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Security Audits</li>
+            <li>Network Security</li>
+            <li>Data Protection</li>
             <li>24/7 IT Support</li>
-            <li>Compliance Management</li>
           </ul>
         </div>
       </div>
 
-      <!-- Accordion Item 6 -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <button class="w-full flex justify-between items-center px-8 py-6 text-2xl font-bold text-blue-600 accordion-toggle">
-          Business Consulting
-          <span class="accordion-icon text-3xl">+</span>
+      <!-- ✅ Business Consulting -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 flex items-center justify-center rounded-xl text-2xl">📈</div>
+            <h3 class="text-xl font-semibold text-gray-900">Business Consulting</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-indigo-600">+</span>
         </button>
-        <div class="accordion-content hidden px-8 pb-6 text-gray-600">
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
           <p class="mb-4">
-            Strategic technology consulting to optimize operations and accelerate digital transformation.
+            Strategic technology consulting to modernize and optimize operations.
           </p>
-          <ul class="space-y-2 list-disc list-inside">
-            <li>Digital Transformation Strategy</li>
-            <li>Technology Assessment</li>
-            <li>Process Optimization</li>
-            <li>Change Management</li>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Digital Transformation</li>
             <li>Technology Roadmapping</li>
+            <li>Process Optimization</li>
           </ul>
         </div>
       </div>
 
     </div>
-  </section>
-</div>
-
+  </div>
+</section>
 
         <!-- Technologies Page Opens -->
-         <section class="py-16 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Technologies</h2>
-    <p class="text-lg text-gray-600 mb-12">Leveraging cutting-edge technologies to build scalable, secure, and innovative solutions that drive your business forward.</p>
-</div>
+  <section class="bg-gradient-to-br text-black py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Our Technologies</h1>
+      <p class="text-xl opacity-90">Leveraging cutting-edge technologies to build scalable, secure, and innovative solutions that drive your business forward.</p>
+    </div>
+  </section>
+
 
             <section class="py-16">
                 <div class="max-w-6xl mx-auto px-4">
@@ -215,8 +281,7 @@
                                 <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
                                 <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Material-UI</span>
                             </div>
-                        </div>
-
+                        </div>                        
                         <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                             <div class="flex items-center mb-4">
                                 <div class="text-blue-600 mr-4">
@@ -361,44 +426,6 @@
                         </div>
             </section>
 
-<!-- Process Section Opens -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Process</h2>
-    <p class="text-lg text-gray-600 mb-12">How we deliver exceptional results for our clients</p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Step 1 -->
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="text-2xl font-bold text-blue-600 mb-2">#1</div>
-        <h3 class="font-semibold text-xl mb-2">Discovery & Planning</h3>
-        <p class="text-gray-600">We analyze your needs, understand your goals, and create a comprehensive roadmap.</p>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="text-2xl font-bold text-blue-600 mb-2">#2</div>
-        <h3 class="font-semibold text-xl mb-2">Design & Development</h3>
-        <p class="text-gray-600">Our expert team brings your vision to life with cutting-edge technology.</p>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="text-2xl font-bold text-blue-600 mb-2">#3</div>
-        <h3 class="font-semibold text-xl mb-2">Testing & QA</h3>
-        <p class="text-gray-600">Rigorous testing ensures your solution performs flawlessly across all platforms.</p>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="text-2xl font-bold text-blue-600 mb-2">#4</div>
-        <h3 class="font-semibold text-xl mb-2">Launch & Support</h3>
-        <p class="text-gray-600">We deploy your solution and provide ongoing support for success and growth.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Process Section Closes -->
 
 
                         <!-- CTA Section opens -->
@@ -555,6 +582,61 @@
       });
     }
     lucide.createIcons();
+const accordions = document.querySelectorAll(".accordion-toggle");
+
+  accordions.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector(".accordion-icon");
+
+      if (content.classList.contains("hidden")) {
+        content.classList.remove("hidden");
+        icon.textContent = "−";
+      } else {
+        content.classList.add("hidden");
+        icon.textContent = "+";
+      }
+    });
+  });
+  document.querySelectorAll(".accordion-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector(".accordion-icon");
+
+      // Close all other accordions first
+      document.querySelectorAll(".accordion-content").forEach(item => {
+        if (item !== content) {
+          item.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".accordion-icon").forEach(i => {
+        if (i !== icon) i.textContent = "+";
+      });
+
+      // Toggle the clicked one
+      content.classList.toggle("hidden");
+      icon.textContent = content.classList.contains("hidden") ? "+" : "−";
+    });
+  });
+
+    const openPopup = document.getElementById("openPopup");
+  const closePopup = document.getElementById("closePopup");
+  const headerPopup = document.getElementById("headerPopup");
+
+  openPopup.addEventListener("click", () => {
+    headerPopup.classList.remove("hidden");
+  });
+
+  closePopup.addEventListener("click", () => {
+    headerPopup.classList.add("hidden");
+  });
+
+  // Close popup if clicking outside modal content
+  headerPopup.addEventListener("click", (e) => {
+    if (e.target === headerPopup) {
+      headerPopup.classList.add("hidden");
+    }
+  });
   </script>
 
 </body>
