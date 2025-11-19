@@ -19,7 +19,7 @@
   ↑
 </button>
   <!-- Header -->
-  <header class="top-0 w-full bg-white shadow-lg z-50">
+  <header class="navbar-neutral top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
@@ -56,6 +56,14 @@
       if (!menu) return;
       menu.classList.toggle('hidden');
     }
+    function ensureLucide() {
+      if (window.lucide && lucide.createIcons) { lucide.createIcons(); return; }
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
+      s.async = true;
+      s.onload = () => { if (window.lucide && lucide.createIcons) lucide.createIcons(); };
+      document.head.appendChild(s);
+    }
     function setTheme(theme) {
       const root = document.documentElement;
       if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
@@ -64,7 +72,11 @@
       if (btn) {
         btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
         btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
-        if (window.lucide && lucide.createIcons) lucide.createIcons();
+        if (window.lucide && lucide.createIcons) {
+          lucide.createIcons();
+        } else {
+          btn.textContent = theme === 'dark' ? '☀︎' : '☾';
+        }
       }
     }
     function toggleTheme() {
@@ -72,6 +84,7 @@
       setTheme(isDark ? 'light' : 'dark');
     }
     document.addEventListener('DOMContentLoaded', () => {
+      ensureLucide();
       const saved = localStorage.getItem('theme') || 'light';
       setTheme(saved);
       const btn = document.getElementById('themeToggleBtn');
@@ -114,6 +127,46 @@
   </div>
 </section>
 
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- LEFT TEXT CONTENT -->
+      <div>
+        <h2 class="text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          DELVERSE TECHNOLOGIES LIMITED (RC: 8707553), stands out with a vision to bridge the gap between
+          cutting-edge technology and practical business solutions, Delverse Technologies has emerged as
+          a leading consulting firm specializing in AI-driven software development.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          We understand that in today's rapidly evolving digital landscape, businesses need more than just
+          technology, they need strategic partners who can navigate complexity and deliver solutions that
+          drive real results.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed">
+          Our team of experienced professionals combines deep technical expertise with industry knowledge
+          to create tailored solutions that not only meet current needs but also position our clients for
+          future growth.
+        </p>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div>
+        <div class="rounded-2xl overflow-hidden shadow-xl bg-white">
+          <img src="tech.jpg" alt="Business professional"
+               class="w-full h-full object-cover">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
     <!-- Vision Mission Section -->
 <!-- Vision & Mission Section -->
 <section class="py-16 bg-white">
@@ -122,7 +175,12 @@
       
       <!-- Vision -->
       <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">👁️</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="eye.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h3 class="text-2xl font-bold mb-2">Our Vision</h3>
         <p class="text-gray-600 text-sm">
           To be the global leader in AI-driven solutions, empowering businesses
@@ -133,7 +191,12 @@
 
       <!-- Mission -->
       <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">🎯</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="target.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h3 class="text-2xl font-bold mb-2">Our Mission</h3>
         <p class="text-gray-600 text-sm">
           To craft innovative, tailored technology solutions that drive meaningful
@@ -159,7 +222,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       
       <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">🎯</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="target.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-bold mb-2">Innovation</h4>
         <p class="text-gray-600 text-sm">
           We continuously push the boundaries of technology to deliver
@@ -168,7 +236,12 @@
       </div>
 
       <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">👥</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="people-community-24.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-bold mb-2">Collaboration</h4>
         <p class="text-gray-600 text-sm">
           We believe in the power of partnership and work closely with our clients
@@ -177,7 +250,12 @@
       </div>
 
       <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">🏆</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="sports-medal.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-bold mb-2">Precision</h4>
         <p class="text-gray-600 text-sm">
           Every detail matters. We maintain the highest standards of quality and
@@ -186,7 +264,12 @@
       </div>
 
       <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
-        <div class="text-4xl mb-4">💎</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="file-type-nsri-integrity.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-bold mb-2">Integrity</h4>
         <p class="text-gray-600 text-sm">
           We operate with transparency, honesty, and ethical practices in all our
@@ -199,7 +282,7 @@
 </section>
 
 
-            <!-- Team Section -->
+            <!-- Team Section 
             <section class="py-16 bg-gray-50">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl font-bold mb-4">Our Team</h2>
@@ -207,13 +290,13 @@
                     </div>
 <section class="py-16">
   <div class="max-w-7xl mx-auto px-4">
-
-    <!-- GRID WRAPPER -->
+-->
+    <!-- GRID WRAPPER 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
+-->
       <!-- ============================
            DAVID OCHOLI
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -235,11 +318,11 @@
           Delverse, ensuring every project is executed with precision and purpose.
         </div>
       </div>
-
+-->
 
       <!-- ============================
            TOMIWA AMODEMAJA
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -260,11 +343,11 @@
           are innovative, commercially viable, and aligned with client goals.
         </div>
       </div>
-
+-->
 
       <!-- ============================
            JOSHUA OCHOLI
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -284,11 +367,11 @@
           sets the standard for technical excellence across Delverse.
         </div>
       </div>
-
+-->
 
       <!-- ============================
            WILLIAMS SIMEON
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -308,11 +391,11 @@
           in the competitive tech landscape.
         </div>
       </div>
-
+-->
 
       <!-- ============================
            LYDIA IDUNGAFE
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -332,11 +415,11 @@
           a thriving environment for top talent.
         </div>
       </div>
-
+-->
 
       <!-- ============================
            ABIMBOLA
-      ============================== -->
+      ============================== 
       <div 
         x-data="{ open: false }" 
         @click="open = !open"
@@ -357,11 +440,13 @@
         </div>
       </div>
 
-    </div> <!-- END GRID -->
+    </div>
+    -->
+    <!-- END GRID 
 
   </div>
 </section>
-
+-->
                 <!-- Why Choose Section -->
 <section class="py-16 bg-gray-50">
   <div class="max-w-6xl mx-auto px-6 lg:px-8">
@@ -375,21 +460,36 @@
     <div class="grid gap-8 md:grid-cols-3">
       <!-- Card 1 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-        <div class="text-5xl mb-4 text-teal-500">🌐</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="world.svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-semibold text-gray-800 mb-2">Remote-First Approach</h4>
         <p class="text-gray-600">Access to global talent and cost-effective solutions without compromising quality.</p>
       </div>
 
       <!-- Card 2 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-        <div class="text-5xl mb-4 text-blue-800">👨‍💼</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="professions-man-construction-2.svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-semibold text-gray-800 mb-2">Expert Team</h4>
         <p class="text-gray-600">Skilled professionals with deep expertise in AI, web development, and digital transformation.</p>
       </div>
 
       <!-- Card 3 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-        <div class="text-5xl mb-4 text-yellow-500">🏅</div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="trophy (1).svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
         <h4 class="text-xl font-semibold text-gray-800 mb-2">Proven Results</h4>
         <p class="text-gray-600">Track record of successful projects and satisfied clients across various industries.</p>
       </div>

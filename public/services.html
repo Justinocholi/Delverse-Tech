@@ -33,7 +33,7 @@
   ↑
 </button>
   <!-- Header -->
-  <header class="top-0 w-full bg-white shadow-lg z-50">
+  <header class="navbar-neutral top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
         <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
@@ -65,34 +65,50 @@
     </div>
   </header>
   <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      if (!menu) return;
-      menu.classList.toggle('hidden');
-    }
-    function setTheme(theme) {
-      const root = document.documentElement;
-      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-      localStorage.setItem('theme', theme);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) {
-        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
-        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
-        if (window.lucide && lucide.createIcons) lucide.createIcons();
+    <script>
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        if (!menu) return;
+        menu.classList.toggle('hidden');
       }
-    }
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'light' : 'dark');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'light';
-      setTheme(saved);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) btn.addEventListener('click', toggleTheme);
-      if (window.lucide && lucide.createIcons) lucide.createIcons();
-    });
-  </script>
+      // Ensure Lucide is available, otherwise load fallback CDN and initialize
+      function ensureLucide() {
+        if (window.lucide && lucide.createIcons) { lucide.createIcons(); return; }
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
+        s.async = true;
+        s.onload = () => { if (window.lucide && lucide.createIcons) lucide.createIcons(); };
+        document.head.appendChild(s);
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+        localStorage.setItem('theme', theme);
+        const btn = document.getElementById('themeToggleBtn');
+        if (btn) {
+          btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+          btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+          if (window.lucide && lucide.createIcons) {
+            lucide.createIcons();
+          } else {
+            // Temporary emoji fallback if Lucide isn't loaded yet
+            btn.textContent = theme === 'dark' ? '☀︎' : '☾';
+          }
+        }
+      }
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        ensureLucide();
+        const saved = localStorage.getItem('theme') || 'light';
+        setTheme(saved);
+        const btn = document.getElementById('themeToggleBtn');
+        if (btn) btn.addEventListener('click', toggleTheme);
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      });
+    </script>
 
             <!-- SERVICES PAGE OPENS -->
           <!-- OUR SOLUTIONS -->
@@ -120,8 +136,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl text-2xl">🤖</div>
-            <h3 class="text-xl font-semibold text-gray-900">AI-Powered Solutions</h3>
+<div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="robot.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-900">AI-Powered Solutions</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-blue-600">+</span>
         </button>
@@ -142,8 +161,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-green-100 text-green-600 flex items-center justify-center rounded-xl text-2xl">💻</div>
-            <h3 class="text-xl font-semibold text-gray-900">Website Development</h3>
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="laptop-computer.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-green-900">Website Development</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-green-600">+</span>
         </button>
@@ -164,8 +186,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-purple-100 text-purple-600 flex items-center justify-center rounded-xl text-2xl">📱</div>
-            <h3 class="text-xl font-semibold text-gray-900">Mobile App Development</h3>
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="mobile-phone.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-purple-900">Mobile App Development</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-purple-600">+</span>
         </button>
@@ -186,8 +211,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-yellow-100 text-yellow-600 flex items-center justify-center rounded-xl text-2xl">📊</div>
-            <h3 class="text-xl font-semibold text-gray-900">Data Analytics</h3>
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="data-scatter-24.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-yellow-900">Data Analytics</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-yellow-600">+</span>
         </button>
@@ -208,8 +236,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-red-100 text-red-600 flex items-center justify-center rounded-xl text-2xl">🛡️</div>
-            <h3 class="text-xl font-semibold text-gray-900">IT Support</h3>
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="shield-28.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-red-900">IT Support</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
         </button>
@@ -230,8 +261,11 @@
       <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
         <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 flex items-center justify-center rounded-xl text-2xl">📈</div>
-            <h3 class="text-xl font-semibold text-gray-900">Business Consulting</h3>
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="business-chart-4.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-indigo-900">Business Consulting</h3>
           </div>
           <span class="accordion-icon text-3xl font-bold text-indigo-600">+</span>
         </button>
@@ -252,7 +286,7 @@
 </section>
 
         <!-- Technologies Page Opens -->
-  <section class="bg-gradient-to-br text-black py-20">
+  <section class="bg-gradient-to-br text-gray-600 py-20">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h1 class="text-4xl font-bold mb-4">Our Technologies</h1>
       <p class="text-xl opacity-90">Leveraging cutting-edge technologies to build scalable, secure, and innovative solutions that drive your business forward.</p>
@@ -470,6 +504,10 @@
                             <span class="sr-only">Twitter</span>
                             <i class="fab fa-twitter"></i>
                         </a>
+                        <a href="https://instagram.com/delverse.tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">instagram</span>
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -498,13 +536,7 @@
                             </button>
                             </a>
                         </li>
-                        <li>
-                            <a href="technologies.html">
-                            <button class="text-gray-400 hover:text-white transition-colors">
-                                Technologies
-                            </button>
-                            </a>
-                        </li>
+          
                     </ul>
                 </div>
 
