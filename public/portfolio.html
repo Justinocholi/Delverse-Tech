@@ -105,12 +105,38 @@
     // Initialize icons
     lucide.createIcons();
   });
+            function setTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+            localStorage.setItem('theme', theme);
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+              btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+              btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+            }
+            const mobileBtn = document.getElementById('mobileThemeToggle');
+            if (mobileBtn) {
+              mobileBtn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i><span>Toggle Theme</span>`;
+            }
+            if (window.lucide && lucide.createIcons) lucide.createIcons();
+          }
+          function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            setTheme(isDark ? 'light' : 'dark');
+          }
+          document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            setTheme(saved);
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) btn.addEventListener('click', toggleTheme);
+            if (window.lucide && lucide.createIcons) lucide.createIcons();
+          });
 </script>
   <!-- Header -->
   <header class="navbar-neutral top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
-        <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
+        <img src="circle-logo.PNG" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
       <div class="flex items-center gap-4">
         <nav class="hidden md:flex space-x-8">
@@ -139,33 +165,32 @@
     </div>
   </header>
   <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      if (!menu) return;
-      menu.classList.toggle('hidden');
-    }
-    function setTheme(theme) {
-      const root = document.documentElement;
-      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-      localStorage.setItem('theme', theme);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) {
-        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
-        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
-        if (window.lucide && lucide.createIcons) lucide.createIcons();
-      }
-    }
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'light' : 'dark');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'light';
-      setTheme(saved);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) btn.addEventListener('click', toggleTheme);
-      if (window.lucide && lucide.createIcons) lucide.createIcons();
-    });
+          function setTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+            localStorage.setItem('theme', theme);
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+              btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+              btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+            }
+            const mobileBtn = document.getElementById('mobileThemeToggle');
+            if (mobileBtn) {
+              mobileBtn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i><span>Toggle Theme</span>`;
+            }
+            if (window.lucide && lucide.createIcons) lucide.createIcons();
+          }
+          function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            setTheme(isDark ? 'light' : 'dark');
+          }
+          document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('theme') || 'light';
+            setTheme(saved);
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) btn.addEventListener('click', toggleTheme);
+            if (window.lucide && lucide.createIcons) lucide.createIcons();
+          });
   </script>
 
 
@@ -208,16 +233,20 @@
 <!-- Simplified Portfolio Card -->
 <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
   <!-- Cover Image / Placeholder -->
-  <div class="h-32 bg-gray-300 flex items-center justify-center">
-    <div class="text-white text-2xl font-bold">
-      <img src="cows.jpg" alt="">Cover</div>
-  </div>
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="cows.jpg" 
+    alt="Cows"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Card Content -->
   <div class="p-3">
     <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce"></div>
     <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
-      Ecommerce
+      Website
     </span>
     <h3 class="text-md font-bold mb-2">AbisGroup Africa</h3>
     <p class="text-gray-600 mb-2 text-sm">
@@ -251,14 +280,114 @@
   </div>
 </div>
 
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+    <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="cows 2.jpg" 
+    alt="Cows"
+    class="w-full h-full object-cover"
+  >
+</div>
+
+  <!-- Card Content -->
+  <div class="p-3">
+    <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce"></div>
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Ecommerce
+    </span>
+    <h3 class="text-md font-bold mb-2">AbisGroup Marketplace</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+A livestock processing company and marketplace platform connecting farmers, processors, and consumers in the livestock value chain.
+    </p>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Livestock Marketplace</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Processing Management</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+      </div>
+    </div>
+
+    <a
+      href="https://www.abisfarms.africa/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="first.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
+
+  <!-- Card Content -->
+  <div class="p-3">
+    <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="ecommerce"></div>
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      Website
+    </span>
+    <h3 class="text-md font-bold mb-2">Center Point</h3>
+    <p class="text-gray-600 mb-2 text-sm">
+      Centerpoint Infrastructures Limited delivers world-class multidisciplinary engineering solutions across agriculture, construction, power, mining, and oil & gas sectors. We bridge the gap between industrial demand and engineering innovation.
+    </p>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Engineering</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Consultation</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Node.js</span>
+      </div>
+    </div>
+
+    <a
+      href="https://www.centerpoint.com.ng/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+    </a>
+  </div>
+</div>
+
 
                         <!-- MECA Group -->
                         <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website">
-                            <div class="h-40 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
-                                <div class="text-white text-3xl font-bold">
-                                  <img src="meca.jpg" alt="">
-                                </div>
-                            </div>
+                            <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="meca.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
                             <div class="p-4">
                                 <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
                                     Website
@@ -298,10 +427,14 @@
 <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
   <!-- Cover Image / Placeholder -->
    <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-category="website"></div>
-  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-    <div class="text-white text-2xl font-bold">
-      <img src="dcp.jpg" alt="">D</div>
-  </div>
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="dcp.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Card Content -->
   <div class="p-3">
@@ -349,10 +482,14 @@
                         <!-- Simplified Portfolio Card -->
 <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
   <!-- Cover Image / Placeholder -->
-  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-    <div class="text-white text-2xl font-bold">
-      <img src="getspares.jpg" alt="">G</div>
-  </div>
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="getspares.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Card Content -->
   <div class="p-3">
@@ -400,10 +537,14 @@
                         <!-- Simplified Portfolio Card -->
 <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
   <!-- Cover Image / Placeholder -->
-  <div class="h-32 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-    <div class="text-white text-2xl font-bold">
-      <img src="precious.jpg" alt="">P</div>
-  </div>
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="precious.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Card Content -->
   <div class="p-3">
@@ -450,11 +591,16 @@
 
     <!-- GitHub Project 1 -->
 <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="data.jpg" alt="">
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="forex.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -467,11 +613,33 @@
     <p class="text-gray-700 mb-2 text-sm flex-grow">
       Firebase-based user behavior and retention analysis report with actionable insights for improving user engagement.
     </p>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">User Behavior Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Retention Metrics</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Firebase Integration</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Data Visualization</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Firebase</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Python</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Data Analysis</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Visualization</span>
+      </div>
+    </div>
+
     <a href="https://github.com/daveeocholi/User-Behavior-and-Retention-Analysis-Report-Firebase-Overview-Project" 
        target="_blank" 
        rel="noopener noreferrer" 
-       class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto">
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
+    >
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
@@ -480,15 +648,16 @@
 
                             <!-- GitHub Project 2 -->
   <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="analysis.jpg" alt="">
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="data.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -497,17 +666,36 @@
 
   <!-- Content -->
   <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">Business Analysis</h3>
+    <h3 class="text-md font-bold mb-2">Business Analysis: EPI vs Minimum Premium Variances</h3>
     <p class="text-gray-600 mb-2 text-sm">
       EPI vs Minimum Premium Variances analysis for business insights.
     </p>
-    <a
-      href="https://github.com/daveeocholi/Business-Analysis-EPI-vs-Minimum-Premium-Variances"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+        <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Variance Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Premium Comparison</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Business insights</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Reporting</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">EXCEL</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Power BI</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Python</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Statistical Analysis</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/daveeocholi/Business-Analysis-EPI-vs-Minimum-Premium-Variances" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
     >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
@@ -515,15 +703,16 @@
 
     <!-- User Behavior Analysis Card -->
 <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="black.jpg" alt="">
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="last.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -532,32 +721,52 @@
 
   <!-- Content -->
   <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">User Behavior Analysis</h3>
+    <h3 class="text-md font-bold mb-2">Burger Analytics: Sales Data Analysis</h3>
     <p class="text-gray-600 mb-2 text-sm">
-      Firebase-based user behavior and retention analysis report with actionable insights for improving user engagement.
+      Sales data analysis for November-December 2022 providing insights into business performance and trends.
     </p>
-    <a
-      href="#"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+        <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Sales Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Trend Identification</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Performance Metrics</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Visual Reports</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Pandas</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Matplotlib</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Python</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Jupyter</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/daveeocholi/BurgerAnalytics-Sales-Data-Analysis-Nov-Dec-2022-/tree/main" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
     >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
                                           
                             <!-- GitHub Project 3 -->
                             <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="white.jpg" alt="">
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="white.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -566,32 +775,52 @@
 
   <!-- Content -->
   <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">Burger Analytics</h3>
+    <h3 class="text-md font-bold mb-2">Superstore Sales Performance Analysis</h3>
     <p class="text-gray-600 mb-2 text-sm">
-      Sales data analysis for Nov-Dec 2022 with comprehensive insights.
+      Exploratory data analysis of superstore sales performance across the United States.
     </p>
-    <a
-      href="https://github.com/daveeocholi/BurgerAnalytics-Sales-Data-Analysis-Nov-Dec-2022-/tree/main"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+        <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Geographic Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Sales Trends</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Customer Segmentation</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">interactive Dashboards</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Pandas</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Seaborn</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Python</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Tableau</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/daveeocholi/TECHCRUSH-CAPSTONE-PROJECT-ON-EXPLORATORY-ANALYSIS-OF-HOUSE-PRICES-IN-KING-COUNTY-WASHINGTON" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
     >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
 
                             <!-- GitHub Project 4 -->
                             <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="forex.jpg" alt="">
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="analysis.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
+</div>
+
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -600,103 +829,53 @@
 
   <!-- Content -->
   <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">Superstore Sales Analysis</h3>
+    <h3 class="text-md font-bold mb-2">House Prices Analysis - King County</h3>
     <p class="text-gray-600 mb-2 text-sm">
-      Exploratory data analysis of superstore sales performance in the United States.
+      Exploratory data analysis of residential house prices in King County, Washington.
     </p>
-    <a
-      href="https://github.com/daveeocholi/EXPLORATORY-DATA-ANALYSIS-OF-SUPERSTORE-SALES-PERFORMANCE-IN-THE-UNITED-STATES"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
-    >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
-    </a>
-  </div>
-</div>
-
-                            
-                            <!-- GitHub Project 5 -->
-                            <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
+        <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Price Prediction</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Feature Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Market Trends</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Statistical Modeling</span>
+      </div>
     </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="charts.jpg" alt="">
-  </div>
 
-  <!-- Tag -->
-  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
-    Data Analysis
-  </span>
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Data Visualization</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Scikit-learn</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Python</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Statistics</span>
+      </div>
+    </div>
 
-  <!-- Content -->
-  <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">TechCrush House Prices</h3>
-    <p class="text-gray-600 mb-2 text-sm">
-      Exploratory analysis of house prices in King County, Washington.
-    </p>
-    <a
-      href="https://github.com/daveeocholi/TECHCRUSH-CAPSTONE-PROJECT-ON-EXPLORATORY-ANALYSIS-OF-HOUSE-PRICES-IN-KING-COUNTY-WASHINGTON"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+    <a href="https://github.com/daveeocholi/TECHCRUSH-CAPSTONE-PROJECT-ON-EXPLORATORY-ANALYSIS-OF-HOUSE-PRICES-IN-KING-COUNTY-WASHINGTON" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
     >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
 
-                            
+
                             <!-- GitHub Project 6 -->
 <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="last.jpg" alt="">
-  </div>
-
-  <!-- Tag -->
-  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
-    Data Analysis
-  </span>
-
-  <!-- Content -->
-  <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">Brewery Sales Dashboard</h3>
-    <p class="text-gray-600 mb-2 text-sm">
-      International Brewery Sales Dashboard with interactive visualizations.
-    </p>
-    <a
-      href="https://github.com/daveeocholi/International-Brewery-Sales-Dashboard"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
-    >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
-    </a>
-  </div>
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+  <!-- Cover Image / Placeholder -->
+  <div class="h-32 bg-gray-300 flex items-center justify-center overflow-hidden">
+  <img 
+    src="black.jpg" 
+    alt="Cover"
+    class="w-full h-full object-cover"
+  >
 </div>
 
-                            
-                            <!-- GitHub Project 7 -->
-                           <!-- Simplified Portfolio Card -->
-<div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transition-shadow hover:shadow-xl flex flex-col h-full">
-  
-    <div class="flex flex-wrap gap-4 mb-12">
-<button onclick="filterProjects('data')" class="filter-btn px-6 py-2 rounded-full transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">Data Analysis</button>
-    </div>
-  <!-- Top Gradient Banner -->
-  <div class="h-32 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-    <img src="data.jpg" alt="">
-  </div>
 
   <!-- Tag -->
   <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2 mt-2 ml-3">
@@ -705,17 +884,36 @@
 
   <!-- Content -->
   <div class="p-3 flex flex-col flex-grow">
-    <h3 class="text-md font-bold mb-2">Church Membership Analysis</h3>
+    <h3 class="text-md font-bold mb-2">International Brewery Sales Analysis</h3>
     <p class="text-gray-600 mb-2 text-sm">
-      Celebration Church International Mararaba membership bio-data analysis.
+      Comprehensive sales analysis and interactive dashboard for international brewery operations.
     </p>
-    <a
-      href="https://github.com/daveeocholi/CELEBRATION-CHURCH-INTERNATIONAL-MARARABA-MEMBERSHIP-BIO-DATA-ANALYSIS"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700 transition-colors mt-auto"
+        <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Key Features:</h4>
+      <div class="grid grid-cols-2 gap-1">
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Sales Dashboard</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Performance Tracking</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Regional Analysis</span>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">KPI Monitoring</span>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <h4 class="font-semibold text-xs mb-1">Technologies:</h4>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Power BI</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">SQL</span>
+        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">EXCEL</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">DAX</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/daveeocholi/International-Brewery-Sales-Dashboard" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="inline-flex items-center bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition-colors"
     >
-      View on GitHub <i data-lucide="github" class="w-3 h-3 ml-1"></i>
+      View Project on GitHub <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
     </a>
   </div>
 </div>
@@ -828,6 +1026,25 @@
     </footer>
 
   <script>
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const html = document.documentElement;
+
+    // Load saved theme on reload
+    if (localStorage.getItem("theme") === "dark") {
+        html.classList.add("dark");
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+        html.classList.toggle("dark");
+
+        // Save theme preference
+        if (html.classList.contains("dark")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.removeItem("theme");
+        }
+    });
+
 // Get the button element
   const scrollTopBtn = document.getElementById("scrollTopBtn");
 

@@ -12,7 +12,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="/dark.css">
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen flex flex-col m-0 bg-gray-50">
 <!-- Arrow Button -->
 <button id="scrollTopBtn" 
   class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
@@ -22,7 +22,7 @@
   <header class="navbar-neutral top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
-        <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
+        <img src="circle-logo.PNG" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
       <div class="flex items-center gap-4">
         <nav class="hidden md:flex space-x-8">
@@ -56,14 +56,6 @@
       if (!menu) return;
       menu.classList.toggle('hidden');
     }
-    function ensureLucide() {
-      if (window.lucide && lucide.createIcons) { lucide.createIcons(); return; }
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
-      s.async = true;
-      s.onload = () => { if (window.lucide && lucide.createIcons) lucide.createIcons(); };
-      document.head.appendChild(s);
-    }
     function setTheme(theme) {
       const root = document.documentElement;
       if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
@@ -72,11 +64,7 @@
       if (btn) {
         btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
         btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
-        if (window.lucide && lucide.createIcons) {
-          lucide.createIcons();
-        } else {
-          btn.textContent = theme === 'dark' ? '☀︎' : '☾';
-        }
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
       }
     }
     function toggleTheme() {
@@ -84,7 +72,6 @@
       setTheme(isDark ? 'light' : 'dark');
     }
     document.addEventListener('DOMContentLoaded', () => {
-      ensureLucide();
       const saved = localStorage.getItem('theme') || 'light';
       setTheme(saved);
       const btn = document.getElementById('themeToggleBtn');
@@ -209,6 +196,175 @@
   </div>
 </section>
 
+<!-- Our Teams Section --> 
+            <section class="py-16 bg-gray-50">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Our Team</h2>
+                        <p class="text-gray-600">Meet the talented professionals behind Delverse Technologies</p>
+                    </div>
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4">
+
+ 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!--
+       ============================
+           DAVID OCHOLI
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/david.jpg" alt="David Ocholi" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">David Ocholi</h4>
+            <div class="text-blue-600 text-sm font-semibold">Founder</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          A seasoned IT professional and visionary leader, David brings a wealth
+          of experience in steering complex IT projects from concept to completion.
+          His expertise in full-stack development, software architecture, and
+          high-level team management forms the technical and strategic backbone of
+          Delverse, ensuring every project is executed with precision and purpose.
+        </div>
+      </div>
+
+<!--
+      ============================
+           TOMIWA AMODEMAJA
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/tomiwa.jpg" alt="Tomiwa Amodemaja" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Tomiwa Amodemaja</h4>
+            <div class="text-blue-600 text-sm font-semibold">Co-Founder & Lead Product Manager</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          With a sharp eye for market needs and a passion for crafting exceptional
+          user experiences, Tomiwa is the driving force behind our product vision.
+          She expertly navigates the entire product lifecycle, ensuring our solutions
+          are innovative, commercially viable, and aligned with client goals.
+        </div>
+      </div>
+
+<!--
+      ============================
+           JOSHUA OCHOLI
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/joshua.jpg" alt="Joshua Ocholi" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Joshua Ocholi</h4>
+            <div class="text-blue-600 text-sm font-semibold">Co-Founder & CTO </div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          A true coding maestro, Joshua transforms innovative ideas into robust,
+          scalable software. His expertise across the stack and AI/ML frameworks
+          sets the standard for technical excellence across Delverse.
+        </div>
+      </div>
+
+<!--
+      ============================
+           WILLIAMS SIMEON
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/williams.jpg" alt="Williams Simeon" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Williams Simeon</h4>
+            <div class="text-blue-600 text-sm font-semibold">Co-Founder & Business Development Lead</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Williams drives growth through strategic partnerships and client
+          relationships. His insight into market expansion keeps Delverse ahead
+          in the competitive tech landscape.
+        </div>
+      </div>
+
+<!--
+      ============================
+           LYDIA IDUNGAFE
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/lydia.jpg" alt="Lydia Idungafa" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Lydia Idungafa</h4>
+            <div class="text-blue-600 text-sm font-semibold">People's Manager</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Lydia blends legal expertise and leadership to build a culture of
+          collaboration, growth, and accountability ensuring Delverse remains
+          a thriving environment for top talent.
+        </div>
+      </div>
+<!--
+      ============================
+           ABIMBOLA
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/abimbola.jpg" alt="Abimbola" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Abimbola</h4>
+            <div class="text-blue-600 text-sm font-semibold">Product Manager</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Abimbola bridges the gap between development teams and client needs,
+          ensuring clarity, efficiency, and a product vision grounded in both
+          technical feasibility and user-centered design.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
 
     <!-- Values Section -->
 <!-- Values Section -->
@@ -282,179 +438,15 @@
 </section>
 
 
-            <!-- Team Section 
-            <section class="py-16 bg-gray-50">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold mb-4">Our Team</h2>
-                        <p class="text-gray-600">Meet the talented professionals behind Delverse Technologies</p>
-                    </div>
-<section class="py-16">
-  <div class="max-w-7xl mx-auto px-4">
--->
-    <!-- GRID WRAPPER 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
--->
-      <!-- ============================
-           DAVID OCHOLI
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/david.jpg" alt="David Ocholi" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">David Ocholi</h4>
-            <div class="text-blue-600 text-sm font-semibold">Founder</div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          A seasoned IT professional and visionary leader, David brings a wealth
-          of experience in steering complex IT projects from concept to completion.
-          His expertise in full-stack development, software architecture, and
-          high-level team management forms the technical and strategic backbone of
-          Delverse, ensuring every project is executed with precision and purpose.
-        </div>
-      </div>
--->
-
-      <!-- ============================
-           TOMIWA AMODEMAJA
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/tomiwa.jpg" alt="Tomiwa Amodemaja" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">Tomiwa Amodemaja</h4>
-            <div class="text-blue-600 text-sm font-semibold">Co-Founder & Lead Product Manager</div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          With a sharp eye for market needs and a passion for crafting exceptional
-          user experiences, Tomiwa is the driving force behind our product vision.
-          She expertly navigates the entire product lifecycle, ensuring our solutions
-          are innovative, commercially viable, and aligned with client goals.
-        </div>
-      </div>
--->
-
-      <!-- ============================
-           JOSHUA OCHOLI
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/joshua.jpg" alt="Joshua Ocholi" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">Joshua Ocholi</h4>
-            <div class="text-blue-600 text-sm font-semibold">Co-Founder & CTO </div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          A true coding maestro, Joshua transforms innovative ideas into robust,
-          scalable software. His expertise across the stack and AI/ML frameworks
-          sets the standard for technical excellence across Delverse.
-        </div>
-      </div>
--->
-
-      <!-- ============================
-           WILLIAMS SIMEON
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/williams.jpg" alt="Williams Simeon" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">Williams Simeon</h4>
-            <div class="text-blue-600 text-sm font-semibold">Co-Founder & Business Development Lead</div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          Williams drives growth through strategic partnerships and client
-          relationships. His insight into market expansion keeps Delverse ahead
-          in the competitive tech landscape.
-        </div>
-      </div>
--->
-
-      <!-- ============================
-           LYDIA IDUNGAFE
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/lydia.jpg" alt="Lydia Idungafa" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">Lydia Idungafa</h4>
-            <div class="text-blue-600 text-sm font-semibold">People's Manager</div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          Lydia blends legal expertise and leadership to build a culture of
-          collaboration, growth, and accountability ensuring Delverse remains
-          a thriving environment for top talent.
-        </div>
-      </div>
--->
-
-      <!-- ============================
-           ABIMBOLA
-      ============================== 
-      <div 
-        x-data="{ open: false }" 
-        @click="open = !open"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
-      >
-        <div class="flex items-center gap-4">
-          <img src="/images/abimbola.jpg" alt="Abimbola" class="w-16 h-16 rounded-full object-cover border">
-          <div>
-            <h4 class="text-xl font-bold">Abimbola</h4>
-            <div class="text-blue-600 text-sm font-semibold">Product Manager</div>
-          </div>
-        </div>
-
-        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
-          Abimbola bridges the gap between development teams and client needs,
-          ensuring clarity, efficiency, and a product vision grounded in both
-          technical feasibility and user-centered design.
-        </div>
-      </div>
-
-    </div>
-    -->
-    <!-- END GRID 
-
-  </div>
-</section>
--->
                 <!-- Why Choose Section -->
 <section class="py-16 bg-gray-50">
   <div class="max-w-6xl mx-auto px-6 lg:px-8">
     <!-- Section Title -->
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-extrabold text-gray-900">Why Choose Delverse?</h2>
+      <h2 class="text-3xl font-bold mb-4">Why Choose Delverse?</h2>
       <p class="mt-3 text-lg text-gray-600">What sets us apart in the technology consulting landscape</p>
     </div>
+
 
     <!-- Grid Layout -->
     <div class="grid gap-8 md:grid-cols-3">
@@ -497,24 +489,9 @@
   </div>
 </section>
 
-
-                        <!-- CTA Section -->
-            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white hidden">
-                <div class="max-w-4xl mx-auto text-center px-4">
-                    <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
-                    <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
-                    <button onclick="showPage('contact')" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
-                        Start Your Project
-                    </button>
-                    <button onclick="showPage('services')" class=" text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
-                        View our Services
-                    </button>
-                </div>
-            </section>
-            <!-- About Page Closes -->
-    
                  <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-12">
+  <!-- Footer -->
+    <footer class="mt-auto bg-blue-900 text-white py-12">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Company Info -->
@@ -596,7 +573,6 @@
             </div>
         </div>
     </footer>
-
   <!-- JS for Filtering -->
   <script>
     // Get the button element

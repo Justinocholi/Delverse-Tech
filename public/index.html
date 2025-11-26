@@ -50,7 +50,7 @@
       <div class="flex items-center">
         <div class="w-24 h-24">
           <img 
-            src="/logo.png" 
+            src="circle-logo.PNG" 
             alt="Delverse Logo" 
             class="object-contain w-full h-full" 
           />
@@ -148,16 +148,7 @@
             const isDark = document.documentElement.classList.contains('dark');
             setTheme(isDark ? 'light' : 'dark');
           }
-          function ensureLucide() {
-            if (window.lucide && lucide.createIcons) { lucide.createIcons(); return; }
-            const s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
-            s.async = true;
-            s.onload = () => { if (window.lucide && lucide.createIcons) lucide.createIcons(); };
-            document.head.appendChild(s);
-          }
           document.addEventListener('DOMContentLoaded', () => {
-            ensureLucide();
             const saved = localStorage.getItem('theme') || 'light';
             setTheme(saved);
             const btn = document.getElementById('themeToggleBtn');
@@ -203,49 +194,63 @@
                     <!-- Hero Section closes -->
   
 <!-- About Section for homepage opens -->
-<section class="about-section" id="about">
-  <div class="about-container">
+<section class="about-section py-12" id="about">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
     
     <!-- Left Side Image -->
-    <div class="slide-image">
-      <img src="./image 2.jpg" alt="Professional woman working on laptop">
+    <div class="w-full">
+      <img 
+        src="./image 2.jpg" 
+        alt="Professional woman working on laptop" 
+        class="w-full h-auto rounded-xl object-cover"
+      >
     </div>
 
-     <!-- Right Side Text -->
+    <!-- Right Side Text -->
     <div class="about-text space-y-6">
-      <h2 class="text-3xl font-bold">
+      <h2 class="text-3xl font-bold leading-snug">
         Delverse Solutions: Your Partner in 
         <span class="text-blue-600">Digital Transformation</span>
       </h2>
+
       <p class="text-gray-600 leading-relaxed">
         We stand at the core of international networks to advance your strategic interests. 
         Our mission is to craft innovative, tailored solutions that drive meaningful business growth.
       </p>
 
-      <!-- Features as boxes -->
+      <!-- Features Section -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="feature-card bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
-          <h3 class="font-semibold text-blue-800">Vision</h3>
-          <p class="font-mediumtext-sm text-blue-800">Global leaders in AI-driven solutions</p>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+          <h3 class="font-semibold text-blue-800 mb-1">Vision</h3>
+          <p class="text-sm text-blue-800">Global leaders in AI-driven solutions</p>
         </div>
-        <div class="feature-card bg-green-50 border border-green-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
-          <h3 class="font-semibold text-green-800">Mission</h3>
-          <p class="font-mediumtext-sm text-green-800">Crafting innovative, tailored solutions for growth</p>
+
+        <div class="bg-green-50 border border-green-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+          <h3 class="font-semibold text-green-800 mb-1">Mission</h3>
+          <p class="text-sm text-green-800">Crafting innovative, tailored solutions for growth</p>
         </div>
-        <div class="feature-card bg-purple-50 border border-purple-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
-          <h3 class="font-semibold text-purple-800">Values</h3>
-          <p class="font-mediumtext-sm text-blue-800">Innovation, Collaboration & Precision</p>
+
+        <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+          <h3 class="font-semibold text-purple-800 mb-1">Values</h3>
+          <p class="text-sm text-purple-800">Innovation, Collaboration & Precision</p>
         </div>
+
       </div>
 
       <!-- Button -->
-      <a href="contact.html" onclick="showPage('contact'); toggleMobileMenu();" 
-        class="btn-primary mt-2 px-3 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition">
+      <a 
+        href="contact.html"
+        onclick="showPage('contact'); toggleMobileMenu();" 
+        class="inline-block mt-2 px-5 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition"
+      >
         Learn More About Us
       </a>
+
     </div>
   </div>
 </section>
+
 <!-- About Section for homepage closes -->
 
             <!-- Services Section for homepage opens -->
@@ -348,25 +353,25 @@
                     <div class="stars">★★★★★</div>
                     <div class="quote-mark">"</div>
                     <p class="testimonial-text">"Delverse Technologies transformed our digital presence completely. Their team delivered a comprehensive website solution that not only looks professional but also significantly improved our operational efficiency. The AI-driven features they implemented have streamlined our engineering processes and enhanced our client engagement. Outstanding work!"</p>
-                    <div class="testimonial-author">Engr. Yakubu Samaila</div>
-                    <div class="testimonial-position">Managing Director/CEO</div>
-                    <div class="testimonial-company">MECA GROUP</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">"Working with Delverse was a game-changer for our consultancy firm. They understood our complex requirements and delivered a sophisticated platform that perfectly aligns with our business needs. Their attention to detail and commitment to excellence is remarkable. The new system has improved our project management capabilities tremendously."</p>
-                    <div class="testimonial-author">Dr. I.B. Gashinbaki</div>
+                    <div class="testimonial-author">*****************</div>
                     <div class="testimonial-position">Group Country Director</div>
                     <div class="testimonial-company">DCP</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
                     <div class="quote-mark">"</div>
+                    <p class="testimonial-text">"Working with Delverse was a game-changer for our consultancy firm. They understood our complex requirements and delivered a sophisticated platform that perfectly aligns with our business needs. Their attention to detail and commitment to excellence is remarkable. The new system has improved our project management capabilities tremendously."</p>
+                    <div class="testimonial-author">******************</div>
+                    <div class="testimonial-position">Managing Director/CEO</div>
+                    <div class="testimonial-company">MECA GROUP</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="quote-mark">"</div>
                     <p class="testimonial-text">"Working with ABIS Group on our website has been a game-changer for our firm. They truly understood our complex vision and delivered a sophisticated platform that aligns perfectly with our business goals. The new website has already made a significant impact on how we manage projects and engage with clients."</p>
-                    <div class="testimonial-author">Amb. Emmanuel Nelson Usman</div>
-                    <div class="testimonial-position">Founder, Group CEO/Founder</div>
-                    <div class="testimonial-company">ABIS Group </div>
+                    <div class="testimonial-author">***********************</div>
+                    <div class="testimonial-position">ABIS Group</div>
+                    <div class="testimonial-company">Managing Director/CEO</div>
                 </div>
             </div>
         </div>

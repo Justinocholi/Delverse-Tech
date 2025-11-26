@@ -36,7 +36,7 @@
   <header class="navbar-neutral top-0 w-full bg-white shadow-lg z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="index.html">
-        <img src="/logo.png" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
+        <img src="circle-logo.PNG" alt="Delverse Logo" class="w-16 h-16 object-contain"/>
       </a>
       <div class="flex items-center gap-4">
         <nav class="hidden md:flex space-x-8">
@@ -65,50 +65,34 @@
     </div>
   </header>
   <script>
-    <script>
-      function toggleMobileMenu() {
-        const menu = document.getElementById('mobileMenu');
-        if (!menu) return;
-        menu.classList.toggle('hidden');
-      }
-      // Ensure Lucide is available, otherwise load fallback CDN and initialize
-      function ensureLucide() {
-        if (window.lucide && lucide.createIcons) { lucide.createIcons(); return; }
-        const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
-        s.async = true;
-        s.onload = () => { if (window.lucide && lucide.createIcons) lucide.createIcons(); };
-        document.head.appendChild(s);
-      }
-      function setTheme(theme) {
-        const root = document.documentElement;
-        if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-        localStorage.setItem('theme', theme);
-        const btn = document.getElementById('themeToggleBtn');
-        if (btn) {
-          btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
-          btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
-          if (window.lucide && lucide.createIcons) {
-            lucide.createIcons();
-          } else {
-            // Temporary emoji fallback if Lucide isn't loaded yet
-            btn.textContent = theme === 'dark' ? '☀︎' : '☾';
-          }
-        }
-      }
-      function toggleTheme() {
-        const isDark = document.documentElement.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-      }
-      document.addEventListener('DOMContentLoaded', () => {
-        ensureLucide();
-        const saved = localStorage.getItem('theme') || 'light';
-        setTheme(saved);
-        const btn = document.getElementById('themeToggleBtn');
-        if (btn) btn.addEventListener('click', toggleTheme);
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+    }
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
         if (window.lucide && lucide.createIcons) lucide.createIcons();
-      });
-    </script>
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    });
+  </script>
 
             <!-- SERVICES PAGE OPENS -->
           <!-- OUR SOLUTIONS -->
