@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Delverse Technologies</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="/delverse-app/src/style/about.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="/dark.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+</head>
+<body class="min-h-screen flex flex-col m-0 bg-gray-50">
+<!-- Arrow Button -->
+<button id="scrollTopBtn" 
+  class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+  ↑
+</button>
+    <!-- Header -->
+
+     <!-- Navigation bar open --> 
+    <header class="navbar-neutral top-0 w-full h-26 bg-white shadow-lg z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="w-24 h-24">
+          <a href="index.html">
+          <img 
+            src="circle-logo.PNG" 
+            alt="Delverse Logo" 
+            class="object-contain w-full h-full" 
+          />
+          </a>
+        </div>
+      </div>
+                <nav class="hidden md:flex space-x-12">
+                    <a href="index.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Home
+                    </button>
+                    </a>
+
+                    <a href="services.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Services
+                    </button>
+                    </a>
+
+
+                    <a href="portfolio.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Portfolio
+                    </button>
+                    </a>
+
+                    <a href="about.html">
+                    <button class="nav-link font-medium transition-colors text-blue-600">
+                        About Us
+                    </button>
+                    </a>
+
+                    <a href="contact.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Contact Us
+                    </button>
+                    </a>
+
+                </nav>
+                <button id="themeToggleBtn" class="ml-4 p-2 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100" aria-label="Toggle theme">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                </button>
+                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 hidden">
+                <a href="index.html" onclick="showPage('home'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Home
+                </a>
+
+                <a href="services.html" onclick="showPage('services'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Services
+                </a>
+
+                <a href="portfolio.html" onclick="showPage('portfolio'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Portfolio
+                </a>
+                <a href="about.html" onclick="showPage('about'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded bg-blue-50 text-blue-600">
+                    About Us
+                </a>
+                <a href="contact.html" onclick="showPage('contact'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Contact Us
+                </a>
+                <div class="px-4 mt-2">
+                  <button id="mobileThemeToggle" onclick="toggleTheme()" class="w-full flex items-center justify-center gap-2 p-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                    <span>Toggle Theme</span>
+                  </button>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Navigation bar closes -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+    }
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    });
+  </script>
+
+        <!-- About Page Opens -->
+        <div id="aboutPage" class="page-content">
+            <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+                <div class="max-w-6xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl font-bold mb-4">About Delverse Technologies</h1>
+                    <p class="text-xl opacity-90">Your trusted partner in digital transformation, delivering innovative AI-driven solutions</p>
+                </div>
+            </section>
+            </div>
+
+            <!-- Stats Section -->
+          <section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="26">0</div>
+        <div class="text-gray-600">Projects Completed</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="15">0</div>
+        <div class="text-gray-600">Happy Clients</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="3">0</div>
+        <div class="text-gray-600">Years Experience</div>
+      </div>
+      <div class="text-center bg-white p-6 rounded-lg shadow-md">
+        <div class="counter text-3xl font-bold text-blue-600 mb-2" data-target="24">0</div>
+        <div class="text-gray-600">Support Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- LEFT TEXT CONTENT -->
+      <div>
+        <h2 class="text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          DELVERSE TECHNOLOGIES LIMITED (RC: 8707553), stands out with a vision to bridge the gap between
+          cutting-edge technology and practical business solutions, Delverse Technologies has emerged as
+          a leading consulting firm specializing in future driven software development.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          We understand that in today's rapidly evolving digital landscape, businesses need more than just
+          technology, they need strategic partners who can navigate complexity and deliver solutions that
+          drive real results.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed">
+          Our team of experienced professionals combines deep technical expertise with industry knowledge
+          to create tailored solutions that not only meet current needs but also position our clients for
+          future growth.
+        </p>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div>
+        <div class="rounded-2xl overflow-hidden shadow-xl bg-white">
+          <img src="tech.jpg" alt="Business professional"
+               class="w-full h-full object-cover">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+    <!-- Vision Mission Section -->
+<!-- Vision & Mission Section -->
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Vision -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="eye.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h3 class="text-2xl font-bold mb-2">Our Vision</h3>
+        <p class="text-gray-600 text-sm">
+To deliver future-driven technology solutions that empower businesses globally to achieve extraordinary growth through innovation and excellence.
+        </p>
+      </div>
+
+      <!-- Mission -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="target.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h3 class="text-2xl font-bold mb-2">Our Mission</h3>
+        <p class="text-gray-600 text-sm">
+To design and implement innovative, tailored technology solutions that accelerate business growth while building long-term partnerships rooted in trust, excellence, and shared success.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Our Teams Section --> 
+            <section class="py-16 bg-gray-50">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Our Team</h2>
+                        <p class="text-gray-600">Meet the talented professionals behind Delverse Technologies</p>
+                    </div>
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4">
+
+ 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!--
+       ============================
+           DAVID OCHOLI
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="Dave.jpeg" alt="David Ocholi" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">David Ocholi</h4>
+            <div class="text-blue-600 text-sm font-semibold">Founder/CEO</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          A seasoned IT professional and visionary leader with a strong record of driving complex IT projects from concept to completion. 
+          David’s expertise in product development, software architecture, and high-level team leadership forms the technical and strategic backbone of Delverse. 
+          He ensures every project is executed with precision, excellence, and purpose.
+        </div>
+      </div>
+
+<!--
+      ============================
+           TOMIWA AMODEMAJA
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="Tomi.jpeg" alt="Tomiwa Amodemaja" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Tomiwa Amodemaja</h4>
+            <div class="text-blue-600 text-sm font-semibold">Co-Founder/COO</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+            A business manager with 5+ years of experience and a keen understanding of market needs. 
+            Tomiwa leads strategic engagements and drives product innovation across the company. 
+            As a skilled product manager, he expertly navigates the entire product lifecycle, ensuring every solution is user-centered, commercially viable, and aligned with client objectives.
+        </div>
+      </div>
+
+<!--
+      ============================
+           JOSHUA OCHOLI
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="josh.jpg" alt="Joshua Ocholi" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Ocholi Joshua E.</h4>
+            <div class="text-blue-600 text-sm font-semibold">Co-Founder/CTO</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          A highly skilled developer who transforms innovative ideas into scalable, high-performing software. Joshua’s command of diverse development stacks and frameworks sets the standard for technical excellence across Delverse.
+        </div>
+      </div>
+
+<!--
+      ============================
+           WILLIAMS SIMEON
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="wills.jpg" alt="Williams Simeon" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Williams Simeon</h4>
+            <div class="text-blue-600 text-sm font-semibold">Business Development Lead</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          With over 5 years of business development experience, Williams leads Delverse’s growth initiatives through strategy, client engagement, and long-term partnership development. His work drives the company’s presence across multiple industries and markets.
+        </div>
+      </div>
+
+<!--
+      ============================
+           LYDIA IDUNGAFE
+      ============================== 
+    
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/lydia.jpg" alt="Lydia Idungafa" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Lydia Idungafa</h4>
+            <div class="text-blue-600 text-sm font-semibold">People's Manager</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Lydia blends legal expertise and leadership to build a culture of
+          collaboration, growth, and accountability ensuring Delverse remains
+          a thriving environment for top talent.
+        </div>
+      </div>
+-->
+<!--
+      ============================
+           Dauda David Anishi 
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="anishi.jpg" alt="Dauda David Anishi" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Dauda Anishiei </h4>
+            <div class="text-blue-600 text-sm font-semibold">Legal Analyst/People’s Lead</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Dauda combines legal expertise with people-focused leadership to foster a culture of collaboration, accountability, and professional growth. His work ensures Delverse remains a thriving and compliant environment for top talent.
+        </div>
+      </div>
+
+<!--
+      ============================
+           Deborah 
+      ============================== 
+    -->
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="debs.jpg" alt="Deborah" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Deborah Olufemi</h4>
+            <div class="text-blue-600 text-sm font-semibold">Data Analyst/Project Lead</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          A skilled data analyst and project manager with 4+ years of experience driving business-enhancing solutions. Deborah leads cross-functional teams to deliver data-driven, process-improving outcomes that move businesses forward.
+        </div>
+      </div>
+
+<!--
+      ============================
+           ABIMBOLA
+      ============================== 
+    
+      <div 
+        x-data="{ open: false }" 
+        @click="open = !open"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <img src="/images/abimbola.jpg" alt="Abimbola" class="w-16 h-16 rounded-full object-cover border">
+          <div>
+            <h4 class="text-xl font-bold">Abimbola</h4>
+            <div class="text-blue-600 text-sm font-semibold">Product Manager</div>
+          </div>
+        </div>
+
+        <div x-show="open" x-transition class="mt-4 text-gray-600 text-sm leading-relaxed">
+          Abimbola bridges the gap between development teams and client needs,
+          ensuring clarity, efficiency, and a product vision grounded in both
+          technical feasibility and user-centered design.
+        </div>
+      </div>
+
+    </div>
+-->
+  </div>
+</section>
+
+
+
+    <!-- Values Section -->
+<!-- Values Section -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Our Values</h2>
+      <p class="text-gray-600">The principles that guide everything we do</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="target.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-bold mb-2">Innovation</h4>
+        <p class="text-gray-600 text-sm">
+          We continuously push the boundaries of technology to deliver
+          cutting-edge solutions that give our clients a competitive advantage.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="people-community-24.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-bold mb-2">Collaboration</h4>
+        <p class="text-gray-600 text-sm">
+          We believe in the power of partnership and work closely with our clients
+          to understand their unique challenges and goals.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="sports-medal.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-bold mb-2">Precision</h4>
+        <p class="text-gray-600 text-sm">
+          Every detail matters. We maintain the highest standards of quality and
+          precision in all our deliverables.
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="file-type-nsri-integrity.svg" class="w-10 h-10 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-bold mb-2">Excellence</h4>
+        <p class="text-gray-600 text-sm">
+          We operate with transparency, honesty, and ethical practices in all our
+          business relationships.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+                <!-- Why Choose Section -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <!-- Section Title -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Why Choose Delverse?</h2>
+      <p class="mt-3 text-lg text-gray-600">What sets us apart in the technology consulting landscape</p>
+    </div>
+
+
+    <!-- Grid Layout -->
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="world.svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Future-First Approach</h4>
+        <p class="text-gray-600">We design and develop with a future-first philosophy, ensuring every product is built to evolve, scale, and stand the test of time. Our solutions stay relevant in rapidly changing digital landscapes.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="professions-man-construction-2.svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Expert Team</h4>
+        <p class="text-gray-600">Skilled professionals with deep expertise in AI, web development, and digital transformation.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+  <div class="text-4xl mb-4">
+    <img src="trophy (1).svg" class="w-12 h-12 mx-auto" alt="">
+  </div>
+</div>
+
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Proven Results</h4>
+        <p class="text-gray-600">Track record of successful projects and satisfied clients across various industries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+                 <!-- Footer -->
+  <!-- Footer -->
+    <footer class="mt-auto bg-blue-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Company Info -->
+                <div>
+            <div class="w-16 h-16">
+          <img 
+             src="/logo.png" 
+                alt="Delverse Logo" 
+                class="object-contain w-full h-full" 
+                />
+                    </div>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Delverse Technologies Limited is a future-driven consulting and technology firm specializing in crafting tailored software solutions that empower businesses to innovate, scale, and achieve sustainable growth.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/delverse-technologies-limited/about/" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">LinkedIn</span>
+                             <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://x.com/delverse_tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="services.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Services
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="portfolio.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Portfolio
+                            </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            delverse.tech@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            +234 806 930 5155
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"></i>
+                            <span>Plot 2542, Hassan Usman Katsina Street, Asokoro, Abuja, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Delverse Technologies Limited. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+  <!-- JS for Filtering -->
+  <script>
+    // Get the button element
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 300px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove("hidden");
+      scrollTopBtn.classList.add("block");
+    } else {
+      scrollTopBtn.classList.add("hidden");
+      scrollTopBtn.classList.remove("block");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  
+     const counters = document.querySelectorAll(".counter");
+  const speed = 200; // lower = faster
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        const count = +counter.innerText;
+
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target + (counter.getAttribute("data-target") === "24" ? "/7" : "+");
+        }
+      };
+
+      updateCount();
+    });
+  };
+
+  // Trigger when section is visible
+  const statsSection = document.querySelector(".py-16");
+  let started = false;
+  window.addEventListener("scroll", () => {
+    const sectionTop = statsSection.offsetTop - window.innerHeight + 100;
+    if (!started && window.scrollY > sectionTop) {
+      animateCounters();
+      started = true;
+    }
+  });
+
+    function filterProjects(category) {
+      const cards = document.querySelectorAll(".project-card");
+      cards.forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

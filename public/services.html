@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Delverse Technologies - Your Partner in Digital Transformation" />
+    <title>Services - Delverse Technologies</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/dark.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Your custom styles -->
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+</head>
+<body class="min-h-screen bg-gray-50">
+<!-- Arrow Button -->
+<button id="scrollTopBtn" 
+  class="hidden fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+  ↑
+</button>
+    <!-- Header -->
+
+     <!-- Navigation bar open --> 
+    <header class="navbar-neutral top-0 w-full h-26 bg-white shadow-lg z-50">
+  <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="w-24 h-24">
+          <img 
+            src="circle-logo.PNG" 
+            alt="Delverse Logo" 
+            class="object-contain w-full h-full" 
+          />
+        </div>
+      </div>
+                <nav class="hidden md:flex space-x-12">
+                    <a href="index.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Home
+                    </button>
+                    </a>
+
+                    <a href="services.html">
+                    <button class="nav-link font-medium transition-colors text-blue-600">
+                        Services
+                    </button>
+                    </a>
+
+
+                    <a href="portfolio.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Portfolio
+                    </button>
+                    </a>
+
+                    <a href="about.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        About Us
+                    </button>
+                    </a>
+
+                    <a href="contact.html">
+                    <button class="nav-link font-medium transition-colors text-gray-600 hover:text-blue-600">
+                        Contact Us
+                    </button>
+                    </a>
+
+                </nav>
+                <button id="themeToggleBtn" class="ml-4 p-2 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100" aria-label="Toggle theme">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                </button>
+                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <span class="sr-only">Menu</span>
+                </button>
+            </div>
+
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 hidden">
+                <a href="index.html" onclick="showPage('home'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Home
+                </a>
+
+                <a href="services.html" onclick="showPage('services'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded bg-blue-50 text-blue-600">
+                    Services
+                </a>
+
+                <a href="portfolio.html" onclick="showPage('portfolio'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Portfolio
+                </a>
+                <a href="about.html" onclick="showPage('about'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    About Us
+                </a>
+                <a href="contact.html" onclick="showPage('contact'); toggleMobileMenu();" class="mobile-nav-link block w-full text-left py-2 px-4 rounded text-gray-600 hover:bg-gray-50">
+                    Contact Us
+                </a>
+                <div class="px-4 mt-2">
+                  <button id="mobileThemeToggle" onclick="toggleTheme()" class="w-full flex items-center justify-center gap-2 p-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100">
+                    <i data-lucide="moon" class="w-5 h-5"></i>
+                    <span>Toggle Theme</span>
+                  </button>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Navigation bar closes -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('hidden');
+    }
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+        btn.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}" class="w-5 h-5"></i>`;
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (window.lucide && lucide.createIcons) lucide.createIcons();
+    });
+  </script>
+
+            <!-- SERVICES PAGE OPENS -->
+          <!-- OUR SOLUTIONS -->
+<div id="servicesPage" class="page-content">
+
+<!-- Our Solutions Section -->
+
+
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-blue-900 to-blue-600 text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Our Services</h1>
+      <p class="text-xl opacity-90">Comprehensive technology solutions to drive your business forward</p>
+    </div>
+  </section>
+
+<!-- Services Accordion Redesigned -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- GRID WRAPPER FOR SIDE-BY-SIDE CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- ✅ AI-Powered Solutions -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="robot.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">AI-Powered Solutions</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Transform your business with intelligent automation, machine learning models, and AI-driven insights.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Machine Learning Models</li>
+            <li>Natural Language Processing (NLP)</li>
+            <li>Computer Vision</li>
+            <li>Predictive Analytics</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ✅ Website Development -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="laptop-computer.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">Website Development</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Stunning and responsive websites designed to engage users and drive conversions.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Responsive UI/UX</li>
+            <li>SEO Optimization</li>
+            <li>CMS Integration</li>
+            <li>E-commerce Solutions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ✅ Mobile App Development -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="mobile-phone.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">Mobile App Development</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Build powerful mobile applications with seamless user experience across devices.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Native iOS & Android</li>
+            <li>Cross-platform Development</li>
+            <li>UI/UX Design</li>
+            <li>App Store Optimization</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ✅ Data Analytics -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="data-scatter-24.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">Data Analytics</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Turn raw data into actionable insights with BI and advanced analytics.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Business Intelligence</li>
+            <li>Data Visualization</li>
+            <li>Reporting Dashboards</li>
+            <li>Predictive Modeling</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ✅ IT Support -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="shield-28.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">IT Support</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Reliable IT support and cybersecurity solutions for business protection.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Security Audits</li>
+            <li>Network Security</li>
+            <li>Data Protection</li>
+            <li>24/7 IT Support</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ✅ Business Consulting -->
+      <div class="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <button class="w-full flex justify-between items-center p-6 text-left accordion-toggle">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 flex items-center justify-center rounded-xl">
+    <img src="business-chart-4.svg" class="w-6 h-6" alt="">
+</div>
+
+            <h3 class="text-xl font-semibold text-blue-600">Business Consulting</h3>
+          </div>
+          <span class="accordion-icon text-3xl font-bold text-red-600">+</span>
+        </button>
+        <div class="accordion-content hidden px-6 pb-6 text-gray-600">
+          <p class="mb-4">
+            Strategic technology consulting to modernize and optimize operations.
+          </p>
+          <ul class="space-y-2 pl-5 list-disc">
+            <li>Digital Transformation</li>
+            <li>Technology Roadmapping</li>
+            <li>Process Optimization</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        <!-- Technologies Page Opens -->
+  <section class="bg-gradient-to-br text-gray-600 py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Our Technologies</h1>
+      <p class="text-xl opacity-90">Leveraging cutting-edge technologies to build scalable, secure, and innovative solutions that drive your business forward.</p>
+    </div>
+  </section>
+
+
+            <section class="py-16">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="code" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Frontend Development</h3>
+                                    <p class="text-gray-600 text-sm">Modern frontend technologies for creating exceptional user experiences</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">React</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Next.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Vue.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">TypeScript</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Material-UI</span>
+                            </div>
+                        </div>                        
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="database" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Backend Development</h3>
+                                    <p class="text-gray-600 text-sm">Robust backend solutions for scalable and secure applications</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Node.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Django</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Express.js</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">FastAPI</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">GraphQL</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="smartphone" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Mobile Development</h3>
+                                    <p class="text-gray-600 text-sm">Cross-platform and native mobile applications</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Flutter</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">React Native</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">iOS (Swift)</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Android (Kotlin)</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Ionic</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Xamarin</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="cloud" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Cloud & DevOps</h3>
+                                    <p class="text-gray-600 text-sm">Cloud infrastructure and deployment automation</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">AWS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Google Cloud</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Azure</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Docker</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Kubernetes</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Terraform</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="brain" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">AI & Machine Learning</h3>
+                                    <p class="text-gray-600 text-sm">Cutting-edge AI and ML technologies</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">TensorFlow</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">PyTorch</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Scikit-learn</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OpenAI</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Hugging Face</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">LangChain</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="shield" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Security & Testing</h3>
+                                    <p class="text-gray-600 text-sm">Comprehensive security and quality assurance</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OAuth 2.0</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">JWT</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">SSL/TLS</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Jest</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Cypress</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Penetration Testing</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="database" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Database & Storage</h3>
+                                    <p class="text-gray-600 text-sm">Efficient data management and storage solutions</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">MongoDB</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Redis</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">MySQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Elasticsearch</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Firebase</span>
+                            </div>
+                        </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="text-blue-600 mr-4">
+                                    <i data-lucide="users" class="w-10 h-10"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Integration & APIs</h3>
+                                    <p class="text-gray-600 text-sm">Seamless system integration and API development</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">REST APIs</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">GraphQL</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Webhooks</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Microservices</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">API Gateway</span>
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Message Queues</span>
+                            </div>
+                        </div>
+
+                    </div>
+                        </div>
+            </section>
+
+
+
+                        <!-- CTA Section opens -->
+            <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white hidden">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
+                    <p class="text-lg mb-8 opacity-90">Contact us today and let's discuss how we can help you achieve your digital transformation goals.</p>
+                    <button onclick="showPage('contact')" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        Start Your Project
+                    </button>
+                    <button onclick="showPage('services')" class=" text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
+                        View our Services
+                    </button>
+                </div>
+            </section>
+        </div>
+        <!-- CTA Section closes -->
+<!-- Services Page closes -->
+
+                 <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Company Info -->
+                <div>
+            <div class="w-16 h-16">
+              <a href="index.html">
+          <img 
+             src="/logo.png" 
+                alt="Delverse Logo" 
+                class="object-contain w-full h-full" 
+                />
+                </a>
+                    </div>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Delverse Technologies Limited is a future-driven consulting and technology firm specializing in crafting tailored software solutions that empower businesses to innovate, scale, and achieve sustainable growth.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/delverse-technologies-limited/about/" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">LinkedIn</span>
+                             <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://x.com/delverse_tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/delverse.tech" class="text-gray-400 hover:text-white transition-colors">
+                            <span class="sr-only">instagram</span>
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="services.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Services
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                About Us
+                            </button>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="portfolio.html">
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                Portfolio
+                            </button>
+                            </a>
+                        </li>
+          
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            delverse.tech@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            +234 806 930 5155
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"></i>
+                            <span>Plot 2542, Hassan Usman Katsina Street, Asokoro, Abuja, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 Delverse Technologies Limited. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    
+  <!-- JS for Filtering -->
+  <script>
+    // Get the button element
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 300px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollTopBtn.classList.remove("hidden");
+      scrollTopBtn.classList.add("block");
+    } else {
+      scrollTopBtn.classList.add("hidden");
+      scrollTopBtn.classList.remove("block");
+    }
+  });
+
+  // Scroll to top when button is clicked
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  
+     document.querySelectorAll(".accordion-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector(".accordion-icon");
+
+      content.classList.toggle("hidden");
+      icon.textContent = content.classList.contains("hidden") ? "+" : "−";
+    });
+  });
+
+    function filterProjects(category) {
+      const cards = document.querySelectorAll(".project-card");
+      cards.forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+    lucide.createIcons();
+const accordions = document.querySelectorAll(".accordion-toggle");
+
+  accordions.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector(".accordion-icon");
+
+      if (content.classList.contains("hidden")) {
+        content.classList.remove("hidden");
+        icon.textContent = "−";
+      } else {
+        content.classList.add("hidden");
+        icon.textContent = "+";
+      }
+    });
+  });
+  document.querySelectorAll(".accordion-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector(".accordion-icon");
+
+      // Close all other accordions first
+      document.querySelectorAll(".accordion-content").forEach(item => {
+        if (item !== content) {
+          item.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".accordion-icon").forEach(i => {
+        if (i !== icon) i.textContent = "+";
+      });
+
+      // Toggle the clicked one
+      content.classList.toggle("hidden");
+      icon.textContent = content.classList.contains("hidden") ? "+" : "−";
+    });
+  });
+
+    const openPopup = document.getElementById("openPopup");
+  const closePopup = document.getElementById("closePopup");
+  const headerPopup = document.getElementById("headerPopup");
+
+  openPopup.addEventListener("click", () => {
+    headerPopup.classList.remove("hidden");
+  });
+
+  closePopup.addEventListener("click", () => {
+    headerPopup.classList.add("hidden");
+  });
+
+  // Close popup if clicking outside modal content
+  headerPopup.addEventListener("click", (e) => {
+    if (e.target === headerPopup) {
+      headerPopup.classList.add("hidden");
+    }
+  });
+  </script>
+
+</body>
+</html>

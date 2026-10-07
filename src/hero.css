@@ -1,0 +1,138 @@
+/* Hero Section Background */
+.hero-section {
+  position: relative;
+  background: linear-gradient(to bottom right, #1e3a8a, #1e40af, #2563eb);
+  color: white;
+  padding: 5rem 0;
+}
+
+/* Container */
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Layout */
+.hero-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 24rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-flex {
+    flex-direction: row;
+  }
+  .hero-left {
+    width: 50%;
+    padding-right: 2rem;
+  }
+  .hero-right {
+    width: 50%;
+  }
+}
+
+/* Fade-in Animation */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Headings */
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+.hero-highlight {
+  color: #fbbf24; /* yellow-400 */
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+/* Paragraph */
+.hero-text {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.hero-btn-primary {
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.hero-btn-primary:hover {
+  background: #1e40af;
+}
+
+.hero-btn-outline {
+  background: transparent;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 0.375rem;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.hero-btn-outline:hover {
+  background: white;
+  color: #1e3a8a;
+}
+
+/* Buttons group */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Carousel Container */
+.carousel-container {
+  position: relative;
+}
+
+/* Owl Carousel Styling */
+.owl-carousel .item {
+  position: relative;
+}
+.owl-carousel .item img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+}
+.owl-carousel .item h3 {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Carousel caption overlay */
+.owl-carousel .item .absolute {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+}

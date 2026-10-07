@@ -1,0 +1,256 @@
+/* About Section */
+.about-section {
+    padding: 80px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.slide-image img {
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-text .highlight {
+    color: #2b9cb8;
+}
+
+.about-text p {
+    color: #718096;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.about-features {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.about-features .feature-card {
+    background: #f7f9fc;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.about-features .feature-card.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.about-features li {
+    margin-bottom: 1rem;
+    color: #718096;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.about-features li::before {
+    content: "◄";
+    color: #2b9cb8;
+    position: absolute;
+    left: 0;
+}
+
+.about-features strong {
+    color: #2d3748;
+}
+
+.about-button {
+    background: #2c5282;
+}
+
+/* Vision Mission Section */
+.vision-mission-section {
+    padding: 5rem 0;
+    background: #f8f9fa;
+}
+
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.vision-card,
+.mission-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vision-card:hover,
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+.mission-card {
+    border: 2px solid #e2e8f0;
+}
+
+.vision-icon,
+.mission-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.vision-icon {
+    background: #1a365d;
+}
+
+.mission-icon {
+    background: #2b6cb0;
+}
+
+.vision-card h3,
+.mission-card h3 {
+    font-size: 1.8rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.vision-card p,
+.mission-card p {
+    color: #718096;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Values Section */
+.values-section {
+    background: white;
+    padding: 5rem 0;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.value-card {
+    background: #f8f9fa;
+    padding: 2.5rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.value-card.highlighted {
+    border: 2px solid #2b6cb0;
+    background: white;
+}
+
+.value-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #2b6cb0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.value-card h4 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.value-card p {
+    color: #718096;
+    line-height: 1.6;
+}
+
+/* Why Choose Section */
+.why-choose-section {
+    background: #f8f9fa;
+    padding: 5rem 0;
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.why-choose-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.why-choose-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.why-choose-icon.teal {
+    background: #2b6cb0;
+}
+
+.why-choose-icon.dark {
+    background: #1a365d;
+}
+
+.why-choose-card h4 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.why-choose-card p {
+    color: #718096;
+    line-height: 1.6;
+}

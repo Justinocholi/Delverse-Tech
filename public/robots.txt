@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://delverse-tech.vercel.app/sitemap.xml
