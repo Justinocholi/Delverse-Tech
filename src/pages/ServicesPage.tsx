@@ -21,23 +21,28 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
   const [activeTechTab, setActiveTechTab] = useState(0);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  // IntersectionObserver to highlight sticky nav item in view
+  // IntersectionObserver to highlight sticky nav item in view without layout thrashing
   useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = servicesData.map((s) => document.getElementById(s.id));
-      const scrollPosition = window.scrollY + 250;
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const el = sectionElements[i];
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSectionId(servicesData[i].id);
-          break;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSectionId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
       }
-    };
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    servicesData.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToService = (id: string) => {

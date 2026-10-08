@@ -37,6 +37,25 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
     'Logistics & Cold-Chain', 'Public Sector & Non-Profits'
   ];
 
+  // Lock body scroll and listen for Escape key when modal is open
+  React.useEffect(() => {
+    if (!selectedProject) return;
+
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProject]);
+
   return (
     <div className="relative">
       {/* =========================================================================
@@ -259,7 +278,12 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
           5. CASE STUDY DETAIL MODAL (with Before/After Slider & Metrics)
           ========================================================================= */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 animate-fade-in">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-project-title"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 animate-fade-in"
+        >
           <div className="relative w-full max-w-4xl bg-[#0A0F1E] border border-white/15 rounded-3xl shadow-2xl max-h-[92vh] overflow-y-auto p-6 sm:p-10 text-slate-200 space-y-8">
             {/* Modal Header & Close Button */}
             <div className="flex items-start justify-between border-b border-white/10 pb-6">
@@ -267,7 +291,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
                 <span className="text-xs font-mono uppercase tracking-widest text-teal-400">
                   {selectedProject.industry} Case Study
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+                <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-bold text-white mt-1">
                   {selectedProject.title}
                 </h2>
                 <p className="text-xs text-slate-400 font-mono mt-1">Client: {selectedProject.client}</p>

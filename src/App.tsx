@@ -15,10 +15,15 @@ import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => {
-  // Theme state: defaults to dark (the hero theme)
+  // Theme state: defaults to dark (the hero theme) while honoring user preference
   const [isDark, setIsDark] = useState<boolean>(() => {
     const saved = localStorage.getItem('delverse_theme');
     if (saved) return saved === 'dark';
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return false;
+      }
+    }
     return true; // Dark is the hero theme
   });
 

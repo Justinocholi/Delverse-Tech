@@ -3,7 +3,7 @@ import {
   Brain, Globe, Smartphone, Database, Shield, Users, 
   ArrowRight, ChevronLeft, ChevronRight, Star, 
   CheckCircle2, Compass, Layers, CheckSquare, Rocket, 
-  Sparkles, Activity, ShieldCheck, Terminal, Cpu, ArrowUpRight
+  Sparkles, Activity, ShieldCheck, Terminal, Cpu, ArrowUpRight, Target
 } from 'lucide-react';
 import { 
   companyDetails, clientBrands, heroStats, 
@@ -296,7 +296,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
                 <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-teal-500/30 transition-colors">
                   <div className="w-9 h-9 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center mb-3">
-                    <TargetIcon size={18} />
+                    <Target size={18} />
                   </div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Our Mission</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
@@ -711,22 +711,3 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     </div>
   );
 };
-
-function TargetIcon(props: { size?: number }) {
-  return (
-    <svg 
-      width={props.size || 24} 
-      height={props.size || 24} 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="6" />
-      <circle cx="12" cy="12" r="2" />
-    </svg>
-  );
-}

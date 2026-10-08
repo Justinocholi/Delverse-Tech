@@ -28,11 +28,27 @@ export const ContactPage: React.FC = () => {
     honeypot: '', // anti-spam bot trap
   });
 
-  // Copy to clipboard helper
-  const handleCopy = (text: string, fieldName: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedField(fieldName);
-    setTimeout(() => setCopiedField(null), 2500);
+  // Copy to clipboard helper with resilient fallback
+  const handleCopy = async (text: string, fieldName: string) => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setCopiedField(fieldName);
+      setTimeout(() => setCopiedField(null), 2500);
+    } catch {
+      setCopiedField(fieldName);
+      setTimeout(() => setCopiedField(null), 2500);
+    }
   };
 
   const toggleService = (title: string) => {
