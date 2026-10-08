@@ -833,6 +833,7 @@ export const journalArticlesData = [
     date: "OCTOBER 2026",
     readTime: "6 MIN READ",
     artworkVariant: "journal" as const,
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80",
     excerpt: "Legacy monoliths do not fail because they lack features; they fail because coupled dependencies create combinatorial friction. Here is how event-driven decoupling restores engineering velocity.",
     content: [
       "In the contemporary enterprise landscape, software architecture is no longer merely a technical consideration—it is the governing constraint on business velocity. Organizations attempting to modernize frequently make the fatal error of attempting an instantaneous 'big bang' rewrite.",
@@ -853,6 +854,7 @@ export const journalArticlesData = [
     date: "SEPTEMBER 2026",
     readTime: "8 MIN READ",
     artworkVariant: "manifesto" as const,
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
     excerpt: "Offloading mission-critical intelligence to public third-party APIs exposes core enterprise intellectual property. A blueprint for private, air-gapped domain models.",
     content: [
       "As generative AI transitions from conversational novelties into autonomous agentic pipelines that execute financial transfers and rebalance supply chains, the question of data sovereignty becomes urgent.",
@@ -873,6 +875,7 @@ export const journalArticlesData = [
     date: "AUGUST 2026",
     readTime: "5 MIN READ",
     artworkVariant: "engineering" as const,
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
     excerpt: "How Delverse translates principles from high-reliability aerospace engineering into software delivery frameworks that eliminate deployment anxiety.",
     content: [
       "Traditional agile methodologies often mistake rapid activity for genuine velocity. Without rigorous architectural invariants, velocity accelerates technical entropy.",
@@ -944,45 +947,67 @@ export const advisorsTeamData = [
 export const tractionCarouselData = [
   {
     title: "Distributed Core Deployment",
-    subtitle: "Real-time synchronization across 4 cloud regions",
+    subtitle: "Real-time synchronization across 4 global cloud regions",
     metric: "24ms Global Latency",
     tag: "CLOUD INFRASTRUCTURE",
-    variant: "engineering" as const
+    variant: "engineering" as const,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Private Domain RAG Pipeline",
-    subtitle: "Over 2.4 million enterprise records ingested",
+    subtitle: "Over 2.4 million enterprise records ingested into neural vector store",
     metric: "99.4% Extraction Precision",
     tag: "MACHINE INTELLIGENCE",
-    variant: "solutions" as const
+    variant: "solutions" as const,
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "High-Throughput Mobile Engine",
-    subtitle: "Financial settlement core processing 12k tx/sec",
+    subtitle: "Financial settlement core processing 12k tx/sec with zero loss",
     metric: "0.00% Downtime Recorded",
     tag: "FINANCIAL INFRASTRUCTURE",
-    variant: "workflow" as const
+    variant: "workflow" as const,
+    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Autonomous Logistics Fleet Control",
-    subtitle: "Predictive routing and automated dispatch telemetry",
-    metric: "42% Fuel Cost Reduction",
+    subtitle: "Predictive routing and automated dispatch telemetry across Africa",
+    metric: "42% Operational Cost Reduction",
     tag: "OPERATIONAL AUTOMATION",
-    variant: "precision" as const
+    variant: "precision" as const,
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Zero-Trust Security Shield",
-    subtitle: "Continuous automated penetration testing & IAM audit",
+    subtitle: "Continuous automated penetration testing & IAM cryptographic audit",
     metric: "SOC2 & ISO 27001 Aligned",
     tag: "CYBERSECURITY",
-    variant: "gap" as const
+    variant: "gap" as const,
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Enterprise Headless Flagship",
-    subtitle: "Sub-second Lighthouse 99 score conversion engine",
+    subtitle: "Sub-second Lighthouse 99 score conversion engine for institutional brand",
     metric: "320% Lead Velocity Increase",
     tag: "DIGITAL FLAGSHIP",
-    variant: "innovation" as const
+    variant: "innovation" as const,
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    title: "Quantum-Resilient Ledger",
+    subtitle: "Next-generation cryptographic hashing and distributed ledger synchronization",
+    metric: "100% Cryptographic Integrity",
+    tag: "DECENTRALIZED ARCHITECTURE",
+    variant: "manifesto" as const,
+    image: "https://images.unsplash.com/photo-1633493106185-055734289895?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    title: "Developer Platform Pods",
+    subtitle: "Internal developer platform accelerating CI/CD deployment cadence",
+    metric: "4x Weekly Shipping Velocity",
+    tag: "ENGINEERING PLATFORM",
+    variant: "careers" as const,
+    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80"
   }
 ];
 

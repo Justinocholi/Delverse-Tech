@@ -17,6 +17,7 @@ export interface ArticleData {
   readTime: string;
   excerpt: string;
   artworkVariant?: ArtworkVariant;
+  image?: string;
   content?: string[];
   pullQuote?: {
     quote: string;
@@ -41,14 +42,26 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
       className={`group cursor-pointer flex flex-col justify-between overflow-hidden p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/[0.08] bg-[#111113]/85 backdrop-blur-xl hover:border-white/[0.2] hover:bg-[#151518] transition-all duration-300 ${className}`}
     >
       <div>
-        {/* Cinematic Artwork Thumbnail */}
-        <div className="w-full mb-6 overflow-hidden rounded-xl md:rounded-2xl border border-white/[0.06]">
-          <CinematicArtwork
-            variant={article.artworkVariant || 'journal'}
-            aspectRatio="landscape"
-            alt={article.title}
-            className="w-full h-44 md:h-48 group-hover:scale-105 transition-transform duration-700"
-          />
+        {/* Cinematic Artwork or Futuristic Unsplash Thumbnail */}
+        <div className="relative w-full mb-6 overflow-hidden rounded-xl md:rounded-2xl border border-white/[0.08] aspect-[16/10] bg-[#0E0E12]">
+          {article.image ? (
+            <>
+              <img
+                src={article.image}
+                alt={article.title}
+                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-[0.7] contrast-125"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/85 via-transparent to-transparent pointer-events-none" />
+            </>
+          ) : (
+            <CinematicArtwork
+              variant={article.artworkVariant || 'journal'}
+              aspectRatio="landscape"
+              alt={article.title}
+              className="w-full h-full group-hover:scale-105 transition-transform duration-700"
+            />
+          )}
         </div>
 
         {/* Metadata Row */}

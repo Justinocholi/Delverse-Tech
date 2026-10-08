@@ -2,16 +2,20 @@
  * @file HomePage.tsx
  * @description Long-scroll marketing homepage strictly replicating the structure, layout rhythm,
  * and visual language of cognichip.ai:
- * 1. HERO (Full viewport, category-defining headline, 1-line subhead, two pill CTAs, 3D liquid-metal artwork)
+ * 1. HERO (Full viewport, category-defining headline, 1-line subhead, two pill CTAs, 3D liquid-metal artwork,
+ *    and integral background video /video.mp4 with audio/play toggle)
  * 2. BUILT FOR EVERY TEAM (Solutions: section label, headline, 5 persona cards in grid with dash-bullets)
  * 3. MANIFESTO BREAK (Giant-type statement, minimal words, dark background, single artwork)
- * 4. INTELLIGENCE MEETS ENGINEERING (Proprietary delivery approach combining strategy, design, and engineering)
- * 5. TRACTION / ANNOUNCEMENT (Milestone banner, client quote with bold attribution, 6-10 image/telemetry carousel)
+ * 4. INTELLIGENCE MEETS ENGINEERING (Proprietary delivery framework + interactive embedded Systems Reel video player)
+ * 5. TRACTION / ANNOUNCEMENT (Milestone banner, client quote with bold attribution, 8-card futuristic Unsplash telemetry carousel)
  * 6. EMAIL CAPTURE ("Don't miss what's next", enterprise input, early access trigger)
  */
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, ChevronRight, Sparkles, Shield, Cpu, Zap, Activity } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  ArrowRight, Play, Pause, Volume2, VolumeX, Maximize2, 
+  Activity, Shield, Cpu, Zap, Layers, Sparkles 
+} from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { SolutionCard } from '../components/SolutionCard';
 import { CinematicArtwork } from '../components/CinematicArtwork';
@@ -31,6 +35,12 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [siteData, setSiteData] = useState<SiteData>(() => getStoredSiteData());
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+  const [telemetryViewMode, setTelemetryViewMode] = useState<'photo' | 'artwork'>('photo');
+
+  // Inline Systems Reel Player State
+  const sectionVideoRef = useRef<HTMLVideoElement>(null);
+  const [isSectionVideoPlaying, setIsSectionVideoPlaying] = useState(true);
+  const [isSectionVideoMuted, setIsSectionVideoMuted] = useState(true);
 
   // Sync data reactively if admin changes occur
   useEffect(() => {
@@ -45,9 +55,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveCarouselIndex((prev) => (prev + 1) % tractionCarouselData.length);
-    }, 4500);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const toggleSectionVideo = () => {
+    if (!sectionVideoRef.current) return;
+    if (isSectionVideoPlaying) {
+      sectionVideoRef.current.pause();
+      setIsSectionVideoPlaying(false);
+    } else {
+      sectionVideoRef.current.play();
+      setIsSectionVideoPlaying(true);
+    }
+  };
+
+  const toggleSectionMute = () => {
+    if (!sectionVideoRef.current) return;
+    sectionVideoRef.current.muted = !isSectionVideoMuted;
+    setIsSectionVideoMuted(!isSectionVideoMuted);
+  };
 
   return (
     <div className="bg-[#0A0A0B] text-white selection:bg-[#0066FF] selection:text-white">
@@ -55,7 +82,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* =========================================================================
           SECTION 1: HERO
           Full-viewport category-defining headline pattern, subhead, dual CTAs,
-          and signature 3D liquid-metal abstract artwork.
+          signature 3D liquid-metal artwork, and integrated /video.mp4 background.
          ========================================================================= */}
       <Hero
         onStartProject={() => onNavigate('contact')}
@@ -121,7 +148,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   Need a custom transformation blueprint?
                 </h3>
                 <p className="text-sm text-[#9CA3AF] leading-relaxed mb-6">
-                  Book a confidential 45-minute architectural review with our principal engineers. We assess legacy bottlenecks, data posture, and deliver an immediate execution roadmap.
+                  Book a confidential 45-minute architectural review with our principal engineers in Asokoro. We assess legacy bottlenecks, data posture, and deliver an immediate execution roadmap.
                 </p>
                 <ul className="space-y-3.5 my-6 pt-2 border-t border-white/[0.06] text-sm text-[#9CA3AF]">
                   <li className="flex items-start">
@@ -130,7 +157,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-white/50 font-mono">—</span>
-                    <span>Codebase & security posture audit</span>
+                    <span>Codebase & security posture audit under NDA</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-3 text-white/50 font-mono">—</span>
@@ -195,8 +222,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* =========================================================================
           SECTION 4: INTELLIGENCE MEETS ENGINEERING
           2–3 sentences on Delverse's proprietary delivery approach
-          (proven delivery framework combining strategy, design, and engineering)
-          with supporting artwork.
+          + INTEGRATED SYSTEMS REEL VIDEO PLAYER (/video.mp4)
          ========================================================================= */}
       <section className="relative py-28 md:py-36 border-t border-white/[0.08] bg-[#0A0A0B] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -235,7 +261,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 flex items-center gap-6">
                 <button
                   onClick={() => onNavigate('about')}
                   className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-[#38BDF8] transition-colors"
@@ -246,15 +272,69 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Column: Supporting Artwork */}
+            {/* Right Column: INTEGRAL CINEMATIC VIDEO PLAYER (/video.mp4) */}
             <div className="lg:col-span-6 w-full">
-              <div className="rounded-3xl overflow-hidden border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)]">
-                <CinematicArtwork
-                  variant="engineering"
-                  aspectRatio="landscape"
-                  alt="Proprietary delivery framework render of intertwined molten chrome helices and circuit micro-architecture"
-                  className="w-full h-80 md:h-96"
-                />
+              <div className="relative rounded-3xl overflow-hidden border border-white/[0.15] bg-[#0E0E12] shadow-[0_25px_60px_rgba(0,0,0,0.8)] group">
+                
+                {/* Header Bar of Video Player */}
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.08] bg-[#111113]/90 backdrop-blur-md">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#0066FF] animate-pulse" />
+                    <span className="text-xs font-mono uppercase tracking-wider text-white">
+                      DELVERSE CORE SYSTEMS REEL
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono text-[#38BDF8] border border-[#0066FF]/30 px-2.5 py-0.5 rounded-full bg-[#0066FF]/10">
+                    LIVE STREAM
+                  </span>
+                </div>
+
+                {/* Video Container */}
+                <div className="relative aspect-video w-full bg-black">
+                  <video
+                    ref={sectionVideoRef}
+                    autoPlay
+                    loop
+                    muted={isSectionVideoMuted}
+                    playsInline
+                    poster="/tech.jpg"
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="/video.mp4" type="video/mp4" />
+                  </video>
+
+                  {/* Gradient bottom bar for controls */}
+                  <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-between text-xs font-mono text-white">
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={toggleSectionVideo}
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-colors"
+                        title={isSectionVideoPlaying ? 'Pause Reel' : 'Play Reel'}
+                        aria-label="Toggle video playback"
+                      >
+                        {isSectionVideoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                      </button>
+
+                      <button
+                        onClick={toggleSectionMute}
+                        className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-colors"
+                        title={isSectionVideoMuted ? 'Unmute' : 'Mute'}
+                        aria-label="Toggle video audio"
+                      >
+                        {isSectionVideoMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                      </button>
+
+                      <span className="text-[11px] text-slate-300 hidden sm:inline">
+                        1080p · 60fps · Continuous Telemetry
+                      </span>
+                    </div>
+
+                    <span className="text-[10px] uppercase tracking-wider text-[#9CA3AF] bg-black/60 px-2.5 py-1 rounded border border-white/10">
+                      ASOKORO, ABUJA
+                    </span>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -264,8 +344,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* =========================================================================
           SECTION 5: TRACTION / ANNOUNCEMENT
-          Milestone banner + client or partner quote with bold attribution +
-          6–10 image / telemetry architecture carousel.
+          Milestone banner + client quote with bold attribution +
+          8-panel futuristic Unsplash architecture telemetry carousel.
          ========================================================================= */}
       <section className="relative py-28 md:py-36 border-t border-white/[0.08] bg-[#070709] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -306,7 +386,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             />
           </div>
 
-          {/* Section Subhead for Photo / Architecture Telemetry Carousel */}
+          {/* Section Subhead & Telemetry Mode Controls */}
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-10">
             <div>
               <span className="cogni-section-label block mb-2">
@@ -317,23 +397,45 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </h3>
             </div>
 
-            {/* Carousel Controls */}
-            <div className="flex items-center gap-2">
-              {tractionCarouselData.map((_, i) => (
+            {/* Toggle Mode: Futuristic Photos vs Procedural 3D Artworks */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center p-1 rounded-full border border-white/10 bg-[#111113] text-xs font-mono">
                 <button
-                  key={i}
-                  onClick={() => setActiveCarouselIndex(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    activeCarouselIndex === i ? 'w-8 bg-[#0066FF]' : 'w-2 bg-white/20 hover:bg-white/40'
+                  onClick={() => setTelemetryViewMode('photo')}
+                  className={`px-3 py-1 rounded-full transition-colors ${
+                    telemetryViewMode === 'photo' ? 'bg-[#0066FF] text-white' : 'text-[#9CA3AF] hover:text-white'
                   }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
+                >
+                  Futuristic Lens
+                </button>
+                <button
+                  onClick={() => setTelemetryViewMode('artwork')}
+                  className={`px-3 py-1 rounded-full transition-colors ${
+                    telemetryViewMode === 'artwork' ? 'bg-[#0066FF] text-white' : 'text-[#9CA3AF] hover:text-white'
+                  }`}
+                >
+                  3D Vectors
+                </button>
+              </div>
+
+              {/* Slide Indicators */}
+              <div className="flex items-center gap-1.5 ml-2">
+                {tractionCarouselData.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveCarouselIndex(i)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      activeCarouselIndex === i ? 'w-6 bg-[#0066FF]' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* 6-10 Image / Telemetry Architecture Carousel */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* 8-Panel Futuristic Image / Architecture Carousel */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tractionCarouselData.map((item, idx) => {
               const isCurrent = activeCarouselIndex === idx;
               return (
@@ -346,14 +448,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       : 'border-white/[0.08] bg-[#111113]/70 hover:border-white/[0.2]'
                   }`}
                 >
-                  {/* Visual Render Preview */}
-                  <div className="w-full mb-5 overflow-hidden rounded-xl border border-white/[0.06]">
-                    <CinematicArtwork
-                      variant={item.variant}
-                      aspectRatio="landscape"
-                      alt={item.title}
-                      className="w-full h-36 group-hover:scale-105 transition-transform duration-700"
-                    />
+                  {/* Visual Preview: Futuristic Unsplash Photography vs 3D Vector Render */}
+                  <div className="relative w-full mb-5 overflow-hidden rounded-xl border border-white/[0.08] aspect-[16/10] bg-[#0E0E12]">
+                    {telemetryViewMode === 'photo' && item.image ? (
+                      <>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-[0.7] contrast-125"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/90 via-transparent to-transparent pointer-events-none" />
+                      </>
+                    ) : (
+                      <CinematicArtwork
+                        variant={item.variant}
+                        aspectRatio="landscape"
+                        alt={item.title}
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-700"
+                      />
+                    )}
+
+                    {/* Corner Tag */}
+                    <div className="absolute top-2.5 left-2.5 text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-black/70 border border-white/10 text-[#38BDF8]">
+                      SYS #{idx + 1}
+                    </div>
                   </div>
 
                   <div className="flex items-center justify-between text-xs font-mono text-[#38BDF8] mb-2">
@@ -361,10 +480,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <span className="text-white font-medium">{item.metric}</span>
                   </div>
 
-                  <h4 className="text-lg font-medium text-white tracking-tight mb-1">
+                  <h4 className="text-base font-medium text-white tracking-tight mb-1 leading-snug">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-[#9CA3AF] leading-relaxed">
+                  <p className="text-xs text-[#9CA3AF] leading-relaxed line-clamp-2">
                     {item.subtitle}
                   </p>
                 </div>

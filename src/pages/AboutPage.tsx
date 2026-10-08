@@ -114,14 +114,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             ))}
           </div>
 
-          {/* Bridging Artwork */}
-          <div className="mt-14 max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/[0.08]">
-            <CinematicArtwork
-              variant="gap"
-              aspectRatio="wide"
-              alt="Fragmented chrome lattice bridging into aligned electric blue superhighways"
-              className="w-full h-44 md:h-52"
+          {/* Bridging Artwork with Futuristic Cybernetic Unsplash Backdrop */}
+          <div className="mt-14 max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/[0.08] relative group">
+            <img
+              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
+              alt="Futuristic cybernetic telemetry and server arrays"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover filter brightness-[0.25] contrast-150 group-hover:scale-105 transition-transform duration-700"
             />
+            <div className="relative z-10">
+              <CinematicArtwork
+                variant="gap"
+                aspectRatio="wide"
+                alt="Fragmented chrome lattice bridging into aligned electric blue superhighways"
+                className="w-full h-44 md:h-52 bg-transparent border-none"
+              />
+            </div>
           </div>
 
         </div>
