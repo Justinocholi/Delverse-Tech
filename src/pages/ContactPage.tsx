@@ -144,29 +144,55 @@ export const ContactPage: React.FC = () => {
 
             {/* Direct Cards: Email, Phone, Address with Copy-to-Clipboard */}
             <div className="space-y-4">
-              {/* Email Card */}
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-blue-500/30 transition-colors flex items-center justify-between">
+              {/* Email Cards: General & Legal */}
+              <div className="p-5 rounded-2xl bg-[#111113]/85 border border-white/10 hover:border-[#0066FF]/40 transition-colors flex items-center justify-between">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#0066FF]/20 text-[#38BDF8] flex items-center justify-center">
                     <Mail size={18} />
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono uppercase text-slate-400 block">Direct Inquiries</span>
+                    <span className="text-[11px] font-mono uppercase text-[#9CA3AF] block">General & Projects</span>
                     <a
-                      href={`mailto:${companyDetails.email}`}
-                      className="text-sm font-bold text-white hover:text-blue-400 transition-colors"
+                      href="mailto:hello@delversetech.com"
+                      className="text-sm font-medium text-white hover:text-[#38BDF8] transition-colors"
                     >
-                      {companyDetails.email}
+                      hello@delversetech.com
                     </a>
                   </div>
                 </div>
                 <button
-                  onClick={() => handleCopy(companyDetails.email, 'email')}
+                  onClick={() => handleCopy('hello@delversetech.com', 'email')}
                   className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/10 text-slate-300 transition-colors"
                   aria-label="Copy email address"
                   title="Copy email"
                 >
-                  {copiedField === 'email' ? <Check size={16} className="text-teal-400" /> : <Copy size={16} />}
+                  {copiedField === 'email' ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+                </button>
+              </div>
+
+              {/* Legal & Compliance Email Card */}
+              <div className="p-5 rounded-2xl bg-[#111113]/85 border border-white/10 hover:border-[#0066FF]/40 transition-colors flex items-center justify-between">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center">
+                    <Mail size={18} />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono uppercase text-[#9CA3AF] block">Legal & Compliance</span>
+                    <a
+                      href="mailto:legal@delversetech.com"
+                      className="text-sm font-medium text-white hover:text-purple-300 transition-colors"
+                    >
+                      legal@delversetech.com
+                    </a>
+                  </div>
+                </div>
+                <button
+                  onClick={() => handleCopy('legal@delversetech.com', 'legal-email')}
+                  className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/10 text-slate-300 transition-colors"
+                  aria-label="Copy legal email address"
+                  title="Copy legal email"
+                >
+                  {copiedField === 'legal-email' ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
                 </button>
               </div>
 

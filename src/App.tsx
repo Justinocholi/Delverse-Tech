@@ -1,3 +1,10 @@
+/**
+ * @file App.tsx
+ * @description Main application controller for Delverse Technologies.
+ * Dark-themed marketing platform strictly adhering to cognichip.ai design system,
+ * layout patterns, and component architecture.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -8,55 +15,53 @@ import { Preloader } from './components/Preloader';
 
 // Page Views
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './pages/ServicesPage';
-import { PortfolioPage } from './pages/PortfolioPage';
+import { SolutionsPage } from './pages/SolutionsPage';
 import { AboutPage } from './pages/AboutPage';
+import { JournalPage } from './pages/JournalPage';
+import { CareersPage } from './pages/CareersPage';
 import { ContactPage } from './pages/ContactPage';
-import { NotFoundPage } from './pages/NotFoundPage';
 import { AdminPage } from './pages/AdminPage';
+import { PortfolioPage } from './pages/PortfolioPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
+const VALID_PAGES = [
+  'home',
+  'solutions',
+  'about',
+  'journal',
+  'careers',
+  'contact',
+  'services',
+  'portfolio',
+  'admin',
+];
 
 export const App: React.FC = () => {
-  // Theme state: defaults to dark (the hero theme) while honoring user preference
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    const saved = localStorage.getItem('delverse_theme');
-    if (saved) return saved === 'dark';
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-        return false;
-      }
-    }
-    return true; // Dark is the hero theme
-  });
-
-  // Page routing state
+  // Page routing state synchronized with window.location.hash
   const [currentPage, setCurrentPage] = useState<string>(() => {
-    const hash = window.location.hash.replace('#', '').toLowerCase();
-    if (['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(hash)) {
-      return hash;
+    const rawHash = window.location.hash.replace('#', '').toLowerCase();
+    const cleanHash = rawHash.split('?')[0].split('#')[0];
+    if (VALID_PAGES.includes(cleanHash)) {
+      return cleanHash;
     }
     return 'home';
   });
 
-  // Sync theme with document class
+  // Always enforce dark theme matching Cognichip aesthetic
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add('dark');
-      root.classList.remove('light');
-      localStorage.setItem('delverse_theme', 'dark');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-      localStorage.setItem('delverse_theme', 'light');
-    }
-  }, [isDark]);
+    root.classList.add('dark');
+    root.classList.remove('light');
+    localStorage.setItem('delverse_theme', 'dark');
+  }, []);
 
   // Sync route with window hash
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(hash)) {
-        setCurrentPage(hash);
+      const rawHash = window.location.hash.replace('#', '').toLowerCase();
+      const cleanHash = rawHash.split('?')[0].split('#')[0];
+      if (VALID_PAGES.includes(cleanHash)) {
+        setCurrentPage(cleanHash);
       }
     };
 
@@ -65,40 +70,39 @@ export const App: React.FC = () => {
   }, []);
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page);
+    const cleanPage = page.split('?')[0].split('#')[0];
+    setCurrentPage(cleanPage);
     window.location.hash = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const toggleTheme = () => {
-    setIsDark((prev) => !prev);
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#070B14] text-slate-100 transition-colors duration-300">
-      {/* Short branded preloader (<800ms) */}
+    <div className="min-h-screen flex flex-col bg-[#0A0A0B] text-white selection:bg-[#0066FF] selection:text-white font-sans antialiased">
+      {/* Short branded preloader */}
       <Preloader />
 
-      {/* Top scroll-progress bar in accent color */}
+      {/* Top scroll-progress bar in electric blue */}
       <ScrollProgressBar />
 
       {/* Shared Global Sticky Navbar */}
       <Navbar
         currentPage={currentPage}
         onNavigate={handleNavigate}
-        isDark={isDark}
-        onToggleTheme={toggleTheme}
       />
 
       {/* Main Page View */}
       <main className="flex-1">
         {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
-        {currentPage === 'services' && <ServicesPage onNavigate={handleNavigate} />}
-        {currentPage === 'portfolio' && <PortfolioPage onNavigate={handleNavigate} />}
+        {(currentPage === 'solutions' || currentPage === 'services') && (
+          <SolutionsPage onNavigate={handleNavigate} />
+        )}
         {currentPage === 'about' && <AboutPage onNavigate={handleNavigate} />}
+        {currentPage === 'journal' && <JournalPage onNavigate={handleNavigate} />}
+        {currentPage === 'careers' && <CareersPage onNavigate={handleNavigate} />}
         {currentPage === 'contact' && <ContactPage />}
+        {currentPage === 'portfolio' && <PortfolioPage onNavigate={handleNavigate} />}
         {currentPage === 'admin' && <AdminPage onNavigate={handleNavigate} />}
-        {!['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(currentPage) && (
+        {!VALID_PAGES.includes(currentPage) && (
           <NotFoundPage onNavigate={handleNavigate} />
         )}
       </main>

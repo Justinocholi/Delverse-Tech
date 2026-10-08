@@ -629,15 +629,363 @@ export interface HeroData {
 }
 
 export const defaultHeroData: HeroData = {
-  eyebrow: "Digital Transformation Partner",
-  headlinePrefix: "Transform Your Business with",
-  headlineHighlight: "Cutting-Edge Technology",
-  subtext: "From bespoke AI implementation and predictive analytics to award-caliber web platforms, we engineer tailored technology solutions that streamline operations and accelerate digital growth for African and international enterprises.",
-  stat1Value: "50+",
-  stat1Label: "Enterprise Projects",
-  stat2Value: "30+",
-  stat2Label: "Corporate Clients",
+  eyebrow: "THE NEW ERA OF TRANSFORMATION STARTS NOW",
+  headlinePrefix: "Full-Stack Intelligence for",
+  headlineHighlight: "Digital Transformation",
+  subtext: "We craft innovative, custom-built solutions that enable meaningful, measurable business growth. From bespoke AI implementation to resilient cloud architecture, we engineer certainty for visionary organizations.",
+  stat1Value: "99.8%",
+  stat1Label: "SLA Guaranteed",
+  stat2Value: "50+",
+  stat2Label: "Enterprise Systems",
 };
+
+/**
+ * -----------------------------------------------------------------------------
+ * COGNICHIP-ALIGNED DATA MODELS
+ * -----------------------------------------------------------------------------
+ */
+
+export interface CogniSolution {
+  id: string;
+  persona: string;
+  headline: string;
+  description: string;
+  bullets: string[];
+  ctaText: string;
+  accentBadge?: string;
+  workflowOverview?: string;
+  capabilities?: string[];
+}
+
+export const cogniSolutionsData: CogniSolution[] = [
+  {
+    id: "startups",
+    persona: "For Startups",
+    headline: "Ship your MVP at record speed.",
+    description: "Rapid prototyping, modular architecture, and accelerated deployment cycles designed to test market hypothesis without accumulating technical debt.",
+    bullets: [
+      "Rapid prototyping & zero-friction validation",
+      "Scalable cloud-native architecture ready for Series A",
+      "Production-ready auth, billing, and telemetry foundations",
+      "Continuous CI/CD pipeline shipping weekly iterations"
+    ],
+    ctaText: "Explore Startup Pods",
+    accentBadge: "FAST-TRACK",
+    workflowOverview: "Engineered specifically for founders who need to beat competitors to market while building an institutional-grade codebase that passes investor diligence.",
+    capabilities: [
+      "Full-stack MVP sprint pods (2–4 weeks)",
+      "Multi-tenant SaaS boilerplate with Stripe & RBAC",
+      "Serverless & containerized elastic scaling",
+      "Automated automated testing & security scan suites",
+      "Seed-to-Scale architectural advisory"
+    ]
+  },
+  {
+    id: "enterprises",
+    persona: "For Enterprises",
+    headline: "Modernize legacy systems without stopping the business.",
+    description: "Deconstruct brittle monoliths into resilient, event-driven microservices. Ensure zero downtime, bank-grade compliance, and sovereign data governance.",
+    bullets: [
+      "Strangler-fig migration patterns ensuring zero disruption",
+      "High-throughput enterprise event buses (Kafka & RabbitMQ)",
+      "Zero-trust security postures and regulatory compliance",
+      "Centralized identity and fine-grained access control"
+    ],
+    ctaText: "Modernize Infrastructure",
+    accentBadge: "ZERO-DOWNTIME",
+    workflowOverview: "Our modernization playbook abstracts existing operational cores, gradually migrating business logic into decoupled services without interrupting daily transactions.",
+    capabilities: [
+      "Legacy database decoupling & CDC synchronization",
+      "API gateway consolidation & rate-limiting governance",
+      "Air-gapped and hybrid-cloud orchestration",
+      "Automated disaster recovery & failover clustering",
+      "Executive risk analysis and business continuity guarantees"
+    ]
+  },
+  {
+    id: "product-teams",
+    persona: "For Product Teams",
+    headline: "Dedicated engineering pods that ship.",
+    description: "Plug-and-play senior squads embedded seamlessly into your product roadmap. High velocity, rigorous code hygiene, and battle-tested technical leadership.",
+    bullets: [
+      "Pre-vetted senior software engineers, designers, and architects",
+      "Direct integration into your Jira, GitHub, and Slack workflows",
+      "Relentless focus on velocity, code quality, and test coverage",
+      "Clear IP handover with comprehensive architectural specs"
+    ],
+    ctaText: "Deploy Engineering Pod",
+    accentBadge: "AUGMENTATION",
+    workflowOverview: "Scale your engineering throughput overnight without the 6-month recruiting lag. Our pods arrive with mature engineering standards and immediate shipping cadence.",
+    capabilities: [
+      "Autonomous feature pods with dedicated tech leads",
+      "Design systems & component tokenization (Figma to Code)",
+      "Automated end-to-end integration and load testing",
+      "Code review discipline and architectural RFC governance",
+      "Elastic pod scaling aligned with sprint capacity demands"
+    ]
+  },
+  {
+    id: "data-leaders",
+    persona: "For Data-Driven Leaders",
+    headline: "Analytics & AI that turn data into decisions.",
+    description: "Eliminate fractured data silos. Build unified modern lakehouses, custom LLM intelligence layers, and real-time operational telemetry for C-suite certainty.",
+    bullets: [
+      "Automated data extraction, loading, and transformation (ELT)",
+      "Private domain-specific LLM implementations on internal data",
+      "Sub-second executive dashboards and anomaly alert triggers",
+      "Predictive modeling for procurement, demand, and churn"
+    ],
+    ctaText: "Deploy Intelligence Engine",
+    accentBadge: "AI & TELEMETRY",
+    workflowOverview: "We transform dormant operational data into an active competitive moat by unifying warehouse schemas and layering private retrieval-augmented models.",
+    capabilities: [
+      "Modern Data Stack engineering (Snowflake, dbt, Airflow)",
+      "Secure Retrieval-Augmented Generation (RAG) pipelines",
+      "Automated predictive forecasting models",
+      "Real-time streaming telemetry and alerting engines",
+      "Data governance, lineage tracking, and audit protocols"
+    ]
+  },
+  {
+    id: "ops-automation",
+    persona: "For Ops & Automation",
+    headline: "Workflows that run themselves.",
+    description: "Autonomous RPA, self-healing cloud pipelines, and cognitive agent workflows that remove manual human bottlenecks across finance, logistics, and support.",
+    bullets: [
+      "Intelligent document parsing and automated reconciliation",
+      "Self-healing infrastructure with automatic container recovery",
+      "End-to-end cross-platform webhook and event orchestration",
+      "Operational cost reductions exceeding 60% in target units"
+    ],
+    ctaText: "Automate Operations",
+    accentBadge: "AUTONOMOUS",
+    workflowOverview: "Replace brittle manual data transfers with deterministic event-driven micro-automations that operate with 99.99% accuracy 24 hours a day.",
+    capabilities: [
+      "OCR & NLP invoice and contract data extraction",
+      "Multi-system ERP and CRM bi-directional sync",
+      "Automated customer triage and intelligent ticket escalation",
+      "Cloud resource autoscaling and cost-optimization loops",
+      "Comprehensive telemetry logs and exception handling triggers"
+    ]
+  }
+];
+
+export const digitalGapCrisisStats = [
+  {
+    metric: "70%",
+    caption: "of digital transformations fail to meet initial scope and value goals.",
+    subtext: "Source: McKinsey & BCG Digital Transformation Benchmark"
+  },
+  {
+    metric: "$1.3T",
+    caption: "spent globally each year on legacy systems that stall enterprise agility.",
+    subtext: "Source: Enterprise Architecture Spend Analysis"
+  },
+  {
+    metric: "3–5 Yrs",
+    caption: "average legacy modernization timeline when executed with traditional consultants.",
+    subtext: "Delverse compresses this to 6–12 months"
+  },
+  {
+    metric: "84%",
+    caption: "of CEOs identify digital sovereignty and private AI as their top competitive threat.",
+    subtext: "Source: Global Technology Leadership Index"
+  }
+];
+
+export const aNewEraValuesData = [
+  {
+    id: "innovation",
+    title: "Innovation is the Method",
+    eyebrow: "FIRST PRINCIPLES",
+    description: "We discard conventional software dogmas in favor of physics-grade precision. Every system is built to outlast current paradigms and scale indefinitely.",
+    artworkVariant: "innovation" as const
+  },
+  {
+    id: "collaboration",
+    title: "Built on Shared Success",
+    eyebrow: "SYMBIOTIC PARTNERSHIP",
+    description: "We operate as an integrated technical co-founder, aligning directly with your balance sheet and mission rather than billing for passive hours.",
+    artworkVariant: "collaboration" as const
+  },
+  {
+    id: "precision",
+    title: "Precision in Every Line",
+    eyebrow: "ARCHITECTURAL RIGOR",
+    description: "Zero compromise on code hygiene, latency, and fault tolerance. Systems built with rigorous mathematical discipline and audited security postures.",
+    artworkVariant: "precision" as const
+  },
+  {
+    id: "democratizing",
+    title: "Democratizing Transformation",
+    eyebrow: "GLOBAL ACCESS",
+    description: "World-class engineering should not be the exclusive privilege of Silicon Valley monopolies. We empower visionary enterprises across Africa and the globe.",
+    artworkVariant: "democratizing" as const
+  }
+];
+
+export const journalArticlesData = [
+  {
+    id: "journal-1",
+    slug: "architecture-of-transformation",
+    title: "The Architecture of Transformation: Why Modular Engineering Outperforms Monoliths",
+    category: "ENGINEERING",
+    date: "OCTOBER 2026",
+    readTime: "6 MIN READ",
+    artworkVariant: "journal" as const,
+    excerpt: "Legacy monoliths do not fail because they lack features; they fail because coupled dependencies create combinatorial friction. Here is how event-driven decoupling restores engineering velocity.",
+    content: [
+      "In the contemporary enterprise landscape, software architecture is no longer merely a technical consideration—it is the governing constraint on business velocity. Organizations attempting to modernize frequently make the fatal error of attempting an instantaneous 'big bang' rewrite.",
+      "The empirical evidence is unambiguous: over 70% of monolithic rewrites either exceed their budget by orders of magnitude or collapse under organizational fatigue before reaching production parity.",
+      "At Delverse, we advocate for the Strangler-Fig paradigm combined with an immutable event backbone. By introducing an event bus layer and routing traffic through high-throughput edge gateways, legacy modules can be systematically decommissioned one microservice at a time.",
+      "The outcome is not merely a modernized codebase, but an organization capable of deploying multiple production releases daily with zero downstream risk."
+    ],
+    pullQuote: {
+      quote: "Software architecture is not a passive artifact; it is the physical constraint on how rapidly your enterprise can respond to reality.",
+      author: "Delverse Systems Architecture Directorate"
+    }
+  },
+  {
+    id: "journal-2",
+    slug: "digital-sovereignty-ai",
+    title: "Digital Sovereignty in the Age of Autonomous AI Agents",
+    category: "ARTIFICIAL INTELLIGENCE",
+    date: "SEPTEMBER 2026",
+    readTime: "8 MIN READ",
+    artworkVariant: "manifesto" as const,
+    excerpt: "Offloading mission-critical intelligence to public third-party APIs exposes core enterprise intellectual property. A blueprint for private, air-gapped domain models.",
+    content: [
+      "As generative AI transitions from conversational novelties into autonomous agentic pipelines that execute financial transfers and rebalance supply chains, the question of data sovereignty becomes urgent.",
+      "Transmitting proprietary business records and operational telemetry to multi-tenant foreign endpoints creates unacceptable legal and competitive exposure.",
+      "We design self-hosted, domain-adapted models deployed within the enterprise's private cloud boundary. Utilizing high-efficiency quantization and audited Retrieval-Augmented Generation (RAG), organizations achieve frontier model performance while maintaining cryptographic data sovereignty.",
+      "The competitive advantage belongs to enterprises that own their weights, their vectors, and their execution runtime."
+    ],
+    pullQuote: {
+      quote: "If your intelligence layer is rented from an external endpoint, your competitive differentiation has an expiration date.",
+      author: "Chief AI Architect, Delverse"
+    }
+  },
+  {
+    id: "journal-3",
+    slug: "physics-informed-delivery",
+    title: "Physics-Informed Delivery: Engineering Certainty in High-Stakes Deployments",
+    category: "METHODOLOGY",
+    date: "AUGUST 2026",
+    readTime: "5 MIN READ",
+    artworkVariant: "engineering" as const,
+    excerpt: "How Delverse translates principles from high-reliability aerospace engineering into software delivery frameworks that eliminate deployment anxiety.",
+    content: [
+      "Traditional agile methodologies often mistake rapid activity for genuine velocity. Without rigorous architectural invariants, velocity accelerates technical entropy.",
+      "Physics-informed delivery treats software development as a deterministic state machine. Every requirement is mapped to automated verification tests, latency thresholds, and formal verification proofs prior to production release.",
+      "By combining immutable infrastructure-as-code with automated canary rollouts and synthetic chaos testing, our teams ensure that failure is isolated to sub-millisecond degradation rather than catastrophic system outage.",
+      "Predictability is not an accident—it is an engineered outcome."
+    ],
+    pullQuote: {
+      quote: "Certainty is not the absence of risk; it is the presence of an engineering system designed to withstand it.",
+      author: "Lead Principal Engineer, Delverse"
+    }
+  }
+];
+
+export const leadershipTeamData = [
+  {
+    id: "lead-1",
+    name: "Justine Ocholi",
+    title: "Founder & Chief Technology Officer",
+    credentials: ["10+ Yrs Enterprise", "Distributed Systems Pod", "Cloud Architect"],
+    bio: "Pioneering high-scale software architectures, enterprise data pipelines, and transformative AI systems across emerging and global markets.",
+    isAdvisor: false
+  },
+  {
+    id: "lead-2",
+    name: "Tomiwa Adeyemi",
+    title: "Head of AI & Machine Intelligence",
+    credentials: ["Ex-Fintech Lead", "Neural Architectures", "MLOps Infrastructure"],
+    bio: "Specializing in domain-specific foundation models, low-latency inference pipelines, and secure enterprise RAG architectures.",
+    isAdvisor: false
+  },
+  {
+    id: "lead-3",
+    name: "Joshua Nnadi",
+    title: "Principal Cloud & DevOps Architect",
+    credentials: ["AWS Certified Pro", "Kubernetes Lead", "Zero-Trust Security"],
+    bio: "Architecting resilient multi-cloud infrastructures, immutable CI/CD pipelines, and high-availability disaster recovery topologies.",
+    isAdvisor: false
+  }
+];
+
+export const advisorsTeamData = [
+  {
+    id: "adv-1",
+    name: "Dr. Marcus Vance",
+    title: "Senior Enterprise Strategy Advisor",
+    credentials: ["18+ Yrs Enterprise IT", "Global Fortune 500", "Digital Governance"],
+    bio: "Advising institutional executives on legacy modernization, technical risk mitigation, and sovereign infrastructure investments.",
+    isAdvisor: true
+  },
+  {
+    id: "adv-2",
+    name: "Elena Rostova",
+    title: "Fintech & Regulatory Advisor",
+    credentials: ["Ex-Central Banking", "Cross-Border Rails", "Risk Compliance"],
+    bio: "Guiding compliance architecture, automated KYC/AML engineering, and cross-border settlement protocols.",
+    isAdvisor: true
+  },
+  {
+    id: "adv-3",
+    name: "Kofi Mensah",
+    title: "Venture & Growth Advisor",
+    credentials: ["Pan-African Tech Lead", "Seed to Series B", "Product Scale"],
+    bio: "Supporting portfolio founders on rapid go-to-market engineering, team scaling, and technology moats.",
+    isAdvisor: true
+  }
+];
+
+export const tractionCarouselData = [
+  {
+    title: "Distributed Core Deployment",
+    subtitle: "Real-time synchronization across 4 cloud regions",
+    metric: "24ms Global Latency",
+    tag: "CLOUD INFRASTRUCTURE",
+    variant: "engineering" as const
+  },
+  {
+    title: "Private Domain RAG Pipeline",
+    subtitle: "Over 2.4 million enterprise records ingested",
+    metric: "99.4% Extraction Precision",
+    tag: "MACHINE INTELLIGENCE",
+    variant: "solutions" as const
+  },
+  {
+    title: "High-Throughput Mobile Engine",
+    subtitle: "Financial settlement core processing 12k tx/sec",
+    metric: "0.00% Downtime Recorded",
+    tag: "FINANCIAL INFRASTRUCTURE",
+    variant: "workflow" as const
+  },
+  {
+    title: "Autonomous Logistics Fleet Control",
+    subtitle: "Predictive routing and automated dispatch telemetry",
+    metric: "42% Fuel Cost Reduction",
+    tag: "OPERATIONAL AUTOMATION",
+    variant: "precision" as const
+  },
+  {
+    title: "Zero-Trust Security Shield",
+    subtitle: "Continuous automated penetration testing & IAM audit",
+    metric: "SOC2 & ISO 27001 Aligned",
+    tag: "CYBERSECURITY",
+    variant: "gap" as const
+  },
+  {
+    title: "Enterprise Headless Flagship",
+    subtitle: "Sub-second Lighthouse 99 score conversion engine",
+    metric: "320% Lead Velocity Increase",
+    tag: "DIGITAL FLAGSHIP",
+    variant: "innovation" as const
+  }
+];
+
 
 /**
  * Unified Site Data Contract used across pages and the Admin Portal
