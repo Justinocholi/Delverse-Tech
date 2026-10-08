@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, ExternalLink, ArrowUpRight, CheckCircle2, 
-  X, ChevronRight, Layers, Sliders, Star, Sparkles 
+  X, ChevronRight, Layers, Sliders, Star, Sparkles, ArrowLeftRight 
 } from 'lucide-react';
-import { portfolioProjects, ProjectItem, testimonialsData } from '../data/delverseData';
+import { getStoredSiteData, ProjectItem, portfolioProjects } from '../data/delverseData';
 import { Eyebrow, SectionHeader, ButtonPrimary } from '../components/UIElements';
 import { GlobalCTA } from '../components/GlobalCTA';
 
@@ -12,9 +12,19 @@ interface PortfolioPageProps {
 }
 
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
+  const [projectsList, setProjectsList] = useState<ProjectItem[]>(() => getStoredSiteData().projects);
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [sliderPosition, setSliderPosition] = useState<number>(50);
+
+  // Sync with Admin live data changes
+  React.useEffect(() => {
+    const handleUpdate = () => {
+      setProjectsList(getStoredSiteData().projects);
+    };
+    window.addEventListener('delverse-data-updated', handleUpdate);
+    return () => window.removeEventListener('delverse-data-updated', handleUpdate);
+  }, []);
 
   // Filter categories
   const filterCategories = [
@@ -26,10 +36,10 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
   ];
 
   const filteredProjects = activeFilter === 'all'
-    ? portfolioProjects
-    : portfolioProjects.filter((p) => p.category === activeFilter);
+    ? projectsList
+    : projectsList.filter((p) => p.category === activeFilter);
 
-  const featuredProject = portfolioProjects.find((p) => p.featured) || portfolioProjects[0];
+  const featuredProject = projectsList.find((p) => p.featured) || projectsList[0] || portfolioProjects[0];
 
   const industriesWeServe = [
     'Agriculture & Agritech', 'Conglomerates & Heavy Industry', 'Management Consulting',
@@ -349,7 +359,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
                   style={{ left: `${sliderPosition}%` }}
                 >
                   <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-lg text-xs font-bold">
-                    ↔
+                    <ArrowLeftRight size={14} className="text-slate-900" />
                   </div>
                 </div>
 

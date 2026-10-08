@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, ArrowUp, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp, Send, CheckCircle2, AlertCircle, Lock } from 'lucide-react';
 import { companyDetails, servicesData } from '../data/delverseData';
 
 interface FooterProps {
@@ -228,9 +228,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Sub-bar */}
         <div className="pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {currentYear} {companyDetails.legalName}. All rights reserved. Registered in Nigeria (RC).
+            &copy; {currentYear} {companyDetails.legalName}. All rights reserved. Registered in Nigeria (RC).
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             <button
               onClick={() => onNavigate('contact')}
               className="hover:text-slate-300 transition-colors"
@@ -242,6 +242,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               className="hover:text-slate-300 transition-colors"
             >
               Terms of Engagement
+            </button>
+            <button
+              onClick={() => {
+                onNavigate('admin');
+                scrollToTop();
+              }}
+              className="hover:text-teal-400 transition-colors flex items-center gap-1.5 text-slate-400"
+            >
+              <Lock size={12} className="text-teal-400" />
+              <span>Admin Portal</span>
             </button>
             <button
               onClick={scrollToTop}

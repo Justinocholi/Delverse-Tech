@@ -13,6 +13,7 @@ import { PortfolioPage } from './pages/PortfolioPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { AdminPage } from './pages/AdminPage';
 
 export const App: React.FC = () => {
   // Theme state: defaults to dark (the hero theme) while honoring user preference
@@ -30,7 +31,7 @@ export const App: React.FC = () => {
   // Page routing state
   const [currentPage, setCurrentPage] = useState<string>(() => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    if (['home', 'services', 'portfolio', 'about', 'contact'].includes(hash)) {
+    if (['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(hash)) {
       return hash;
     }
     return 'home';
@@ -54,7 +55,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (['home', 'services', 'portfolio', 'about', 'contact'].includes(hash)) {
+      if (['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -96,7 +97,8 @@ export const App: React.FC = () => {
         {currentPage === 'portfolio' && <PortfolioPage onNavigate={handleNavigate} />}
         {currentPage === 'about' && <AboutPage onNavigate={handleNavigate} />}
         {currentPage === 'contact' && <ContactPage />}
-        {!['home', 'services', 'portfolio', 'about', 'contact'].includes(currentPage) && (
+        {currentPage === 'admin' && <AdminPage onNavigate={handleNavigate} />}
+        {!['home', 'services', 'portfolio', 'about', 'contact', 'admin'].includes(currentPage) && (
           <NotFoundPage onNavigate={handleNavigate} />
         )}
       </main>

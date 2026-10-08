@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { 
   servicesData, techStackCategories, engagementModels, 
-  faqData, ServiceItem 
+  faqData, ServiceItem, getStoredSiteData 
 } from '../data/delverseData';
 import { Eyebrow, SectionHeader, ButtonPrimary } from '../components/UIElements';
 import { GlobalCTA } from '../components/GlobalCTA';
@@ -17,9 +17,20 @@ interface ServicesPageProps {
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
-  const [activeSectionId, setActiveSectionId] = useState<string>(servicesData[0].id);
+  const [servicesList, setServicesList] = useState<ServiceItem[]>(() => getStoredSiteData().services);
+  const [activeSectionId, setActiveSectionId] = useState<string>(() => (getStoredSiteData().services[0]?.id || 'ai-solutions'));
   const [activeTechTab, setActiveTechTab] = useState(0);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Sync with Admin live updates
+  useEffect(() => {
+    const handleUpdate = () => {
+      const updated = getStoredSiteData().services;
+      setServicesList(updated);
+    };
+    window.addEventListener('delverse-data-updated', handleUpdate);
+    return () => window.removeEventListener('delverse-data-updated', handleUpdate);
+  }, []);
 
   // IntersectionObserver to highlight sticky nav item in view without layout thrashing
   useEffect(() => {
@@ -143,7 +154,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
           {/* Mobile Horizontal Chip Nav */}
           <div className="lg:hidden sticky top-20 z-30 bg-[#070B14]/95 backdrop-blur-xl py-3 border-b border-white/10 mb-8 overflow-x-auto">
             <div className="flex gap-2 min-w-max px-1">
-              {servicesData.map((service) => (
+              {servicesList.map((service) => (
                 <button
                   key={service.id}
                   onClick={() => scrollToService(service.id)}
@@ -165,7 +176,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
               <span className="text-[11px] font-mono uppercase tracking-widest text-slate-500 block px-3 mb-2">
                 Table of Capabilities
               </span>
-              {servicesData.map((service) => (
+              {servicesList.map((service) => (
                 <button
                   key={service.id}
                   onClick={() => scrollToService(service.id)}
@@ -203,7 +214,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
 
             {/* 6 Alternating Split Capability Sections */}
             <div className="lg:col-span-9 space-y-24">
-              {servicesData.map((service, index) => {
+              {servicesList.map((service, index) => {
                 const isEven = index % 2 === 1;
                 return (
                   <article
@@ -580,7 +591,9 @@ function ServiceCustomVisual({ serviceId }: { serviceId: string }) {
           <div className="space-y-3 p-1">
             <div className="flex items-center justify-between text-[10px] text-slate-400">
               <span className="font-mono font-bold text-white">Delverse Mobile</span>
-              <span className="text-teal-400">5G ● 100%</span>
+              <span className="text-teal-400 flex items-center gap-1.5 font-bold font-mono">
+                5G <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> 100%
+              </span>
             </div>
             <div className="p-3 rounded-xl bg-blue-600/20 border border-blue-500/30 text-[11px] text-white">
               <span className="text-[9px] text-blue-300 block">Instant Alert</span>

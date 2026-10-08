@@ -374,8 +374,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <div className="md:col-span-5 h-56 rounded-2xl bg-[#090D1A] border border-white/10 p-5 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
                 <div className="relative z-10 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <span>LAT: 9.0436° N</span>
-                  <span>LNG: 7.5255° E</span>
+                  <span>LAT: 9.0436 deg N</span>
+                  <span>LNG: 7.5255 deg E</span>
                 </div>
                 <div className="relative z-10 flex flex-col items-center justify-center py-4">
                   <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-teal-400 flex items-center justify-center text-teal-300 shadow-glow-teal animate-bounce">

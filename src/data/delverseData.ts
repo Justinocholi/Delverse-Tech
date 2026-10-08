@@ -78,7 +78,7 @@ export const companyDetails = {
   phone: "+234 806 930 5155",
   phoneDisplay: "+234 806 930 5155",
   email: "delversetech@gmail.com",
-  hours: "Monday – Friday: 8:00 AM – 5:00 PM (WAT)",
+  hours: "Monday - Friday: 8:00 AM - 5:00 PM (WAT)",
   whatsappUrl: "https://wa.me/2348069305155?text=Hello%20Delverse%20Technologies,%20I%20would%20like%20to%20discuss%20a%20project.",
   socials: {
     linkedin: "https://linkedin.com/company/delverse-technologies",
@@ -613,3 +613,98 @@ export const techStackCategories = [
     ]
   }
 ];
+
+/**
+ * Hero Content Data Model
+ */
+export interface HeroData {
+  eyebrow: string;
+  headlinePrefix: string;
+  headlineHighlight: string;
+  subtext: string;
+  stat1Value: string;
+  stat1Label: string;
+  stat2Value: string;
+  stat2Label: string;
+}
+
+export const defaultHeroData: HeroData = {
+  eyebrow: "Digital Transformation Partner",
+  headlinePrefix: "Transform Your Business with",
+  headlineHighlight: "Cutting-Edge Technology",
+  subtext: "From bespoke AI implementation and predictive analytics to award-caliber web platforms, we engineer tailored technology solutions that streamline operations and accelerate digital growth for African and international enterprises.",
+  stat1Value: "50+",
+  stat1Label: "Enterprise Projects",
+  stat2Value: "30+",
+  stat2Label: "Corporate Clients",
+};
+
+/**
+ * Unified Site Data Contract used across pages and the Admin Portal
+ */
+export interface SiteData {
+  company: typeof companyDetails;
+  hero: HeroData;
+  services: ServiceItem[];
+  testimonials: TestimonialItem[];
+  projects: ProjectItem[];
+}
+
+export const defaultSiteData: SiteData = {
+  company: companyDetails,
+  hero: defaultHeroData,
+  services: servicesData,
+  testimonials: testimonialsData,
+  projects: portfolioProjects,
+};
+
+const STORAGE_KEY = 'delverse_site_custom_data_v1';
+
+/**
+ * Retrieves the currently active site data from localStorage or falls back to defaults.
+ */
+export function getStoredSiteData(): SiteData {
+  if (typeof window === 'undefined') return defaultSiteData;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultSiteData;
+    const parsed = JSON.parse(raw);
+    return {
+      company: { ...defaultSiteData.company, ...parsed.company },
+      hero: { ...defaultSiteData.hero, ...parsed.hero },
+      services: parsed.services?.length ? parsed.services : defaultSiteData.services,
+      testimonials: parsed.testimonials?.length ? parsed.testimonials : defaultSiteData.testimonials,
+      projects: parsed.projects?.length ? parsed.projects : defaultSiteData.projects,
+    };
+  } catch (err) {
+    console.warn("Failed to parse custom site data from storage:", err);
+    return defaultSiteData;
+  }
+}
+
+/**
+ * Persists customized site data to localStorage and dispatches a global update event.
+ */
+export function saveStoredSiteData(data: SiteData): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    window.dispatchEvent(new CustomEvent('delverse-data-updated', { detail: data }));
+  } catch (err) {
+    console.error("Failed to save site data to storage:", err);
+  }
+}
+
+/**
+ * Resets all customizations back to factory defaults.
+ */
+export function resetStoredSiteData(): SiteData {
+  if (typeof window === 'undefined') return defaultSiteData;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new CustomEvent('delverse-data-updated', { detail: defaultSiteData }));
+  } catch (err) {
+    console.error("Failed to reset site data:", err);
+  }
+  return defaultSiteData;
+}

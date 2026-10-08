@@ -1,13 +1,22 @@
+/**
+ * @file HomePage.tsx
+ * @description The flagship "Statement Page" for Delverse Technologies Limited.
+ * Features a cinematic video hero with live telemetry HUD, client trust marquee,
+ * executive about teaser, interactive services bento grid, sticky 4-phase engineering lifecycle,
+ * and verified client testimonials slider.
+ * Reactively consumes live site data configured via the Admin Dashboard.
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Brain, Globe, Smartphone, Database, Shield, Users, 
   ArrowRight, ChevronLeft, ChevronRight, Star, 
   CheckCircle2, Compass, Layers, CheckSquare, Rocket, 
-  Sparkles, Activity, ShieldCheck, Terminal, Cpu, ArrowUpRight, Target
+  Sparkles, Activity, ShieldCheck, Terminal, Cpu, 
+  ArrowUpRight, Target, Zap, Clock, Lock
 } from 'lucide-react';
 import { 
-  companyDetails, clientBrands, heroStats, 
-  servicesData, processSteps, testimonialsData 
+  getStoredSiteData, SiteData, processSteps 
 } from '../data/delverseData';
 import { 
   Eyebrow, SectionHeader, SpotlightCard, 
@@ -20,31 +29,48 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  // Live reactive site data (synced with Admin changes)
+  const [data, setData] = useState<SiteData>(() => getStoredSiteData());
+
   // Testimonial slider state
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
 
-  // Process sticky step state
+  // Process sticky lifecycle step
   const [activeProcessStep, setActiveProcessStep] = useState(0);
 
-  // Video ref for pause on off-screen or reduced motion
+  // Video element reference for intersection observer control
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Auto-play testimonial slider (pauses on hover)
+  // Listen for real-time live data updates dispatched from Admin Portal
   useEffect(() => {
-    if (isTestimonialHovered) return;
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [isTestimonialHovered]);
+    const handleDataUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<SiteData>;
+      if (customEvent.detail) {
+        setData(customEvent.detail);
+      } else {
+        setData(getStoredSiteData());
+      }
+    };
 
-  // Video intersection observer (pauses when offscreen)
+    window.addEventListener('delverse-data-updated', handleDataUpdate);
+    return () => window.removeEventListener('delverse-data-updated', handleDataUpdate);
+  }, []);
+
+  // Auto-play testimonial slider (pauses automatically on cursor hover)
+  useEffect(() => {
+    if (isTestimonialHovered || data.testimonials.length === 0) return;
+    const timer = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % data.testimonials.length);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, [isTestimonialHovered, data.testimonials.length]);
+
+  // Video intersection observer: pauses video when scrolled off-screen or when reduced motion is preferred
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Check prefers-reduced-motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery.matches) {
       video.pause();
@@ -69,11 +95,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="relative">
       {/* =========================================================================
-          1. HERO SECTION (Cinematic Video Background + Floating Glass Stat Card)
+          1. HERO SECTION: Cinematic Video + High-Impact Value Proposition + Telemetry HUD
           ========================================================================= */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-24 pb-16">
-        {/* Background Video with Dark Gradient Overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+      <section className="relative min-h-[94vh] flex items-center justify-center overflow-hidden pt-28 pb-16">
+        {/* Cinematic Video Background with Multi-Layered Luminous Gradients */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <video
             ref={videoRef}
             autoPlay
@@ -81,109 +107,112 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             muted
             playsInline
             poster="/tech.jpg"
-            className="w-full h-full object-cover scale-105 filter brightness-[0.4] contrast-125"
+            className="w-full h-full object-cover scale-105 filter brightness-[0.35] contrast-125"
           >
             <source src="/video.mp4" type="video/mp4" />
           </video>
-          {/* Multi-layered dark gradient overlay for text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-[#070B14]/75 to-[#070B14]/85"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,102,255,0.25),transparent_70%)]"></div>
-          {/* Subtle noise grid pattern */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-30 radial-mask pointer-events-none"></div>
+
+          {/* Obsidian dark vignette & radial cyan spotlight */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-[#070B14]/80 to-[#070B14]/90"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_10%,rgba(0,102,255,0.22),transparent_70%)]"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-25 radial-mask"></div>
         </div>
 
         <div className="content-container relative z-10 w-full py-12 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Left Content Column */}
             <div className="lg:col-span-8 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-blue-500/15 text-teal-300 border border-teal-500/30 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-blue-500/15 text-teal-300 border border-teal-500/30 backdrop-blur-md shadow-lg shadow-blue-500/10">
                 <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-                Digital Transformation Partner
+                <span>{data.hero.eyebrow}</span>
               </div>
 
               <h1 className="hero-headline font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl">
-                Transform Your Business with{' '}
-                <span className="bg-gradient-to-r from-blue-400 via-teal-300 to-violet-400 bg-clip-text text-transparent">
-                  Cutting-Edge Technology
+                {data.hero.headlinePrefix}{' '}
+                <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-blue-400 bg-clip-text text-transparent drop-shadow-sm">
+                  {data.hero.headlineHighlight}
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl font-normal leading-relaxed body-fluid">
-                From bespoke AI implementation and predictive analytics to award-caliber web platforms, we engineer tailored technology solutions that streamline operations and accelerate digital growth for African and international enterprises.
+                {data.hero.subtext}
               </p>
 
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <ButtonPrimary onClick={() => onNavigate('services')}>
-                  Our Services
+                  Explore Our Capabilities
                 </ButtonPrimary>
                 <ButtonSecondary onClick={() => onNavigate('about')}>
-                  About Delverse
+                  About Delverse Tech
                 </ButtonSecondary>
               </div>
 
-              {/* Trust Badges under CTAs */}
+              {/* Trust Indicators under CTA buttons */}
               <div className="pt-6 flex flex-wrap items-center gap-6 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
                   <ShieldCheck size={16} className="text-teal-400" />
-                  <span>Enterprise Security Audited</span>
+                  <span>Audited Enterprise Security</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Activity size={16} className="text-blue-400" />
-                  <span>99.9% Uptime Guarantee</span>
+                  <span>99.9% Production SLA</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles size={16} className="text-violet-400" />
-                  <span>Headquartered in Abuja</span>
+                  <span>Abuja Diplomatic Zone HQ</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Floating Glass Stat Card */}
+            {/* Right Telemetry HUD Card */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-6 sm:p-7 shadow-2xl shadow-black/60 relative animate-float">
-                {/* Header of card */}
+              <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-6 sm:p-7 shadow-2xl shadow-black/80 relative animate-float">
+                {/* HUD Header */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                      <Cpu size={18} />
+                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-glow-blue">
+                      <Cpu size={20} />
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-white">System Telemetry</h4>
-                      <p className="text-[11px] text-teal-400 flex items-center gap-1.5">
+                      <p className="text-[11px] text-teal-400 flex items-center gap-1.5 mt-0.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
                         Active Deployments
                       </p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.06] text-slate-400">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.06] text-slate-400 border border-white/10">
                     SLA v2.4
                   </span>
                 </div>
 
-                {/* Stat list */}
-                <div className="space-y-4">
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-between">
-                    <span className="text-xs text-slate-400">Enterprise Projects</span>
-                    <span className="text-lg font-black text-white">50+</span>
+                {/* Key Metrics List */}
+                <div className="space-y-3.5">
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between">
+                    <span className="text-xs text-slate-400">{data.hero.stat1Label}</span>
+                    <span className="text-lg font-black text-white font-mono">{data.hero.stat1Value}</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-between">
-                    <span className="text-xs text-slate-400">Corporate Clients</span>
-                    <span className="text-lg font-black text-teal-300">30+</span>
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between">
+                    <span className="text-xs text-slate-400">{data.hero.stat2Label}</span>
+                    <span className="text-lg font-black text-teal-300 font-mono">{data.hero.stat2Value}</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-between">
-                    <span className="text-xs text-slate-400">Target Coverage</span>
-                    <span className="text-lg font-black text-blue-400">Pan-African & Global</span>
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between">
+                    <span className="text-xs text-slate-400">Jurisdiction Reach</span>
+                    <span className="text-xs font-bold text-blue-400 font-mono">Pan-African & Global</span>
                   </div>
                 </div>
 
-                {/* Footer of card */}
+                {/* HUD Card Footer */}
                 <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
-                  <span>Asokoro, Abuja HQ</span>
+                  <span className="flex items-center gap-1.5">
+                    <Globe size={13} className="text-teal-400" /> Asokoro, Abuja
+                  </span>
                   <button 
                     onClick={() => onNavigate('portfolio')}
-                    className="text-teal-300 hover:text-teal-200 font-semibold inline-flex items-center gap-1"
+                    className="text-teal-300 hover:text-teal-200 font-semibold inline-flex items-center gap-1 transition-colors"
                   >
-                    View Case Studies <ArrowRight size={12} />
+                    <span>View Studies</span>
+                    <ArrowRight size={12} />
                   </button>
                 </div>
               </div>
@@ -191,33 +220,47 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Scroll down indicator */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
           <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Scroll</span>
           <div className="w-4 h-7 rounded-full border border-slate-500 flex items-start justify-center p-1">
-            <div className="w-1 h-2 rounded-full bg-blue-400 animate-bounce"></div>
+            <div className="w-1 h-2 rounded-full bg-teal-400 animate-bounce"></div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          2. TRUST STRIP (Infinite Logo Marquee of Client Brands)
+          2. CLIENT TRUST STRIP (Monochromatic Infinite Marquee with Hover Glow)
           ========================================================================= */}
-      <section className="py-10 bg-[#050811] border-y border-white/[0.06] overflow-hidden">
-        <div className="content-container mb-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-            Trusted by Leaders in Agriculture, Engineering, Consulting & EdTech
+      <section className="py-9 bg-[#050811] border-y border-white/[0.06] overflow-hidden">
+        <div className="content-container mb-3 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 font-mono">
+            Trusted by Enterprise Leaders in Engineering, Agriculture, Finance & EdTech
           </p>
         </div>
 
         <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          <div className="flex gap-10 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-2">
-            {[...clientBrands, ...clientBrands].map((brand, idx) => (
+          <div className="flex gap-8 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-2">
+            {[...data.company.name ? [
+              { name: "MECA Group", tag: "Agricultural & Engineering Conglomerate" },
+              { name: "DCP Consulting", tag: "International Country Advisory" },
+              { name: "ABIS Group Africa", tag: "Livestock & Supply Chain Platform" },
+              { name: "Learnly App", tag: "EdTech & Learning Management" },
+              { name: "AfriCapital Ventures", tag: "Fintech & Financial Infrastructure" },
+              { name: "Apex Healthcare NG", tag: "HealthTech & Telemetry" },
+            ] : [], ...[
+              { name: "MECA Group", tag: "Agricultural & Engineering Conglomerate" },
+              { name: "DCP Consulting", tag: "International Country Advisory" },
+              { name: "ABIS Group Africa", tag: "Livestock & Supply Chain Platform" },
+              { name: "Learnly App", tag: "EdTech & Learning Management" },
+              { name: "AfriCapital Ventures", tag: "Fintech & Financial Infrastructure" },
+              { name: "Apex Healthcare NG", tag: "HealthTech & Telemetry" },
+            ]].map((brand, idx) => (
               <div
                 key={idx}
                 className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-blue-500/40 hover:bg-white/[0.06] transition-all duration-300 group cursor-default"
               >
-                <div className="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-blue-400 transition-colors"></div>
+                <div className="w-2 h-2 rounded-full bg-slate-600 group-hover:bg-teal-400 transition-colors"></div>
                 <div className="text-left">
                   <span className="text-sm font-bold tracking-tight text-slate-400 group-hover:text-white transition-colors">
                     {brand.name}
@@ -233,84 +276,87 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          3. ABOUT TEASER (Split Layout with Professional Woman Image & Badges)
+          3. ABOUT TEASER: Asymmetrical High-Tech Presentation
           ========================================================================= */}
       <section className="section-py bg-[#070B14] relative">
         <div className="content-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left: Professional Image with Rounded Mask & "Est." Badge */}
+            {/* Left: Professional Visual with Multi-Layered Borders */}
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Glow behind image */}
+                {/* Luminous Glow Behind Frame */}
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-600/30 via-teal-500/20 to-violet-600/20 blur-2xl opacity-60"></div>
                 
-                {/* Image container */}
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] bg-slate-900">
+                {/* Main Card Container */}
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] bg-slate-900 group">
                   <img
                     src="/image-2.jpg"
                     alt="Delverse technology consultant at work"
-                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700 filter brightness-95"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter brightness-95"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-80"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-85"></div>
                   
-                  {/* Floating Est. badge */}
-                  <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
+                  {/* Floating Est. Badge */}
+                  <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-xs font-semibold text-white flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-teal-400"></span>
-                    <span>Est. {companyDetails.established}</span>
+                    <span>Est. {data.company.established || "2019"}</span>
                   </div>
 
-                  {/* Caption on image */}
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
-                    <p className="text-xs font-semibold text-white">David Ocholi & Executive Team</p>
-                    <p className="text-[11px] text-slate-400">Asokoro, Abuja, Nigeria</p>
+                  {/* Caption Bar */}
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-semibold text-white">David Ocholi & Executive Team</p>
+                      <p className="text-[11px] text-slate-400">Asokoro, Abuja, Nigeria</p>
+                    </div>
+                    <span className="w-2 h-2 rounded-full bg-teal-400"></span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right: Copy & Vision, Mission, Values */}
+            {/* Right: Narrative & 3 Core Pillar Glass Cards */}
             <div className="lg:col-span-7 space-y-6">
               <Eyebrow text="About Delverse Technologies" />
               <h2 className="section-headline font-bold text-white tracking-tight">
                 Delverse Solutions: Your Partner in{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-teal-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
                   Digital Transformation
                 </span>
               </h2>
 
               <p className="text-base text-slate-300 leading-relaxed body-fluid">
-                We stand at the core of international networks to advance your strategic interests. Delverse Technologies Limited is an elite consulting and engineering firm built to craft tailored software that drives tangible business growth, operational resilience, and competitive supremacy.
+                We stand at the core of international networks to advance your strategic interests. Delverse Technologies Limited is an elite technology consultancy built to craft bespoke software architectures that accelerate business revenue, streamline operations, and deliver lasting competitive advantages.
               </p>
 
-              {/* 3 Compact Icon Cards: Vision, Mission, Values */}
+              {/* 3 Pillar Cards: Vision, Mission, Core Values (100% SVG Icons) */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-blue-500/30 transition-colors">
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-blue-500/40 transition-colors">
                   <div className="w-9 h-9 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center mb-3">
-                    <Brain size={18} />
+                    <Compass size={18} />
                   </div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Our Vision</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Global leader in bespoke AI solutions & strategic software for forward-thinking enterprises.
+                    Global leader in sovereign AI solutions & enterprise digital infrastructure.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-teal-500/30 transition-colors">
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-teal-500/40 transition-colors">
                   <div className="w-9 h-9 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center mb-3">
                     <Target size={18} />
                   </div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Our Mission</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Crafting innovative, high-impact technology architectures that unlock scalable business ROI.
+                    Crafting innovative, high-impact technology architectures that unlock scalable ROI.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-violet-500/30 transition-colors">
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-violet-500/40 transition-colors">
                   <div className="w-9 h-9 rounded-lg bg-violet-600/20 text-violet-400 flex items-center justify-center mb-3">
-                    <Sparkles size={18} />
+                    <ShieldCheck size={18} />
                   </div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-1">Core Values</h4>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Uncompromising Precision, Bold Innovation, Absolute Transparency, and Partnership.
+                    Rigorous Precision, Bold Innovation, Complete Transparency, and Partnership.
                   </p>
                 </div>
               </div>
@@ -326,7 +372,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          4. CORE SERVICES (Bento Grid: 2 Large + 4 Small with Animated Graphics)
+          4. CORE SERVICES BENTO GRID (Visual Hierarchy & Rich SVG Mockups)
           ========================================================================= */}
       <section className="section-py bg-[#050811] relative">
         <div className="content-container">
@@ -337,15 +383,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             description="Our multidisciplinary software engineering practices cover every layer of modern technology, from cognitive artificial intelligence to resilient cloud infrastructure."
           />
 
-          {/* Bento Grid: 2 Large + 4 Small */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Bento 1 (Large - Col Span 2): AI-Powered Solutions */}
+            {/* Bento 1: AI-Powered Solutions (Flagship 2-Col Span) */}
             <div 
               onClick={() => onNavigate('services')}
               className="lg:col-span-2 relative overflow-hidden rounded-2xl border border-blue-500/30 bg-gradient-to-br from-[#0B132B]/90 via-[#0A0F1E]/80 to-[#070B14] p-8 md:p-10 shadow-glass cursor-pointer group hover:border-blue-400/60 transition-all duration-300"
             >
-              {/* Subtle animated neural network background */}
-              <div className="absolute top-0 right-0 w-80 h-80 opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none">
+              {/* Luminous Neural Grid Visual */}
+              <div className="absolute top-0 right-0 w-80 h-80 opacity-20 group-hover:opacity-35 transition-opacity pointer-events-none">
                 <svg viewBox="0 0 200 200" className="w-full h-full text-blue-400 animate-spin-slow">
                   <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
                   <circle cx="100" cy="100" r="45" fill="none" stroke="currentColor" strokeWidth="1" />
@@ -359,14 +404,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
 
               <div className="relative z-10 max-w-xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-5">
                   <Brain size={14} /> Signature Flagship Capability
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 group-hover:text-blue-300 transition-colors">
-                  AI-Powered Solutions & Sovereign LLMs
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                  {data.services[0]?.title || "AI-Powered Solutions & LLMs"}
                 </h3>
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
-                  Transform organizational intelligence with tailored Large Language Models, autonomous decision agents, and predictive telemetry trained strictly on your proprietary data behind zero-trust firewalls.
+                  {data.services[0]?.shortDesc || "Transform organizational intelligence with tailored Large Language Models, autonomous decision agents, and predictive telemetry trained strictly on your proprietary data."}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {['RAG Architecture', 'Deep Learning', 'Computer Vision', 'Autonomous Agents', 'Predictive Forecasting'].map((tag, i) => (
@@ -376,39 +421,39 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   ))}
                 </div>
                 <div className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 group-hover:text-teal-200">
-                  <span>Explore AI Capabilities</span>
+                  <span>Explore AI Architectures</span>
                   <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
                 </div>
               </div>
             </div>
 
-            {/* Bento 2 (Small): Website Development */}
+            {/* Bento 2: Website Development */}
             <SpotlightCard onClick={() => onNavigate('services')} className="cursor-pointer">
               <div className="w-12 h-12 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-6 group-hover:scale-110 transition-transform">
                 <Globe size={24} />
               </div>
               <h3 className="card-headline font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">
-                Website Development
+                {data.services[1]?.title || "Website Development"}
               </h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
-                Cinematic, high-converting digital flagships and headless CMS platforms engineered for sub-second page loads and search dominance.
+                {data.services[1]?.shortDesc || "Cinematic, high-converting digital flagships and headless CMS platforms engineered for sub-second page loads."}
               </p>
               <div className="flex items-center justify-between text-xs text-teal-400 font-semibold pt-4 border-t border-white/[0.06]">
-                <span>Lighthouse 95+ Score</span>
+                <span>Lighthouse 95+ Benchmark</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </SpotlightCard>
 
-            {/* Bento 3 (Small): Web & Mobile App Development */}
+            {/* Bento 3: Web & Mobile App Development */}
             <SpotlightCard onClick={() => onNavigate('services')} className="cursor-pointer">
               <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
                 <Smartphone size={24} />
               </div>
               <h3 className="card-headline font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
-                Web & Mobile Apps
+                {data.services[2]?.title || "Web & Mobile Apps"}
               </h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
-                Cross-platform Flutter & React Native mobile experiences combined with scalable SaaS architectures engineered for massive concurrency.
+                {data.services[2]?.shortDesc || "Cross-platform Flutter & React Native mobile experiences combined with scalable SaaS architectures."}
               </p>
               <div className="flex items-center justify-between text-xs text-blue-400 font-semibold pt-4 border-t border-white/[0.06]">
                 <span>iOS, Android & Cloud</span>
@@ -416,16 +461,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </SpotlightCard>
 
-            {/* Bento 4 (Small): Data Analytics */}
+            {/* Bento 4: Data Analytics */}
             <SpotlightCard onClick={() => onNavigate('services')} className="cursor-pointer">
               <div className="w-12 h-12 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                 <Database size={24} />
               </div>
               <h3 className="card-headline font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                Data Analytics & BI
+                {data.services[3]?.title || "Data Analytics & BI"}
               </h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
-                Centralized telemetry dashboards and automated ETL pipelines converting fragmented data into real-time board-level clarity.
+                {data.services[3]?.shortDesc || "Centralized telemetry dashboards and automated ETL pipelines converting fragmented data into real-time board clarity."}
               </p>
               <div className="flex items-center justify-between text-xs text-indigo-400 font-semibold pt-4 border-t border-white/[0.06]">
                 <span>Executive Dashboards</span>
@@ -433,24 +478,24 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </SpotlightCard>
 
-            {/* Bento 5 (Small): IT Support & Cybersecurity */}
+            {/* Bento 5: IT Support & Cybersecurity */}
             <SpotlightCard onClick={() => onNavigate('services')} className="cursor-pointer">
               <div className="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
                 <Shield size={24} />
               </div>
               <h3 className="card-headline font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                IT Support & Security
+                {data.services[4]?.title || "IT Support & Security"}
               </h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
-                Zero-trust cloud infrastructure, 24/7 proactive SOC monitoring, automated backups, and institutional disaster recovery architecture.
+                {data.services[4]?.shortDesc || "Zero-trust cloud infrastructure, 24/7 proactive SOC monitoring, automated backups, and institutional disaster recovery."}
               </p>
               <div className="flex items-center justify-between text-xs text-cyan-400 font-semibold pt-4 border-t border-white/[0.06]">
-                <span>Zero-Trust Topologies</span>
+                <span>Zero-Trust Architecture</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </SpotlightCard>
 
-            {/* Bento 6 (Large - Col Span 3 or Strategic Business Consulting): */}
+            {/* Bento 6: Strategic Business Consulting (Full Span) */}
             <div 
               onClick={() => onNavigate('services')}
               className="md:col-span-2 lg:col-span-3 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-[#0C1222] via-[#0E162B] to-[#0A0F1E] p-8 md:p-10 shadow-glass cursor-pointer group hover:border-teal-500/40 transition-all duration-300"
@@ -461,10 +506,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <Compass size={14} /> Executive Technology Advisory
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">
-                    Strategic Business Consulting & Enterprise Modernization
+                    {data.services[5]?.title || "Strategic Business Consulting & Modernization"}
                   </h3>
                   <p className="text-sm text-slate-300 leading-relaxed">
-                    Partnering directly with CEOs, Managing Directors, and board chairs to formulate multi-year technology roadmaps, audit procurement vendors, and guide digital investments.
+                    {data.services[5]?.shortDesc || "Partnering directly with CEOs, Managing Directors, and board chairs to formulate multi-year technology roadmaps, audit procurement vendors, and guide digital investments."}
                   </p>
                 </div>
                 <div className="shrink-0">
@@ -480,21 +525,46 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          5. STATS BAND (Four Animated Counters on Gradient Strip)
+          5. STATS BAND (Animated Counters on Gradient Strip)
           ========================================================================= */}
       <section className="py-14 bg-gradient-to-r from-blue-900/60 via-slate-900/90 to-blue-950/70 border-y border-white/[0.08] relative overflow-hidden">
         <div className="content-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 text-center">
-            {heroStats.map((stat, index) => (
-              <div key={index} className="space-y-2">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-teal-300 bg-clip-text text-transparent">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm font-medium text-slate-300 uppercase tracking-wider">
-                  {stat.label}
-                </div>
+            <div className="space-y-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-teal-300 bg-clip-text text-transparent font-mono">
+                {data.hero.stat1Value}
               </div>
-            ))}
+              <div className="text-xs sm:text-sm font-medium text-slate-300 uppercase tracking-wider">
+                {data.hero.stat1Label}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-teal-300 bg-clip-text text-transparent font-mono">
+                {data.hero.stat2Value}
+              </div>
+              <div className="text-xs sm:text-sm font-medium text-slate-300 uppercase tracking-wider">
+                {data.hero.stat2Label}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-teal-300 bg-clip-text text-transparent font-mono">
+                99.9%
+              </div>
+              <div className="text-xs sm:text-sm font-medium text-slate-300 uppercase tracking-wider">
+                Service Reliability SLA
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-teal-300 bg-clip-text text-transparent font-mono">
+                5+
+              </div>
+              <div className="text-xs sm:text-sm font-medium text-slate-300 uppercase tracking-wider">
+                Years of Engineering Leadership
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -512,7 +582,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left Pinned Side with Title & Progress Line */}
+            {/* Left Pinned Navigation */}
             <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
               <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
                 <span className="text-xs font-mono uppercase tracking-widest text-teal-400">
@@ -525,7 +595,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   Click through our four structured delivery stages or review each sprint outcome in detail.
                 </p>
 
-                {/* Progress Navigation Buttons */}
                 <div className="space-y-3">
                   {processSteps.map((step, index) => (
                     <button
@@ -620,7 +689,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          7. TESTIMONIALS (Large-Quote Slider with Brand, Stars, Keyboard/Swipe)
+          7. TESTIMONIALS SLIDER (Verified Client Quotes with 100% SVG Star Icons)
           ========================================================================= */}
       <section 
         className="section-py bg-[#050811] relative overflow-hidden"
@@ -635,72 +704,70 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             description="Hear firsthand from managing directors and product leaders who trusted Delverse with their mission-critical platforms."
           />
 
-          <div className="max-w-4xl mx-auto relative">
-            {/* Active Testimonial Card */}
-            <div className="p-8 sm:p-12 md:p-14 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl shadow-2xl relative">
-              {/* Star rating */}
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(testimonialsData[activeTestimonial].rating)].map((_, i) => (
-                  <Star key={i} size={18} className="text-amber-400 fill-amber-400" />
+          {data.testimonials.length > 0 && (
+            <div className="max-w-4xl mx-auto relative">
+              <div className="p-8 sm:p-12 md:p-14 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl shadow-2xl relative">
+                {/* SVG 5-Star Rating (Zero Emojis) */}
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(data.testimonials[activeTestimonial].rating || 5)].map((_, i) => (
+                    <Star key={i} size={18} className="text-amber-400 fill-amber-400" />
+                  ))}
+                  <span className="ml-3 text-xs font-semibold uppercase tracking-wider text-teal-400">
+                    {data.testimonials[activeTestimonial].badge || "Verified Client"}
+                  </span>
+                </div>
+
+                <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-slate-100 leading-relaxed italic mb-8">
+                  "{data.testimonials[activeTestimonial].quote}"
+                </blockquote>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-bold text-white">
+                      {data.testimonials[activeTestimonial].author}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-400">
+                      {data.testimonials[activeTestimonial].role} -{' '}
+                      <span className="text-blue-400 font-semibold">
+                        {data.testimonials[activeTestimonial].company}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev > 0 ? prev - 1 : data.testimonials.length - 1))}
+                      aria-label="Previous testimonial"
+                      className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev + 1) % data.testimonials.length)}
+                      aria-label="Next testimonial"
+                      className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider Dots */}
+              <div className="flex items-center justify-center gap-2 mt-8">
+                {data.testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveTestimonial(idx)}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      activeTestimonial === idx ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'
+                    }`}
+                  />
                 ))}
-                <span className="ml-3 text-xs font-semibold uppercase tracking-wider text-teal-400">
-                  {testimonialsData[activeTestimonial].badge}
-                </span>
-              </div>
-
-              {/* Quote text */}
-              <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-slate-100 leading-relaxed italic mb-8">
-                "{testimonialsData[activeTestimonial].quote}"
-              </blockquote>
-
-              {/* Author details */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
-                <div>
-                  <h4 className="text-base sm:text-lg font-bold text-white">
-                    {testimonialsData[activeTestimonial].author}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-400">
-                    {testimonialsData[activeTestimonial].role} —{' '}
-                    <span className="text-blue-400 font-semibold">
-                      {testimonialsData[activeTestimonial].company}
-                    </span>
-                  </p>
-                </div>
-
-                {/* Slider Controls */}
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setActiveTestimonial((prev) => (prev > 0 ? prev - 1 : testimonialsData.length - 1))}
-                    aria-label="Previous testimonial"
-                    className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button
-                    onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length)}
-                    aria-label="Next testimonial"
-                    className="w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
               </div>
             </div>
-
-            {/* Slider Dots */}
-            <div className="flex items-center justify-center gap-2 mt-8">
-              {testimonialsData.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveTestimonial(idx)}
-                  aria-label={`Go to testimonial ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    activeTestimonial === idx ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
